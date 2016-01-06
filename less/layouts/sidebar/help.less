@@ -1,0 +1,46 @@
+.game {
+  &__help {
+    &-button {
+      display: inline-block;
+
+      .em(margin-top, 75px, 14px);
+
+      font-family: @font-stack-avenir-roman;
+      .em(font-size, 14px, 18px);
+      color: #aaa;
+      .em(letter-spacing, 4.59px, 14px);
+      .em(line-height, 16px, 14px);
+      text-transform: uppercase;
+
+      cursor: pointer;
+
+      &:hover {
+        border-bottom: 1px solid #aaa;
+      }
+    }
+    &-container {
+      display: none;
+      overflow-y: scroll;
+
+      width: 525px;
+      height: 200px;
+
+      .em(margin-top, 15px, 18px);
+      .em(padding, 10px, 18px);
+
+      background-color: #242628;
+
+      &:before {
+        content: 'Move the orbs on the field, the up / down / left / right keys on your keyboard to place 3 orbs in a row. Groups of 3 orbs disappear, increasing the score. Enjoy the game';
+
+        .em(font-size, 16px, 18px);
+        font-family: @font-stack-avenir-roman;
+        color: #fff;
+        .em(line-height, 24px, 16px);
+      }
+      &--active {
+        display: block;
+      }
+    }
+  }
+}
