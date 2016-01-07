@@ -125,8 +125,9 @@ body {
     opacity: 1;
   }
 }
-.game--game-over:before {
-  content: 'GAME OVER';
+.game--game-over:before,
+.game--victory:before {
+  content: attr(data-message);
   display: block;
   position: relative;
   padding-top: 6em;
