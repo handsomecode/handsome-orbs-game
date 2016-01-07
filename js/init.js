@@ -221,6 +221,27 @@ var Orbs;
       });
     };
 
+    self.sound = function (soundEvent)  {
+      var audio = new Audio(); // Создаём новый элемент Audio
+
+      switch (soundEvent) {
+        case 'move':
+          audio.src = 'sounds/soundMove.mp3';
+          break;
+        case 'undo':
+          audio.src = 'sounds/soundUndo.mp3';
+          break;
+        case 'game over':
+          audio.src = 'sounds/soundGameOver.mp3';
+          break;
+        case 'victory':
+          audio.src = 'sounds/soundVictory.mp3';
+          break;
+      }
+      
+      audio.autoplay = true; // Автоматически запускаем
+    };
+
     self.movePoints = function (direction) {
       if (!self.data.running || self.data.keyDownLock) {
         return false;
@@ -276,6 +297,8 @@ var Orbs;
       }
 
       if (countChanges) {
+        self.sound('move');
+
         if (!self.checkLocalStorage(localStorage['hasUndo'])) {
           localStorage['hasUndo'] = true;
           self.data.buttonsList.undo.classList.remove(self.config.classes.button.disabled);
@@ -423,12 +446,17 @@ var Orbs;
     };
 
     self.undo = function () {
+      self.sound('undo');
+
       if (self.checkLocalStorage(localStorage['hasUndo'])) {
         localStorage['hasUndo'] = false;
         self.data.buttonsList.undo.classList.add(self.config.classes.button.disabled);
 
         if (self.data._board.classList.contains(self.config.classes.boardGameOver)) {
           self.data._board.classList.remove(self.config.classes.boardGameOver);
+        }
+        if (self.data._board.classList.contains(self.config.classes.boardVictory)) {
+          self.data._board.classList.remove(self.config.classes.boardVictory);
         }
 
         self.data.scoresList.score.count = parseInt(localStorage['oldScore']);
@@ -465,6 +493,8 @@ var Orbs;
     };
 
     self.gameOver = function () {
+      self.sound('game over');
+
       self.data.running = false;
 
       self.data._board.setAttribute('data-message', 'GAME OVER');
@@ -485,6 +515,8 @@ var Orbs;
     };
 
     self.victory = function () {
+      self.sound('victory');
+
       self.data.running = false;
 
       self.data._board.setAttribute('data-message', 'VICTORY!!!');
@@ -591,6 +623,9 @@ var Orbs;
 
       if (self.data._board.classList.contains(self.config.classes.boardGameOver)) {
         self.data._board.classList.remove(self.config.classes.boardGameOver);
+      }
+      if (self.data._board.classList.contains(self.config.classes.boardVictory)) {
+        self.data._board.classList.remove(self.config.classes.boardVictory);
       }
 
       self.data._board.classList.add(self.config.classes.boardRunning);
