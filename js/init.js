@@ -232,7 +232,8 @@ var Orbs;
       localStorage['points'] = JSON.stringify(self.data.points);
       localStorage['oldScore'] = self.data.scoresList.score.count;
 
-      var countChanges = 0,
+      var countPointsforVictory = 0,
+          countChanges = 0,
           startLines = [];
 
       var axis = direction === 'left' || direction === 'right' ? 'x' : 'y', // define axis Ox or Oy
@@ -254,6 +255,7 @@ var Orbs;
         if (point.forDeleting) {
           self.data.points.splice(j, 1);
           j--;
+          countPointsforVictory++;
           continue;
         }
 
@@ -286,10 +288,9 @@ var Orbs;
         self.clearPoints(coloredPointsAmount); // delete points, not DOM elements
 
         if (self.data.points.length === self.settings.size * self.settings.size) {
-          self.data.running = false;
-          self.data._board.classList.add(self.config.classes.boardGameOver);
-
           self.gameOver();
+        } else if (self.checkVictory()) {
+          self.victory();
         }
       } else {
         self.data.points = oldPoints.slice(0);
@@ -464,7 +465,34 @@ var Orbs;
     };
 
     self.gameOver = function () {
+      self.data.running = false;
+
+      self.data._board.setAttribute('data-message', 'GAME OVER');
+      self.data._board.classList.add(self.config.classes.boardGameOver);
+
       self.openAlert(self.config.alertGameOverText, function () {
+        self.generateBoard();
+      });
+    };
+
+    self.checkVictory = function () {
+      for (var i = 0; i < self.data.points.length; i++) {
+        if (self.data.points[i].forDeleting === false) {
+          return false;
+        }
+      }
+      return true;
+    };
+
+    self.victory = function () {
+      self.data.running = false;
+
+      self.data._board.setAttribute('data-message', 'VICTORY!!!');
+      self.data._board.classList.add(self.config.classes.boardVictory);
+
+      // add some cartoon/animation about victory...
+
+      self.openAlert(self.config.alertVictoryText, function () {
         self.generateBoard();
       });
     };

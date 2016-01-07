@@ -68,9 +68,9 @@
       }
     }
   }
-  &--game-over {
+  &--game-over, &--victory {
     &:before {
-      content: 'GAME OVER';
+      content: attr(data-message);
       display: block;
 
       position: relative;
