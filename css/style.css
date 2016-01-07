@@ -125,15 +125,38 @@ body {
     opacity: 1;
   }
 }
+.game--game-over:before {
+  content: 'GAME OVER';
+  display: block;
+  position: relative;
+  padding-top: 6em;
+  padding-bottom: 6em;
+  border: 1px solid rgba(105, 105, 105, 0.4);
+  background-color: rgba(45, 45, 45, 0.9);
+  font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
+  font-size: 2.44444444em;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  border-radius: 0.22727273em;
+  -webkit-animation: overlayShowing 0.5s ease;
+          animation: overlayShowing 0.5s ease;
+  z-index: 2;
+}
+@keyframes overlayShowing {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .game__point {
   box-sizing: border-box;
   position: absolute;
   list-style: none;
-  border: 3px solid rgba(255, 255, 255, 0.2);
-  background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
-  background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
-  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 0.55555556em;
+  border: 5px solid #212325;
+  border-radius: 0.83333333em;
   opacity: 1;
   -webkit-transition: all 0.5s ease, -webkit-transform 0.5s ease 0.3s;
           transition: all 0.5s ease, transform 0.5s ease 0.3s;
@@ -147,7 +170,11 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  border-radius: 20%;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
+  background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 0.55555556em;
 }
 .game__point--remove {
   opacity: 0;
@@ -212,7 +239,7 @@ body {
 .game__scoreboard {
   overflow: hidden;
   width: 14.16666667em;
-  min-width: 100px;
+  min-width: 5.55555556em;
   height: 5.55555556em;
   font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
 }
@@ -346,8 +373,8 @@ body {
 .game__help-container {
   display: none;
   overflow-y: scroll;
-  width: 525px;
-  height: 200px;
+  width: 29.16666667em;
+  height: 11.11111111em;
   margin-top: 0.83333333em;
   padding: 0.55555556em;
   background-color: #242628;
@@ -423,6 +450,7 @@ body {
   cursor: pointer;
 }
 .game__alert-button--yes {
+  margin-right: 0.27777778em;
   border: 1px solid rgba(211, 73, 73, 0.5);
   background: rgba(211, 73, 73, 0.1);
   color: #d34949;
@@ -432,6 +460,7 @@ body {
   color: #fff;
 }
 .game__alert-button--no {
+  margin-left: 0.27777778em;
   border: 1px solid rgba(84, 158, 201, 0.5);
   background-color: rgba(84, 158, 201, 0.1);
   color: #42748f;

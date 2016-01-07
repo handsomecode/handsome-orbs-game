@@ -22,9 +22,9 @@
     .em(width, 576px, 18px);
     .em(height, 576px, 18px);
 
-    border: 1px solid rgba(255,255,255,0.50);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     background: #212325;
-    box-shadow: 0 0 30px 5px rgba(255,255,255,0.02);
+    box-shadow: 0 0 30px 5px rgba(255, 255, 255, 0.02);
     .em(border-radius, 10px, 18px);
   }
   &--running &__point {
@@ -55,6 +55,41 @@
       background-color: rgba(32, 32, 32, 0.4);
 
       animation: overlayShowing 0.2s ease;
+
+      z-index: 2;
+
+      @keyframes overlayShowing {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &--game-over {
+    &:before {
+      content: 'GAME OVER';
+      display: block;
+
+      position: relative;
+
+      .em(padding-top, 264px, 44px);
+      .em(padding-bottom, 264px, 44px);
+
+      border: 1px solid rgba(105, 105, 105, 0.4);
+      background-color: rgba(45, 45, 45, 0.9);
+
+      font-family: @font-stack-avenir-roman;
+      .em(font-size, 44px, 18px);
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+
+      .em(border-radius, 10px, 44px);
+
+      animation: overlayShowing 0.5s ease;
 
       z-index: 2;
 

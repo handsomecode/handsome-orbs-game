@@ -287,9 +287,9 @@ var Orbs;
 
         if (self.data.points.length === self.settings.size * self.settings.size) {
           self.data.running = false;
-          self.data._board.classList.add(self.config.classes.boardDisabled);
+          self.data._board.classList.add(self.config.classes.boardGameOver);
 
-          alert('Game over.\n\nReload the page to retry.');
+          self.gameOver();
         }
       } else {
         self.data.points = oldPoints.slice(0);
@@ -312,6 +312,7 @@ var Orbs;
       _point.style.width = self.data.itemSize + '%';
       _point.style.height = self.data.itemSize + '%';
       _point.style['background-color'] = color;
+      _point.setAttribute('data-color', color);
 
       var point = {
         x: x,
@@ -425,6 +426,10 @@ var Orbs;
         localStorage['hasUndo'] = false;
         self.data.buttonsList.undo.classList.add(self.config.classes.button.disabled);
 
+        if (self.data._board.classList.contains(self.config.classes.boardGameOver)) {
+          self.data._board.classList.remove(self.config.classes.boardGameOver);
+        }
+
         self.data.scoresList.score.count = parseInt(localStorage['oldScore']);
         self.data.scoresList.score._element.textContent = self.data.scoresList.score.count;
 
@@ -454,6 +459,12 @@ var Orbs;
         localStorage['hasUndo'] = false;
         self.data.buttonsList.undo.classList.add(self.config.classes.button.disabled);
 
+        self.generateBoard();
+      });
+    };
+
+    self.gameOver = function () {
+      self.openAlert(self.config.alertGameOverText, function () {
         self.generateBoard();
       });
     };
@@ -550,6 +561,10 @@ var Orbs;
 
       self.data.init = false;
 
+      if (self.data._board.classList.contains(self.config.classes.boardGameOver)) {
+        self.data._board.classList.remove(self.config.classes.boardGameOver);
+      }
+
       self.data._board.classList.add(self.config.classes.boardRunning);
 
       self.data.running = true;
@@ -583,6 +598,9 @@ var Orbs;
     };
 
     self.openAlert = function (text, callback) {
+      if (text !== self.config.alertGameOverText) {
+        self.data._container.classList.add(self.config.classes.boardDisabled);
+      }
       self.data._container.classList.add(self.config.classes.boardDisabled);
       self.appendChildren(self.data._container, self.config.alertHtml.replace(/%text%/g, text));
 
