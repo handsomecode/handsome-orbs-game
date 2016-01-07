@@ -10,6 +10,7 @@
       board: 'game__content',
       boardRunning: 'game--running',
       boardDisabled: 'game--disabled',
+      boardGameOver: 'game--game-over',
       button: {
         list: 'game__buttons',
         default: 'game__buttons-item',
@@ -50,6 +51,7 @@
     '</div>',
 
     alertRestartText: 'Do you want to continue on and do the restart? All data will be saved.',
+    alertGameOverText: 'Oh no! You lost, want to try again?',
     alertChangeDifficultyText: 'Do you want to continue on and change difficulty level? All data will be saved.',
     alertVictoryText: 'Awesome, You are cool!!!',
     moveTimeout: 500,
@@ -111,7 +113,7 @@
       hard: {
         settings: {
           name: 'Hard',
-          size: 9,
+          size: 7,
 
           colors: [
             '#c64e4e',
