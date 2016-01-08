@@ -3,6 +3,7 @@
 
   var config = {
     debug: false,
+    sound: false,
 
     classes: {
       sidebar: 'game__sidebar',

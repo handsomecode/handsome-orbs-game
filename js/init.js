@@ -71,6 +71,29 @@ var Orbs;
       }
     };
 
+    self.sound = function (soundEvent)  {
+      if (self.config.sound) {
+        var audio = new Audio();
+
+        switch (soundEvent) {
+          case 'move':
+            audio.src = 'sounds/soundMove.mp3';
+            break;
+          case 'undo':
+            audio.src = 'sounds/soundUndo.mp3';
+            break;
+          case 'game over':
+            audio.src = 'sounds/soundGameOver.mp3';
+            break;
+          case 'winning':
+            audio.src = 'sounds/soundWinning.mp3';
+            break;
+        }
+
+        audio.autoplay = true;
+      }
+    };
+
     self.setCookie = function (name, value) {
       document.cookie = name + '=' + value + '; path=/';
     };
@@ -221,27 +244,6 @@ var Orbs;
       });
     };
 
-    self.sound = function (soundEvent)  {
-      var audio = new Audio(); // Создаём новый элемент Audio
-
-      switch (soundEvent) {
-        case 'move':
-          audio.src = 'sounds/soundMove.mp3';
-          break;
-        case 'undo':
-          audio.src = 'sounds/soundUndo.mp3';
-          break;
-        case 'game over':
-          audio.src = 'sounds/soundGameOver.mp3';
-          break;
-        case 'winning':
-          audio.src = 'sounds/soundWinning.mp3';
-          break;
-      }
-
-      audio.autoplay = true; // Автоматически запускаем
-    };
-
     self.movePoints = function (direction) {
       if (!self.data.running || self.data.keyDownLock) {
         return false;
@@ -249,9 +251,6 @@ var Orbs;
 
       self.data.keyDownLock = true;
       self.data.running = false;
-
-      localStorage['points'] = JSON.stringify(self.data.points);
-      localStorage['oldScore'] = self.data.scoresList.score.count;
 
       var countChanges = 0,
           startLines = [];
@@ -319,6 +318,9 @@ var Orbs;
         self.data.points = oldPoints.slice(0);
       }
 
+      localStorage['points'] = JSON.stringify(self.data.points);
+      localStorage['oldScore'] = self.data.scoresList.score.count;
+
       setTimeout(function () {
         self.data.running = true;
       }, self.config.moveTimeout);
@@ -336,7 +338,6 @@ var Orbs;
       _point.style.width = self.data.itemSize + '%';
       _point.style.height = self.data.itemSize + '%';
       _point.style['background-color'] = color;
-      _point.setAttribute('data-color', color);
 
       var point = {
         x: x,
