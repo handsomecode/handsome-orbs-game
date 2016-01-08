@@ -3,7 +3,7 @@
 
   var config = {
     debug: false,
-    sound: false,
+    sound: true,
 
     classes: {
       sidebar: 'game__sidebar',
@@ -140,7 +140,7 @@
           minimalAddingScore: 75,
           percentScoreForAddingPoints: 2,
 
-          randomMode: true,
+          randomMode: true
         }
       }
     }
