@@ -71,7 +71,7 @@ var Orbs;
       }
     };
 
-    self.sound = function (soundEvent)  {
+    self.sound = function (soundEvent) {
       if (self.config.sound) {
         var audio = new Audio();
 
@@ -162,12 +162,6 @@ var Orbs;
 
           if (pointIndexInAllPointsList > -1) {
             _point.classList.add(self.config.classes.removePoint); // point - display: none;
-
-            (function (_point) {
-              setTimeout(function () {
-                self.removeDOMElement(_point);
-              }, self.config.animationDuration);
-            })(_point);
 
             point.forDeleting = true;
           }
@@ -266,12 +260,14 @@ var Orbs;
         startLines.push(0);
       }
 
-      var oldPoints = self.data.points.slice(0);
+      var oldPoints = self.data.points.slice(0),
+          oldScore = self.data.scoresList.score.count;
 
       for (var j = 0; j < self.data.points.length; j++) {
         var point = self.data.points[j];
 
         if (point.forDeleting) {
+          self.removeDOMElement(self.data.points[j]._element);
           self.data.points.splice(j, 1);
           j--;
           continue;
@@ -307,19 +303,18 @@ var Orbs;
 
         self.generateRandomPoints(coloredPointsAmount.length ? self.settings.pointsAmountAfterRemove() : self.settings.pointsAmountAfterMove());
 
+        localStorage['points'] = JSON.stringify(self.data.points);
+        localStorage['score'] = self.data.scoresList.score.count;
+        localStorage['oldScore'] = oldScore;
+
         if ((self.data.points.length === self.settings.size * self.settings.size) && self.checkGameOver()) {
           self.gameOver();
-
         } else if (self.checkWinning()) {
           self.winning();
         }
-
       } else {
         self.data.points = oldPoints.slice(0);
       }
-
-      localStorage['points'] = JSON.stringify(self.data.points);
-      localStorage['oldScore'] = self.data.scoresList.score.count;
 
       setTimeout(function () {
         self.data.running = true;
@@ -331,7 +326,11 @@ var Orbs;
       point._element.style.left = (point.x * self.data.itemSize) + '%';
     };
 
-    self.createPoint = function (x, y, color) {
+    self.createPoint = function (x, y, color, oldX, oldY, forDeleting) {
+      if (typeof forDeleting === 'undefined') {
+        forDeleting = false;
+      }
+
       var _point = document.createElement('li');
 
       _point.classList.add(self.config.classes.point);
@@ -342,10 +341,10 @@ var Orbs;
       var point = {
         x: x,
         y: y,
-        oldX: undefined,
-        oldY: undefined,
+        oldX: oldX,
+        oldY: oldY,
         color: color,
-        forDeleting: false,
+        forDeleting: forDeleting,
         _element: _point
       };
 
@@ -356,6 +355,8 @@ var Orbs;
       self.data._board.appendChild(_point); // add on board
 
       self.debug(point);
+
+      return point;
     };
 
     self.checkColorOfPoints = function () {
@@ -371,11 +372,15 @@ var Orbs;
       return remainingColors;
     };
 
-    self.getRandomColor = function (x, y) {
+    self.getRandomColor = function (x, y, force) {
+      if (typeof force === 'undefined') {
+        force = false;
+      }
+
       var colors,
           minPointsAmount = (self.settings.size * self.settings.size) / 3 - 1;
 
-      if ((self.data.points.length <= minPointsAmount) && (self.data.init === false)) {
+      if (!force && (self.data.points.length <= minPointsAmount) && !self.data.init) {
         colors = self.checkColorOfPoints().slice(0);
       } else {
         colors = self.settings.colors.slice(0);
@@ -390,7 +395,7 @@ var Orbs;
         }
       }
 
-      return colors[Math.floor(Math.random() * colors.length)];
+      return colors.length ? colors[Math.floor(Math.random() * colors.length)] : false;
     };
 
     self.getEmptyPlaces = function () {
@@ -404,7 +409,7 @@ var Orbs;
 
       for (var x = 0; x < self.settings.size; x++) {
         for (var y = 0; y < self.settings.size; y++) {
-          if (self.data.allPointsCoordinates[x][y] === true) {
+          if (self.data.allPointsCoordinates[x][y]) {
             emptyPointsList.push({x: x, y: y});
           }
           self.data.allPointsCoordinates[x][y] = true;
@@ -421,12 +426,25 @@ var Orbs;
         emptyPlaces = self.getEmptyPlaces(); // first iteration emptyPlaces[64]
       }
 
-      var currentPointCoordinates = emptyPlaces[Math.floor(Math.random() * emptyPlaces.length)]; // take random coordinate and devide it into to path - arr[0 , 2]
+      var currentPointCoordinates,
+          currentPointColor = false;
+
+      var countColorCheck = 0;
+      while (!currentPointColor && countColorCheck < 50) {
+        currentPointCoordinates = emptyPlaces[Math.floor(Math.random() * emptyPlaces.length)];
+        currentPointColor = self.getRandomColor(currentPointCoordinates.x, currentPointCoordinates.y);
+
+        countColorCheck++;
+      }
+
+      if (!currentPointColor) {
+        currentPointColor = self.getRandomColor(currentPointCoordinates.x, currentPointCoordinates.y, true);
+      }
 
       self.createPoint(
           currentPointCoordinates.x,
           currentPointCoordinates.y,
-          self.getRandomColor(currentPointCoordinates.x, currentPointCoordinates.y)
+          currentPointColor
       );
     };
 
@@ -463,13 +481,18 @@ var Orbs;
         self.data.scoresList.score.count = parseInt(localStorage['oldScore']);
         self.data.scoresList.score._element.textContent = self.data.scoresList.score.count;
 
+        localStorage['score'] = self.data.scoresList.score.count;
+        localStorage.removeItem('oldScore');
+
         for (var i = self.data.points.length - 1; i >= 0; i--) {
           var point = self.data.points[i];
 
-          if (point.forDeleting) {
-            self.createPoint(point.oldX, point.oldY, point.color);
-            self.data.points.splice(i, 1);
-          } else if (typeof point.oldX !== 'undefined' && typeof point.oldY !== 'undefined') {
+          if (typeof point.oldX !== 'undefined' && typeof point.oldY !== 'undefined') {
+            if (point.forDeleting) {
+              point.forDeleting = false;
+              point._element.classList.remove(self.config.classes.removePoint);
+            }
+
             point.x = point.oldX;
             point.y = point.oldY;
             point.oldX = undefined;
@@ -481,11 +504,13 @@ var Orbs;
             self.data.points.splice(i, 1);
           }
         }
+
+        localStorage['points'] = JSON.stringify(self.data.points);
       }
     };
 
     self.restart = function () {
-      self.openAlert(self.config.alertRestartText, function () {
+      self.openConfirm(self.config.confirmRestartText, function () {
         localStorage['hasUndo'] = false;
         self.data.buttonsList.undo.classList.add(self.config.classes.button.disabled);
 
@@ -495,7 +520,7 @@ var Orbs;
 
     self.checkGameOver = function () {
       for (var i = 0; i < self.data.points.length; i++) {
-        if (self.data.points[i].forDeleting === true) {
+        if (self.data.points[i].forDeleting) {
           return false;
         }
       }
@@ -507,20 +532,20 @@ var Orbs;
 
       self.data.running = false;
 
-      self.data._board.setAttribute('data-message', 'GAME OVER');
       self.data._board.classList.add(self.config.classes.boardGameOver);
 
-      self.openAlert(self.config.alertGameOverText, function () {
+      self.openConfirm(self.config.confirmGameOverText, function () {
         self.generateBoard();
       });
     };
 
     self.checkWinning = function () {
       for (var i = 0; i < self.data.points.length; i++) {
-        if (self.data.points[i].forDeleting === false) {
+        if (!self.data.points[i].forDeleting) {
           return false;
         }
       }
+
       return true;
     };
 
@@ -529,12 +554,17 @@ var Orbs;
 
       self.data.running = false;
 
-      self.data._board.setAttribute('data-message', 'WINNING!!!');
       self.data._board.classList.add(self.config.classes.boardWinning);
+
+      self.data.buttonsList.undo.classList.add(self.config.classes.button.disabled);
+      localStorage['hasUndo'] = false;
+      localStorage.removeItem('oldScore');
+      localStorage['points'] = JSON.stringify([]);
+      localStorage['score'] = 0;
 
       // add some cartoon/animation about winning...
 
-      self.openAlert(self.config.alertWinningText, function () {
+      self.openConfirm(self.config.confirmWinningText, function () {
         self.generateBoard();
       });
     };
@@ -543,6 +573,8 @@ var Orbs;
       if (self.data.scoresList.score.count) {
         self.data.scoresList.score.count = 0;
         self.data.scoresList.score._element.textContent = self.data.scoresList.score.count;
+        localStorage['score'] = self.data.scoresList.score.count;
+        localStorage.removeItem('oldScore');
       }
     };
 
@@ -611,16 +643,20 @@ var Orbs;
       self.clearBoard();
 
       if (init) {
-        var oldPoints = JSON.parse(localStorage['points']);
+        var points = JSON.parse(localStorage['points']);
 
-        if (oldPoints.length) {
+        if (points.length) {
           self.changeMode(localStorage['mode']);
 
-          self.data.scoresList.score.count = parseInt(localStorage['oldScore']);
+          self.data.scoresList.score.count = parseInt(localStorage['score']);
           self.data.scoresList.score._element.textContent = self.data.scoresList.score.count;
 
-          for (var i = 0; i < oldPoints.length; i++) {
-            self.createPoint(oldPoints[i].x, oldPoints[i].y, oldPoints[i].color);
+          for (var i = 0; i < points.length; i++) {
+            var point = self.createPoint(points[i].x, points[i].y, points[i].color, points[i].oldX, points[i].oldY, points[i].forDeleting);
+
+            if (point.forDeleting) {
+              point._element.classList.add(self.config.classes.removePoint);
+            }
           }
         } else {
           self.generateStartPoints(mode);
@@ -670,19 +706,19 @@ var Orbs;
       self.data._container.appendChild(_buttonsList);
     };
 
-    self.openAlert = function (text, callback) {
-      if (text !== self.config.alertGameOverText) {
+    self.openConfirm = function (text, callback) {
+      if (text !== self.config.confirmGameOverText) {
         self.data._container.classList.add(self.config.classes.boardDisabled);
       }
       self.data._container.classList.add(self.config.classes.boardDisabled);
-      self.appendChildren(self.data._container, self.config.alertHtml.replace(/%text%/g, text));
+      self.appendChildren(self.data._container, self.config.confirmHtml.replace(/%text%/g, text));
 
       self.data.running = false;
 
-      function alertKeyDown(e) {
+      function confirmKeyDown(e) {
         if (!self.data.keyDownLock) {
           self.data.keyDownLock = true;
-          switch(e.keyCode) {
+          switch (e.keyCode) {
             case 89: // Y
             case 13: // Enter
               confirmYes();
@@ -703,7 +739,7 @@ var Orbs;
 
         self.data._container.classList.remove(self.config.classes.boardDisabled);
 
-        document.removeEventListener('keydown', alertKeyDown);
+        document.removeEventListener('keydown', confirmKeyDown);
       }
 
       function confirmNo() {
@@ -713,10 +749,10 @@ var Orbs;
 
         self.removeDOMElement(document.getElementById('confirm'));
 
-        document.removeEventListener('keydown', alertKeyDown);
+        document.removeEventListener('keydown', confirmKeyDown);
       }
 
-      document.addEventListener('keydown', alertKeyDown);
+      document.addEventListener('keydown', confirmKeyDown);
 
       document.getElementById('confirm-no').addEventListener('click', function () {
         confirmNo();
@@ -791,7 +827,7 @@ var Orbs;
 
       _mode.addEventListener('click', function () {
         if (self.settings.id !== mode.id) {
-          self.openAlert(self.config.alertChangeDifficultyText, function () {
+          self.openConfirm(self.config.confirmChangeDifficultyText, function () {
             self.generateBoard(mode.id);
           });
         }
@@ -854,6 +890,10 @@ var Orbs;
 
     self.binding = function () {
       document.addEventListener('keydown', function (e) {
+        if (e.shiftKey || e.metaKey || e.ctrlKey || e.altKey) {
+          return false;
+        }
+
         switch (e.keyCode) {
           case 37: // Arrow Left
             self.movePoints('left');
