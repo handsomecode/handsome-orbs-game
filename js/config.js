@@ -52,10 +52,10 @@
     '  <button class="game__confirm-button game__confirm-button--no" id="confirm-no">No</button>' +
     '</div>',
 
-    confirmRestartText: 'Do you want to continue on and do the restart? All data will be saved.',
-    confirmGameOverText: 'Oh no! You lost, want to try again?',
-    confirmChangeDifficultyText: 'Do you want to continue on and change difficulty level? All data will be saved.',
-    confirmWinningText: 'Awesome, You are cool!!! Want to try to improve your high-score?',
+    confirmRestartText: 'Would you like to continue on and do the restart? All data will be saved.',
+    confirmGameOverText: 'Oh no! You lost, would you like to try again?',
+    confirmChangeDifficultyText: 'Would you like to continue on and change difficulty level? All data will be saved.',
+    confirmWinningText: 'Awesome, You are cool!!! would you like to improve your high-score?',
     moveTimeout: 500,
     animationDuration: 500,
 
@@ -99,7 +99,7 @@
             '#3bb675'
           ],
 
-          pointsAmountAfterStart: 16,
+          pointsAmountAfterStart: 18,
           pointsAmountAfterMove: function () {
             return 1;
           },
