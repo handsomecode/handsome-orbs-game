@@ -246,7 +246,7 @@ var Orbs;
 
       self.data.keyDownLock = true;
       self.data.running = false;
-      
+
       var countChanges = 0,
           startLines = [];
 
