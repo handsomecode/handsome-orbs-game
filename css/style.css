@@ -71,32 +71,6 @@ body {
   box-shadow: 0 0 30px 5px rgba(255, 255, 255, 0.02);
   border-radius: 0.55555556em;
 }
-.game--running .game__point {
-  -webkit-animation: addingPointAnimation 0.5s ease 0.5s both;
-          animation: addingPointAnimation 0.5s ease 0.5s both;
-}
-@-webkit-keyframes addingPointAnimation {
-  0% {
-    opacity: 0;
-  }
-  30% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes addingPointAnimation {
-  0% {
-    opacity: 0;
-  }
-  30% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 .game--disabled:before {
   content: '';
   position: fixed;
@@ -125,9 +99,8 @@ body {
     opacity: 1;
   }
 }
-.game--game-over:before,
-.game--winning:before {
-  content: attr(data-message);
+.game--winning:before,
+.game--game-over:before {
   display: block;
   position: relative;
   padding-top: 6em;
@@ -139,6 +112,7 @@ body {
   font-weight: bold;
   color: #fff;
   text-align: center;
+  text-transform: uppercase;
   border-radius: 0.22727273em;
   -webkit-animation: overlayShowing 0.5s ease;
           animation: overlayShowing 0.5s ease;
@@ -152,6 +126,12 @@ body {
     opacity: 1;
   }
 }
+.game--winning:before {
+  content: 'Winning!!!';
+}
+.game--game-over:before {
+  content: 'Game Over';
+}
 .game__point {
   box-sizing: border-box;
   position: absolute;
@@ -159,8 +139,8 @@ body {
   border: 5px solid #212325;
   border-radius: 0.83333333em;
   opacity: 1;
-  -webkit-transition: all 0.5s ease, -webkit-transform 0.5s ease 0.3s;
-          transition: all 0.5s ease, transform 0.5s ease 0.3s;
+  -webkit-transition: opacity 0.5s ease, top 0.5s ease, left 0.5s ease;
+          transition: opacity 0.5s ease, top 0.5s ease, left 0.5s ease;
   -webkit-transform: scale(1);
           transform: scale(1);
 }
@@ -177,10 +157,38 @@ body {
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
   border-radius: 0.55555556em;
 }
-.game__point--remove {
-  opacity: 0;
+.game__point--removed {
+  opacity: 0 !important;
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
+  -webkit-transition: opacity 0.5s ease, top 0.5s ease, left 0.5s ease, -webkit-transform 0.5s ease 0.3s;
+          transition: opacity 0.5s ease, top 0.5s ease, left 0.5s ease, transform 0.5s ease 0.3s;
+}
+.game--running .game__point {
+  -webkit-animation: addingPointAnimation 0.5s ease 0.5s both;
+          animation: addingPointAnimation 0.5s ease 0.5s both;
+}
+@-webkit-keyframes addingPointAnimation {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes addingPointAnimation {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .game__buttons {
   overflow: hidden;
@@ -390,7 +398,7 @@ body {
 .game__help-container--active {
   display: block;
 }
-.game__alert {
+.game__confirm {
   visibility: visible;
   position: fixed;
   top: 50%;
@@ -406,11 +414,11 @@ body {
   border-radius: 0.55555556em;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
-  -webkit-animation: alertShowing 0.2s ease;
-          animation: alertShowing 0.2s ease;
+  -webkit-animation: confirmShowing 0.2s ease;
+          animation: confirmShowing 0.2s ease;
   z-index: 100;
 }
-@-webkit-keyframes alertShowing {
+@-webkit-keyframes confirmShowing {
   0% {
     opacity: 0;
   }
@@ -418,7 +426,7 @@ body {
     opacity: 1;
   }
 }
-@keyframes alertShowing {
+@keyframes confirmShowing {
   0% {
     opacity: 0;
   }
@@ -426,7 +434,7 @@ body {
     opacity: 1;
   }
 }
-.game__alert-text {
+.game__confirm-text {
   height: 5.55555556em;
   margin-top: 1.66666667em;
   margin-left: 2.22222222em;
@@ -436,7 +444,7 @@ body {
   color: #fff;
   line-height: 1.33333333em;
 }
-.game__alert-button {
+.game__confirm-button {
   min-width: 4.44444444em;
   height: 2.22222222em;
   padding-left: 0.55555556em;
@@ -450,23 +458,23 @@ body {
   border-radius: 0.33333333em;
   cursor: pointer;
 }
-.game__alert-button--yes {
+.game__confirm-button--yes {
   margin-right: 0.27777778em;
   border: 1px solid rgba(211, 73, 73, 0.5);
   background: rgba(211, 73, 73, 0.1);
   color: #d34949;
 }
-.game__alert-button--yes:hover {
+.game__confirm-button--yes:hover {
   background-color: #d34949;
   color: #fff;
 }
-.game__alert-button--no {
+.game__confirm-button--no {
   margin-left: 0.27777778em;
   border: 1px solid rgba(84, 158, 201, 0.5);
   background-color: rgba(84, 158, 201, 0.1);
   color: #42748f;
 }
-.game__alert-button--no:hover {
+.game__confirm-button--no:hover {
   background-color: #42748f;
   color: #fff;
 }

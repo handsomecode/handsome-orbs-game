@@ -26,7 +26,7 @@
       modeList: 'game__modes',
       modeItem: 'game__modes-item',
       point: 'game__point',
-      removePoint: 'game__point--remove',
+      removePoint: 'game__point--removed',
       scoreboard: {
         container: 'game__scoreboard',
         name: 'game__scoreboard-title',
@@ -40,22 +40,22 @@
         label: 'game__modes-item-label',
         active: 'game__modes-item--active'
       },
-      alert: {
-        containerDisabled: 'game__alert--disabled'
+      confirm: {
+        containerDisabled: 'game__confirm--disabled'
       }
     },
 
-    alertHtml: '' +
-    '<div class="game__alert" id="confirm">' +
-    '  <p class="game__alert-text">%text%</p>' +
-    '  <button class="game__alert-button game__alert-button--yes" id="confirm-yes">Yes</button>' +
-    '  <button class="game__alert-button game__alert-button--no" id="confirm-no">No</button>' +
+    confirmHtml: '' +
+    '<div class="game__confirm" id="confirm">' +
+    '  <p class="game__confirm-text">%text%</p>' +
+    '  <button class="game__confirm-button game__confirm-button--yes" id="confirm-yes">Yes</button>' +
+    '  <button class="game__confirm-button game__confirm-button--no" id="confirm-no">No</button>' +
     '</div>',
 
-    alertRestartText: 'Do you want to continue on and do the restart? All data will be saved.',
-    alertGameOverText: 'Oh no! You lost, want to try again?',
-    alertChangeDifficultyText: 'Do you want to continue on and change difficulty level? All data will be saved.',
-    alertWinningText: 'Awesome, You are cool!!! Want to try to improve your high-score?',
+    confirmRestartText: 'Do you want to continue on and do the restart? All data will be saved.',
+    confirmGameOverText: 'Oh no! You lost, want to try again?',
+    confirmChangeDifficultyText: 'Do you want to continue on and change difficulty level? All data will be saved.',
+    confirmWinningText: 'Awesome, You are cool!!! Want to try to improve your high-score?',
     moveTimeout: 500,
     animationDuration: 500,
 
