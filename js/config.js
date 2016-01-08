@@ -11,7 +11,7 @@
       boardRunning: 'game--running',
       boardDisabled: 'game--disabled',
       boardGameOver: 'game--game-over',
-      boardVictory: 'game--victory',
+      boardWinning: 'game--winning',
       button: {
         list: 'game__buttons',
         default: 'game__buttons-item',
@@ -54,7 +54,7 @@
     alertRestartText: 'Do you want to continue on and do the restart? All data will be saved.',
     alertGameOverText: 'Oh no! You lost, want to try again?',
     alertChangeDifficultyText: 'Do you want to continue on and change difficulty level? All data will be saved.',
-    alertVictoryText: 'Awesome, You are cool!!! Want to try to improve your high-score?',
+    alertWinningText: 'Awesome, You are cool!!! Want to try to improve your high-score?',
     moveTimeout: 500,
     animationDuration: 500,
 

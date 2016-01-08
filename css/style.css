@@ -126,7 +126,7 @@ body {
   }
 }
 .game--game-over:before,
-.game--victory:before {
+.game--winning:before {
   content: attr(data-message);
   display: block;
   position: relative;
