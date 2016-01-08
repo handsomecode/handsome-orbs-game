@@ -67,7 +67,7 @@ var Orbs;
 
     self.debug = function (message) {
       if (self.config.debug) {
-        console.debug(message);
+        console.log(message);
       }
     };
 
@@ -238,7 +238,7 @@ var Orbs;
           audio.src = 'sounds/soundVictory.mp3';
           break;
       }
-      
+
       audio.autoplay = true; // Автоматически запускаем
     };
 
@@ -306,15 +306,17 @@ var Orbs;
 
         var coloredPointsAmount = self.checkSameColoredPoints();
 
-        self.generateRandomPoints(coloredPointsAmount.length ? self.settings.pointsAmountAfterRemove() : self.settings.pointsAmountAfterMove());
-
         self.clearPoints(coloredPointsAmount); // delete points, not DOM elements
 
-        if (self.data.points.length === self.settings.size * self.settings.size) {
+        self.generateRandomPoints(coloredPointsAmount.length ? self.settings.pointsAmountAfterRemove() : self.settings.pointsAmountAfterMove());
+
+        if ((self.data.points.length === self.settings.size * self.settings.size) && self.checkGameOver()) {
           self.gameOver();
+
         } else if (self.checkVictory()) {
           self.victory();
         }
+
       } else {
         self.data.points = oldPoints.slice(0);
       }
@@ -446,9 +448,9 @@ var Orbs;
     };
 
     self.undo = function () {
-      self.sound('undo');
-
       if (self.checkLocalStorage(localStorage['hasUndo'])) {
+        self.sound('undo');
+
         localStorage['hasUndo'] = false;
         self.data.buttonsList.undo.classList.add(self.config.classes.button.disabled);
 
@@ -490,6 +492,15 @@ var Orbs;
 
         self.generateBoard();
       });
+    };
+
+    self.checkGameOver = function () {
+      for (var i = 0; i < self.data.points.length; i++) {
+        if (self.data.points[i].forDeleting === true) {
+          return false;
+        }
+      }
+      return true;
     };
 
     self.gameOver = function () {
