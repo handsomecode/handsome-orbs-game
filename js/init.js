@@ -16,6 +16,7 @@ var Orbs;
       itemSize: 0,
       points: [],
       allPointsCoordinates: [],
+      hasOpenedConfirm: false,
       keyDownLock: false,
       running: false,
       init: false,
@@ -239,13 +240,13 @@ var Orbs;
     };
 
     self.movePoints = function (direction) {
-      if (!self.data.running || self.data.keyDownLock) {
+      if (!self.data.running || self.data.keyDownLock || self.data.hasOpenedConfirm) {
         return false;
       }
 
       self.data.keyDownLock = true;
       self.data.running = false;
-
+      
       var countChanges = 0,
           startLines = [];
 
@@ -380,8 +381,12 @@ var Orbs;
       var colors,
           minPointsAmount = (self.settings.size * self.settings.size) / 3 - 1;
 
-      if (!force && (self.data.points.length <= minPointsAmount) && !self.data.init) {
-        colors = self.checkColorOfPoints().slice(0);
+      if (!self.config.modes.hard.settings.randomMode) {
+        if (!force && (self.data.points.length <= minPointsAmount) && !self.data.init) {
+          colors = self.checkColorOfPoints().slice(0);
+        } else {
+          colors = self.settings.colors.slice(0);
+        }
       } else {
         colors = self.settings.colors.slice(0);
       }
@@ -528,9 +533,9 @@ var Orbs;
     };
 
     self.gameOver = function () {
-      self.sound('game over');
-
       self.data.running = false;
+
+      self.sound('game over');
 
       self.data._board.classList.add(self.config.classes.boardGameOver);
 
@@ -707,6 +712,12 @@ var Orbs;
     };
 
     self.openConfirm = function (text, callback) {
+      if (self.data.hasOpenedConfirm) {
+        return false;
+      }
+
+      self.data.hasOpenedConfirm = true;
+
       if (text !== self.config.confirmGameOverText) {
         self.data._container.classList.add(self.config.classes.boardDisabled);
       }
@@ -732,17 +743,22 @@ var Orbs;
       }
 
       function confirmYes() {
-        if (typeof callback === 'function') {
-          callback();
-        }
+        self.data.hasOpenedConfirm = false;
+
         self.removeDOMElement(document.getElementById('confirm'));
 
         self.data._container.classList.remove(self.config.classes.boardDisabled);
 
         document.removeEventListener('keydown', confirmKeyDown);
+
+        if (typeof callback === 'function') {
+          callback();
+        }
       }
 
       function confirmNo() {
+        self.data.hasOpenedConfirm = false;
+
         self.data._container.classList.remove(self.config.classes.boardDisabled);
 
         self.data.running = true;
@@ -890,7 +906,7 @@ var Orbs;
 
     self.binding = function () {
       document.addEventListener('keydown', function (e) {
-        if (e.shiftKey || e.metaKey || e.ctrlKey || e.altKey) {
+        if (self.data.keyDownLock || e.shiftKey || e.metaKey || e.ctrlKey || e.altKey) {
           return false;
         }
 
@@ -905,16 +921,16 @@ var Orbs;
             self.movePoints('right');
             break;
           case 40: // Arrow Down
-            self.movePoints('bottom');
+              self.movePoints('bottom');
             break;
           case 82: // R
-            if (!self.data.keyDownLock) {
+            if (!self.data.hasOpenedConfirm) {
               self.data.keyDownLock = true;
               self.restart();
             }
             break;
           case 85: // U
-            if (!self.data.keyDownLock) {
+            if (!self.data.hasOpenedConfirm) {
               self.data.keyDownLock = true;
               self.undo();
             }

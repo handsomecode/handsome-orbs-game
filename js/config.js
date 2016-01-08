@@ -125,7 +125,7 @@
             '#3bb675'
           ],
 
-          pointsAmountAfterStart: 20,
+          pointsAmountAfterStart: 1,
           pointsAmountAfterMove: function () {
             return game.data.points.length <= 16 ? 1 : 2;
           }
@@ -138,7 +138,9 @@
           pointsAmountInLineForRemove: 3,
 
           minimalAddingScore: 75,
-          percentScoreForAddingPoints: 2
+          percentScoreForAddingPoints: 2,
+
+          randomMode: true,
         }
       }
     }
