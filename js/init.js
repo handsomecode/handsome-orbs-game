@@ -367,7 +367,12 @@ var Orbs;
       for (var i = 0; i < self.data.points.length; i++) {
         var point = self.data.points[i];
 
-        remainingColors.push(colors[colors.indexOf(point.color)]);
+        if (remainingColors.indexOf(point.color) === -1) {
+          remainingColors.push(point.color);
+        }
+        if (remainingColors.length === colors.length) {
+          break;
+        }
       }
 
       return remainingColors;
@@ -381,12 +386,10 @@ var Orbs;
       var colors,
           minPointsAmount = (self.settings.size * self.settings.size) / 3 - 1;
 
-      if (!self.config.modes.hard.settings.randomMode) {
-        if (!force && (self.data.points.length <= minPointsAmount) && !self.data.init) {
-          colors = self.checkColorOfPoints().slice(0);
-        } else {
-          colors = self.settings.colors.slice(0);
-        }
+      if (self.config.modes.hard.settings.randomMode && self.settings.id === 'hard') {
+        colors = self.settings.colors.slice(0);
+      } else  if (!force && (self.data.points.length <= minPointsAmount) && !self.data.init) {
+        colors = self.checkColorOfPoints().slice(0);
       } else {
         colors = self.settings.colors.slice(0);
       }
@@ -396,7 +399,7 @@ var Orbs;
 
         if ((point.x === x && Math.abs(point.y - y) === 1) ||
             (point.y === y && Math.abs(point.x - x) === 1)) {
-          colors.splice(colors.indexOf(point.color), 1); // cut the color from array
+          colors.splice(colors.indexOf(point.color), 1);
         }
       }
 
@@ -456,7 +459,7 @@ var Orbs;
     self.generateRandomPoints = function (amount) {
       self.data.running = false;
 
-      if (amount + self.data.points.length > self.settings.size * self.settings.size) { // self.settings.size == 8, amount == 2 (def?)
+      if (amount + self.data.points.length > self.settings.size * self.settings.size) {
         amount = self.settings.size * self.settings.size - self.data.points.length; // when we can't add more points (all points==amount) because field can be almost full
       }
 
