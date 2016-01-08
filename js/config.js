@@ -125,7 +125,7 @@
             '#3bb675'
           ],
 
-          pointsAmountAfterStart: 1,
+          pointsAmountAfterStart: 12,
           pointsAmountAfterMove: function () {
             return game.data.points.length <= 16 ? 1 : 2;
           }
