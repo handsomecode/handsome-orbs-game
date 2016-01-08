@@ -234,8 +234,8 @@ var Orbs;
         case 'game over':
           audio.src = 'sounds/soundGameOver.mp3';
           break;
-        case 'victory':
-          audio.src = 'sounds/soundVictory.mp3';
+        case 'winning':
+          audio.src = 'sounds/soundWinning.mp3';
           break;
       }
 
@@ -253,8 +253,7 @@ var Orbs;
       localStorage['points'] = JSON.stringify(self.data.points);
       localStorage['oldScore'] = self.data.scoresList.score.count;
 
-      var countPointsforVictory = 0,
-          countChanges = 0,
+      var countChanges = 0,
           startLines = [];
 
       var axis = direction === 'left' || direction === 'right' ? 'x' : 'y', // define axis Ox or Oy
@@ -276,7 +275,6 @@ var Orbs;
         if (point.forDeleting) {
           self.data.points.splice(j, 1);
           j--;
-          countPointsforVictory++;
           continue;
         }
 
@@ -313,8 +311,8 @@ var Orbs;
         if ((self.data.points.length === self.settings.size * self.settings.size) && self.checkGameOver()) {
           self.gameOver();
 
-        } else if (self.checkVictory()) {
-          self.victory();
+        } else if (self.checkWinning()) {
+          self.winning();
         }
 
       } else {
@@ -457,8 +455,8 @@ var Orbs;
         if (self.data._board.classList.contains(self.config.classes.boardGameOver)) {
           self.data._board.classList.remove(self.config.classes.boardGameOver);
         }
-        if (self.data._board.classList.contains(self.config.classes.boardVictory)) {
-          self.data._board.classList.remove(self.config.classes.boardVictory);
+        if (self.data._board.classList.contains(self.config.classes.boardWinning)) {
+          self.data._board.classList.remove(self.config.classes.boardWinning);
         }
 
         self.data.scoresList.score.count = parseInt(localStorage['oldScore']);
@@ -516,7 +514,7 @@ var Orbs;
       });
     };
 
-    self.checkVictory = function () {
+    self.checkWinning = function () {
       for (var i = 0; i < self.data.points.length; i++) {
         if (self.data.points[i].forDeleting === false) {
           return false;
@@ -525,17 +523,17 @@ var Orbs;
       return true;
     };
 
-    self.victory = function () {
-      self.sound('victory');
+    self.winning = function () {
+      self.sound('winning');
 
       self.data.running = false;
 
-      self.data._board.setAttribute('data-message', 'VICTORY!!!');
-      self.data._board.classList.add(self.config.classes.boardVictory);
+      self.data._board.setAttribute('data-message', 'WINNING!!!');
+      self.data._board.classList.add(self.config.classes.boardWinning);
 
-      // add some cartoon/animation about victory...
+      // add some cartoon/animation about winning...
 
-      self.openAlert(self.config.alertVictoryText, function () {
+      self.openAlert(self.config.alertWinningText, function () {
         self.generateBoard();
       });
     };
@@ -635,8 +633,8 @@ var Orbs;
       if (self.data._board.classList.contains(self.config.classes.boardGameOver)) {
         self.data._board.classList.remove(self.config.classes.boardGameOver);
       }
-      if (self.data._board.classList.contains(self.config.classes.boardVictory)) {
-        self.data._board.classList.remove(self.config.classes.boardVictory);
+      if (self.data._board.classList.contains(self.config.classes.boardWinning)) {
+        self.data._board.classList.remove(self.config.classes.boardWinning);
       }
 
       self.data._board.classList.add(self.config.classes.boardRunning);
