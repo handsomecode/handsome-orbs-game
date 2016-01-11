@@ -593,7 +593,13 @@ var Orbs;
 
       self.data._board.innerHTML = '';
 
+      self.removeGrid();
       self.resetScore();
+    };
+
+    self.removeGrid = function () {
+      var grid = document.getElementById('grid');
+      self.removeDOMElement(grid);
     };
 
     self.generateGrid = function () {
@@ -604,6 +610,8 @@ var Orbs;
 
       canvas.height = self.data._board.offsetHeight;
       canvas.width = self.data._board.offsetWidth;
+      canvas.classList.add(self.config.classes.boardGrid);
+      canvas.id = 'grid';
 
       context.strokeStyle = 'rgba(155, 155, 155, 0.03)';
       for (var i = step/2; i < canvas.width; i += step) {
@@ -618,7 +626,7 @@ var Orbs;
         context.stroke();
       }
 
-      self.data._board.appendChild(canvas);
+      self.data._container.appendChild(canvas);
     };
 
     self.generateCoordinatesList = function () {
