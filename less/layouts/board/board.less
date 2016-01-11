@@ -1,0 +1,71 @@
+.game {
+  box-sizing: border-box;
+
+  position: relative;
+
+  .em(width, 1180px, 18px);
+  .em(min-width, 770px, 18px);
+  .em(height, 690px, 18px);
+  .em(min-height, 325px, 18px);
+
+  margin: 0 auto;
+  .em(padding-top, 25px, 18px);
+
+  background-color: #212325;
+
+  &__content {
+    box-sizing: border-box;
+    float: left;
+
+    position: relative;
+
+    .em(width, 576px, 18px);
+    .em(height, 576px, 18px);
+
+    border: 1px solid rgba(255,255,255,0.50);
+    background: #212325;
+    box-shadow: 0 0 30px 5px rgba(255,255,255,0.02);
+    .em(border-radius, 10px, 18px);
+  }
+  &--running &__point {
+    animation: addingPointAnimation @animationDuration ease @animationDuration both;
+
+    @keyframes addingPointAnimation {
+      0% {
+        opacity: 0;
+      }
+      30% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  }
+  &--disabled {
+    &:before {
+      content: '';
+
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      background-color: rgba(32, 32, 32, 0.4);
+
+      animation: overlayShowing 0.2s ease;
+
+      z-index: 2;
+
+      @keyframes overlayShowing {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
