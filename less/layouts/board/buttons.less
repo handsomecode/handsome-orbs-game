@@ -1,0 +1,71 @@
+.game {
+  &__buttons {
+    overflow: hidden;
+
+    position: absolute;
+    .em(top, 630px, 18px);
+    .em(left, 180px, 18px);
+
+    padding: 0;
+
+    &-item {
+      float: left;
+
+      position: relative;
+
+      .em(width, 100px, 18px);
+      .em(height, 40px, 18px);
+
+      .em(margin-right, 10px, 18px);
+
+      list-style: none;
+
+      .em(border-radius, 6px, 18px);
+
+      opacity: 1;
+
+      font-family: @font-stack-avenir-roman;
+      .em(font-size, 18px, 18px);
+      text-transform: lowercase;
+      text-align: center;
+      line-height: 2;
+
+      z-index: 1;
+      cursor: pointer;
+
+      &--undo,
+      &--undo.game__buttons-item--disabled:hover {
+        position: relative;
+
+        border: 1px solid rgba(84, 158, 201, 0.50);
+        background-color: rgba(84, 158, 201, 0.10);
+
+        color: #42748f;
+
+        z-index: 1;
+      }
+      &--undo:hover {
+        background-color: #42748f;
+
+        color: #fff;
+      }
+      &--restart {
+        border: 1px solid rgba(211, 73, 73, 0.50);
+        background: rgba(211, 73, 73, 0.10);
+
+        color: #d34949;
+
+        &:hover {
+          background-color: #d34949;
+
+          color: #fff;
+        }
+      }
+      &--disabled {
+        opacity: 0.3;
+
+        cursor: default;
+      }
+    }
+  }
+}

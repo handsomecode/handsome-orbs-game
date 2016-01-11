@@ -1,0 +1,110 @@
+.game {
+  box-sizing: border-box;
+
+  position: relative;
+
+  .em(width, 1180px, 18px);
+  .em(min-width, 770px, 18px);
+  .em(height, 690px, 18px);
+  .em(min-height, 325px, 18px);
+
+  margin: 0 auto;
+  .em(padding-top, 25px, 18px);
+
+  background-color: #212325;
+
+  &__grid {
+    position: absolute;
+    .em(top, 25px, 18px);
+    left: 0;
+
+    opacity: 0.6;
+
+    z-index: 0;
+  }
+  &__content {
+    box-sizing: border-box;
+    float: left;
+
+    position: relative;
+
+    .em(width, 576px, 18px);
+    .em(height, 576px, 18px);
+
+    background: transparent;
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5),
+                0 0 30px 5px rgba(255, 255, 255, 0.02);
+    .em(border-radius, 10px, 18px);
+
+    z-index: 1;
+  }
+
+  &--disabled {
+    &:before {
+      content: '';
+
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+
+      background-color: rgba(32, 32, 32, 0.4);
+
+      animation: overlayShowing 0.2s ease;
+
+      z-index: 2;
+
+      @keyframes overlayShowing {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &--winning,
+  &--game-over {
+    &:before {
+      display: block;
+
+      position: relative;
+
+      .em(padding-top, 264px, 44px);
+      .em(padding-bottom, 264px, 44px);
+
+      border: 2px solid rgba(105, 105, 105, 0.4);
+      background-color: rgba(45, 45, 45, 0.9);
+
+      font-family: @font-stack-avenir-roman;
+      .em(font-size, 44px, 18px);
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+      text-transform: uppercase;
+
+      .em(border-radius, 10px, 44px);
+
+      animation: overlayShowing 0.5s ease;
+
+      z-index: 2;
+
+      @keyframes overlayShowing {
+        0% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  &--winning:before {
+    content: 'Winning!!!';
+  }
+  &--game-over:before {
+    content: 'Game Over';
+  }
+}
