@@ -91,6 +91,7 @@ var Orbs;
             break;
         }
 
+        audio.preload = 'auto';
         audio.autoplay = true;
       }
     };
