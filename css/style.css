@@ -60,15 +60,23 @@ body {
   padding-top: 1.38888889em;
   background-color: #212325;
 }
+.game__grid {
+  position: absolute;
+  top: 1.38888889em;
+  left: 0;
+  opacity: 0.6;
+  z-index: 0;
+}
 .game__content {
   box-sizing: border-box;
   float: left;
   position: relative;
   width: 32em;
   height: 32em;
-  background: #212325;
+  background: transparent;
   box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5), 0 0 30px 5px rgba(255, 255, 255, 0.02);
   border-radius: 0.55555556em;
+  z-index: 1;
 }
 .game--disabled:before {
   content: '';
@@ -104,7 +112,7 @@ body {
   position: relative;
   padding-top: 6em;
   padding-bottom: 6em;
-  border: 1px solid rgba(105, 105, 105, 0.4);
+  border: 2px solid rgba(105, 105, 105, 0.4);
   background-color: rgba(45, 45, 45, 0.9);
   font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
   font-size: 2.44444444em;

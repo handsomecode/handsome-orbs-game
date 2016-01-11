@@ -9,6 +9,7 @@
       sidebar: 'game__sidebar',
       container: 'game',
       board: 'game__content',
+      boardGrid: 'game__grid',
       boardRunning: 'game--running',
       boardDisabled: 'game--disabled',
       boardGameOver: 'game--game-over',
