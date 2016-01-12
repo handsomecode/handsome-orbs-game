@@ -685,7 +685,7 @@ var Orbs;
 
       self.clearBoard();
 
-      if (init && self.checkLocalStorage(localStorage['points'])) {
+      if (init) {
         var points = JSON.parse(localStorage['points']);
 
         if (points.length) {
