@@ -20,6 +20,7 @@ var Orbs;
       keyDownLock: false,
       running: false,
       init: false,
+      sounds: {},
       scoresList: {
         modesButton: {
           easy: {
@@ -73,26 +74,27 @@ var Orbs;
       }
     };
 
-    self.sound = function (soundEvent) {
-      if (self.config.sound) {
-        var audio = new Audio();
+    self.preloadSound = function () {
+      for (var soundName in self.config.sounds) {
+        var soundSrc = self.config.sounds[soundName];
 
-        switch (soundEvent) {
-          case 'move':
-            audio.src = 'sounds/soundMove.mp3';
-            break;
-          case 'undo':
-            audio.src = 'sounds/soundUndo.mp3';
-            break;
-          case 'game over':
-            audio.src = 'sounds/soundGameOver.mp3';
-            break;
-          case 'winning':
-            audio.src = 'sounds/soundWinning.mp3';
-            break;
+        self.data.sounds[soundName] = new Audio();
+        self.data.sounds[soundName].preload = 'auto';
+        self.data.sounds[soundName].src = soundSrc;
+      }
+    };
+
+    self.sound = function (soundName) {
+      if (typeof self.data.sounds[soundName]) {
+        var sound = self.data.sounds[soundName];
+
+        if (sound.duration > 0 && !sound.paused) {
+          sound.pause();
+          sound.currentTime = sound.currentTime / sound.duration > 0.2 || (sound.duration - sound.currentTime) / sound.duration > 0.2 ? sound.duration / 2 : 0;
+          sound.play();
+        } else {
+          sound.play();
         }
-
-        audio.autoplay = true;
       }
     };
 
@@ -307,6 +309,7 @@ var Orbs;
         self.generateRandomPoints(coloredPointsAmount.length ? self.settings.pointsAmountAfterRemove() : self.settings.pointsAmountAfterMove());
 
         localStorage['points'] = JSON.stringify(self.data.points);
+        localStorage['score'] = self.data.scoresList.score.count;
         localStorage['oldScore'] = oldScore;
 
         if ((self.data.points.length === self.settings.size * self.settings.size) && self.checkGameOver()) {
@@ -583,7 +586,7 @@ var Orbs;
     self.gameOver = function () {
       self.data.running = false;
 
-      self.sound('game over');
+      self.sound('gameOver');
 
       self.data._board.classList.add(self.config.classes.boardGameOver);
 
@@ -976,6 +979,8 @@ var Orbs;
       self.data._sidebar = _sidebar;
 
       self.data._container.appendChild(_sidebar);
+
+      self.preloadSound();
 
       self.generateSidebar(); // add self.generateScoreboard(); // add div and push to it the best high score if it was
 
