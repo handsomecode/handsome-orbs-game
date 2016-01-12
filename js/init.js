@@ -146,7 +146,7 @@ var Orbs;
     };
 
     self.removeDOMElement = function (_element) {
-      if (_element && typeof _element.parentElement !== 'undefined') {
+      if (_element && _element.parentElement) {
         _element.parentElement.removeChild(_element);
       }
     };
