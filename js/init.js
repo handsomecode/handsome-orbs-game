@@ -20,6 +20,7 @@ var Orbs;
       keyDownLock: false,
       running: false,
       init: false,
+      sounds: {},
       scoresList: {
         modesButton: {
           easy: {
@@ -72,26 +73,27 @@ var Orbs;
       }
     };
 
-    self.sound = function (soundEvent) {
-      if (self.config.sound) {
-        var audio = new Audio();
+    self.preloadSound = function () {
+      for (var soundName in self.config.sounds) {
+        var soundSrc = self.config.sounds[soundName];
 
-        switch (soundEvent) {
-          case 'move':
-            audio.src = 'sounds/soundMove.mp3';
-            break;
-          case 'undo':
-            audio.src = 'sounds/soundUndo.mp3';
-            break;
-          case 'game over':
-            audio.src = 'sounds/soundGameOver.mp3';
-            break;
-          case 'winning':
-            audio.src = 'sounds/soundWinning.mp3';
-            break;
+        self.data.sounds[soundName] = new Audio();
+        self.data.sounds[soundName].preload = 'auto';
+        self.data.sounds[soundName].src = soundSrc;
+      }
+    };
+
+    self.sound = function (soundName) {
+      if (typeof self.data.sounds[soundName]) {
+        var sound = self.data.sounds[soundName];
+
+        if (sound.duration > 0 && !sound.paused) {
+          sound.pause();
+          sound.currentTime = sound.currentTime / sound.duration > 0.2 || (sound.duration - sound.currentTime) / sound.duration > 0.2 ? sound.duration / 2 : 0;
+          sound.play();
+        } else {
+          sound.play();
         }
-
-        audio.autoplay = true;
       }
     };
 
@@ -388,7 +390,7 @@ var Orbs;
 
       if (self.config.modes.hard.settings.randomMode && self.settings.id === 'hard') {
         colors = self.settings.colors.slice(0);
-      } else  if (!force && (self.data.points.length <= minPointsAmount) && !self.data.init) {
+      } else if (!force && (self.data.points.length <= minPointsAmount) && !self.data.init) {
         colors = self.checkColorOfPoints().slice(0);
       } else {
         colors = self.settings.colors.slice(0);
@@ -538,7 +540,7 @@ var Orbs;
     self.gameOver = function () {
       self.data.running = false;
 
-      self.sound('game over');
+      self.sound('gameOver');
 
       self.data._board.classList.add(self.config.classes.boardGameOver);
 
@@ -614,13 +616,13 @@ var Orbs;
       canvas.id = 'grid';
 
       context.strokeStyle = 'rgba(155, 155, 155, 0.03)';
-      for (var i = step/2; i < canvas.width; i += step) {
+      for (var i = step / 2; i < canvas.width; i += step) {
         context.moveTo(i, 0);
         context.lineTo(i, canvas.height);
         context.stroke();
       }
 
-      for (var i = step/2; i < canvas.height; i += step) {
+      for (var i = step / 2; i < canvas.height; i += step) {
         context.moveTo(0, i);
         context.lineTo(canvas.width, i);
         context.stroke();
@@ -932,6 +934,8 @@ var Orbs;
 
       self.data._container.appendChild(_sidebar);
 
+      self.preloadSound();
+
       self.generateSidebar(); // add self.generateScoreboard(); // add div and push to it the best high score if it was
 
       self.addHelp();
@@ -959,7 +963,7 @@ var Orbs;
             self.movePoints('right');
             break;
           case 40: // Arrow Down
-              self.movePoints('bottom');
+            self.movePoints('bottom');
             break;
           case 82: // R
             if (!self.data.hasOpenedConfirm) {

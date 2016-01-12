@@ -60,6 +60,13 @@
     moveTimeout: 500,
     animationDuration: 500,
 
+    sounds: {
+      move: 'sounds/soundMove.mp3',
+      undo: 'sounds/soundUndo.mp3',
+      winning: 'sounds/soundWinning.mp3',
+      gameOver: 'sounds/soundGameOver.mp3'
+    },
+
     modes: {
       easy: {
         settings: {
