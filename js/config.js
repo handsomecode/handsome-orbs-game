@@ -29,6 +29,7 @@
       point: 'game__point',
       removePoint: 'game__point--removed',
       scoreboard: {
+        digit: 'game__scoreboard-count-digit',
         container: 'game__scoreboard',
         name: 'game__scoreboard-title',
         count: 'game__scoreboard-count'

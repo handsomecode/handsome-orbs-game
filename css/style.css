@@ -146,8 +146,8 @@ body {
   border: 5px solid #212325;
   border-radius: 0.83333333em;
   opacity: 1;
-  -webkit-transition: opacity 0.5s ease, top 0.5s ease, left 0.5s ease;
-          transition: opacity 0.5s ease, top 0.5s ease, left 0.5s ease;
+  -webkit-transition: opacity 0.3s ease, top 0.3s ease, left 0.3s ease;
+          transition: opacity 0.3s ease, top 0.3s ease, left 0.3s ease;
   -webkit-transform: scale(1);
           transform: scale(1);
 }
@@ -168,12 +168,12 @@ body {
   opacity: 0 !important;
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
-  -webkit-transition: opacity 0.5s ease, top 0.5s ease, left 0.5s ease, -webkit-transform 0.5s ease 0.3s;
-          transition: opacity 0.5s ease, top 0.5s ease, left 0.5s ease, transform 0.5s ease 0.3s;
+  -webkit-transition: opacity 0.3s ease, top 0.3s ease, left 0.3s ease, -webkit-transform 0.3s ease 0.3s;
+          transition: opacity 0.3s ease, top 0.3s ease, left 0.3s ease, transform 0.3s ease 0.3s;
 }
 .game--running .game__point {
-  -webkit-animation: addingPointAnimation 0.5s ease 0.5s both;
-          animation: addingPointAnimation 0.5s ease 0.5s both;
+  -webkit-animation: addingPointAnimation 0.3s ease 0.3s both;
+          animation: addingPointAnimation 0.3s ease 0.3s both;
 }
 @-webkit-keyframes addingPointAnimation {
   0% {
@@ -253,6 +253,7 @@ body {
   padding-left: 2.77777778em;
 }
 .game__scoreboard {
+  position: relative;
   overflow: hidden;
   width: 14.16666667em;
   min-width: 5.55555556em;
@@ -269,8 +270,76 @@ body {
 }
 .game__scoreboard-count {
   display: block;
+  position: relative;
   font-size: 5em;
   color: #37c97c;
+}
+.game__scoreboard-count-digit {
+  position: relative;
+  float: left;
+}
+.game__scoreboard-count-digit:before {
+  content: attr(data-value);
+}
+.game__scoreboard-count-digit[data-to-next-value]:before {
+  float: right;
+  opacity: 0;
+  -webkit-animation: disappearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+          animation: disappearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+}
+@-webkit-keyframes disappearDigitalsAnimation {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0) scale(1);
+            transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(50%) scale(0.6);
+            transform: translateY(50%) scale(0.6);
+  }
+}
+@keyframes disappearDigitalsAnimation {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0) scale(1);
+            transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(50%) scale(0.6);
+            transform: translateY(50%) scale(0.6);
+  }
+}
+.game__scoreboard-count-digit[data-to-next-value]:after {
+  content: attr(data-to-next-value);
+  position: absolute;
+  -webkit-animation: appearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+          animation: appearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+}
+@-webkit-keyframes appearDigitalsAnimation {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-50%) scale(0.6);
+            transform: translateY(-50%) scale(0.6);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0) scale(1);
+            transform: translateY(0) scale(1);
+  }
+}
+@keyframes appearDigitalsAnimation {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-50%) scale(0.6);
+            transform: translateY(-50%) scale(0.6);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0) scale(1);
+            transform: translateY(0) scale(1);
+  }
 }
 .game__modes {
   position: relative;

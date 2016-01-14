@@ -136,9 +136,57 @@ var Orbs;
       }
     };
 
+    self.getDataNextToValue = function (curScore, futureScore) {
+      var arrCurScore = (curScore + '').split(''),
+          arrFutureScore = (futureScore + '').split('');
+
+      var changingNumIndexes = [];
+
+      for (var i = arrFutureScore.length - 1; i >= 0; i--) {
+        if (arrCurScore[i] !== arrFutureScore[i]) {
+          changingNumIndexes.push(i);
+        }
+      }
+
+      return changingNumIndexes.reverse();
+    };
+
+    self.setDataNextToValue = function (changingDigitalIndexes, futureScore) {
+      var digital = document.getElementsByClassName('game__scoreboard-count-digit');
+
+      for(var i = 0; i < changingDigitalIndexes.length; i++) {
+        digital[changingDigitalIndexes[i]].setAttribute('data-to-next-value', futureScore[changingDigitalIndexes[i]]);
+      }
+    };
+
     self.updateScore = function (countPoints) {
-      self.data.scoresList.score.count += self.settings.minimalAddingScore + ((countPoints - self.settings.pointsAmountInLineForRemove) * self.settings.minimalAddingScore * self.settings.percentScoreForAddingPoints);
-      self.data.scoresList.score._element.textContent = self.data.scoresList.score.count;
+      var curScore = self.data.scoresList.score.count,
+          futureScore = curScore + self.settings.minimalAddingScore + ((countPoints - self.settings.pointsAmountInLineForRemove) * self.settings.minimalAddingScore * self.settings.percentScoreForAddingPoints);
+
+      var changingDigitalIndexes = self.getDataNextToValue(curScore, futureScore);
+
+      self.data.scoresList.score.count = futureScore;
+
+      futureScore = (futureScore + '').split('');
+      curScore = (curScore + '').split('');
+
+      var scoreHtml = '';
+
+      if (curScore.length < futureScore.length) {
+        var diffValue = futureScore.length - curScore.length;
+
+        while (diffValue !== 0) {
+          scoreHtml = '<p class="game__scoreboard-count-digit" data-value="' + ' &nbsp;&nbsp; ' + '"></p>'
+          diffValue--;
+        }
+      }
+
+      for(var i = 0; i < curScore.length; i++) {
+        scoreHtml += '<p class="game__scoreboard-count-digit" data-value="' + curScore[i] + '"></p>';
+      }
+      self.data.scoresList.score._element.innerHTML = scoreHtml;
+
+      self.setDataNextToValue(changingDigitalIndexes, futureScore);
 
       self.updateHighScore(self.settings.id);
     };
