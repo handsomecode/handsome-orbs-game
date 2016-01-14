@@ -254,9 +254,6 @@ body {
 }
 .game__scoreboard {
   position: relative;
-  overflow: hidden;
-  width: 14.16666667em;
-  min-width: 5.55555556em;
   height: 5.55555556em;
   font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
 }
@@ -264,81 +261,183 @@ body {
   content: 'current score';
   font-size: 0.66666667em;
   color: #aaaaaa;
-  line-height: 1.33333333em;
   letter-spacing: 0.3825em;
   text-transform: uppercase;
 }
 .game__scoreboard-count {
-  display: block;
   position: relative;
+  padding-top: 0.11111111em;
   font-size: 5em;
   color: #37c97c;
 }
-.game__scoreboard-count-digit {
+.game__scoreboard-count p {
+  float: left;
   position: relative;
+  -webkit-transform: translateY(0) scale(1, 1);
+          transform: translateY(0) scale(1, 1);
+}
+.game__scoreboard-count p:before {
+  content: attr(data-value);
   float: left;
 }
-.game__scoreboard-count-digit:before {
-  content: attr(data-value);
-}
-.game__scoreboard-count-digit[data-to-next-value]:before {
-  float: right;
-  opacity: 0;
-  -webkit-animation: disappearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
-          animation: disappearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
-}
-@-webkit-keyframes disappearDigitalsAnimation {
-  0% {
-    opacity: 1;
-    -webkit-transform: translateY(0) scale(1);
-            transform: translateY(0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: translateY(50%) scale(0.6);
-            transform: translateY(50%) scale(0.6);
-  }
-}
-@keyframes disappearDigitalsAnimation {
-  0% {
-    opacity: 1;
-    -webkit-transform: translateY(0) scale(1);
-            transform: translateY(0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: translateY(50%) scale(0.6);
-            transform: translateY(50%) scale(0.6);
-  }
-}
-.game__scoreboard-count-digit[data-to-next-value]:after {
+.game__scoreboard-count p:after {
   content: attr(data-to-next-value);
   position: absolute;
-  -webkit-animation: appearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
-          animation: appearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
-@-webkit-keyframes appearDigitalsAnimation {
+.game__scoreboard-count--increase > p[data-to-next-value]:before {
+  opacity: 0;
+  -webkit-animation: increaseDisappearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+          animation: increaseDisappearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+}
+@-webkit-keyframes increaseDisappearDigitalsAnimation {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0) scale(1, 1);
+            transform: translateY(0) scale(1, 1);
+  }
+  50% {
+    opacity: 0.4;
+    -webkit-transform: translateY(20%) scale(0.8, 0.8);
+            transform: translateY(20%) scale(0.8, 0.8);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(40%) scale(0.6, 0.6);
+            transform: translateY(40%) scale(0.6, 0.6);
+  }
+}
+@keyframes increaseDisappearDigitalsAnimation {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0) scale(1, 1);
+            transform: translateY(0) scale(1, 1);
+  }
+  50% {
+    opacity: 0.4;
+    -webkit-transform: translateY(20%) scale(0.8, 0.8);
+            transform: translateY(20%) scale(0.8, 0.8);
+  }
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(40%) scale(0.6, 0.6);
+            transform: translateY(40%) scale(0.6, 0.6);
+  }
+}
+.game__scoreboard-count--increase > p[data-to-next-value]:after {
+  -webkit-animation: increaseAppearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+          animation: increaseAppearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+}
+@-webkit-keyframes increaseAppearDigitalsAnimation {
   0% {
     opacity: 0;
-    -webkit-transform: translateY(-50%) scale(0.6);
-            transform: translateY(-50%) scale(0.6);
+    -webkit-transform: translateY(-40%) scale(0.6, 0.6);
+            transform: translateY(-40%) scale(0.6, 0.6);
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: translateY(-20%) scale(0.8, 0.8);
+            transform: translateY(-20%) scale(0.8, 0.8);
   }
   100% {
     opacity: 1;
-    -webkit-transform: translateY(0) scale(1);
-            transform: translateY(0) scale(1);
+    -webkit-transform: translateY(0) scale(1, 1);
+            transform: translateY(0) scale(1, 1);
   }
 }
-@keyframes appearDigitalsAnimation {
+@keyframes increaseAppearDigitalsAnimation {
   0% {
     opacity: 0;
-    -webkit-transform: translateY(-50%) scale(0.6);
-            transform: translateY(-50%) scale(0.6);
+    -webkit-transform: translateY(-40%) scale(0.6, 0.6);
+            transform: translateY(-40%) scale(0.6, 0.6);
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: translateY(-20%) scale(0.8, 0.8);
+            transform: translateY(-20%) scale(0.8, 0.8);
   }
   100% {
     opacity: 1;
-    -webkit-transform: translateY(0) scale(1);
-            transform: translateY(0) scale(1);
+    -webkit-transform: translateY(0) scale(1, 1);
+            transform: translateY(0) scale(1, 1);
+  }
+}
+.game__scoreboard-count--decrease > p[data-to-next-value]:before {
+  opacity: 0;
+  -webkit-animation: decreaseDisappearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+          animation: decreaseDisappearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+}
+@-webkit-keyframes decreaseDisappearDigitalsAnimation {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0) scale(1, 1);
+            transform: translateY(0) scale(1, 1);
+  }
+  25% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes decreaseDisappearDigitalsAnimation {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0) scale(1, 1);
+            transform: translateY(0) scale(1, 1);
+  }
+  25% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+.game__scoreboard-count--decrease > p[data-to-next-value]:after {
+  -webkit-animation: decreaseAppearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+          animation: decreaseAppearDigitalsAnimation 0.3s cubic-bezier(0.25, 0.1, 0.25, 0.1);
+}
+@-webkit-keyframes decreaseAppearDigitalsAnimation {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(40%) scale(0.6, 0.6);
+            transform: translateY(40%) scale(0.6, 0.6);
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: translateY(20%) scale(0.8, 0.8);
+            transform: translateY(20%) scale(0.8, 0.8);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0) scale(1, 1);
+            transform: translateY(0) scale(1, 1);
+  }
+}
+@keyframes decreaseAppearDigitalsAnimation {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(40%) scale(0.6, 0.6);
+            transform: translateY(40%) scale(0.6, 0.6);
+  }
+  50% {
+    opacity: 1;
+    -webkit-transform: translateY(20%) scale(0.8, 0.8);
+            transform: translateY(20%) scale(0.8, 0.8);
+  }
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0) scale(1, 1);
+            transform: translateY(0) scale(1, 1);
   }
 }
 .game__modes {

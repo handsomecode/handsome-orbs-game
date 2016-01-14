@@ -43,7 +43,8 @@ var Orbs;
         },
         score: {
           _element: undefined,
-          count: 0
+          count: 0,
+          event: 'increase'
         }
       },
       buttonsList: {
@@ -136,57 +137,10 @@ var Orbs;
       }
     };
 
-    self.getDataNextToValue = function (curScore, futureScore) {
-      var arrCurScore = (curScore + '').split(''),
-          arrFutureScore = (futureScore + '').split('');
+    self.increaseScore = function (countPoints) {
+      var newScore = self.data.scoresList.score.count + self.settings.minimalAddingScore + ((countPoints - self.settings.pointsAmountInLineForRemove) * self.settings.minimalAddingScore * self.settings.percentScoreForAddingPoints);
 
-      var changingNumIndexes = [];
-
-      for (var i = arrFutureScore.length - 1; i >= 0; i--) {
-        if (arrCurScore[i] !== arrFutureScore[i]) {
-          changingNumIndexes.push(i);
-        }
-      }
-
-      return changingNumIndexes.reverse();
-    };
-
-    self.setDataNextToValue = function (changingDigitalIndexes, futureScore) {
-      var digital = document.getElementsByClassName('game__scoreboard-count-digit');
-
-      for(var i = 0; i < changingDigitalIndexes.length; i++) {
-        digital[changingDigitalIndexes[i]].setAttribute('data-to-next-value', futureScore[changingDigitalIndexes[i]]);
-      }
-    };
-
-    self.updateScore = function (countPoints) {
-      var curScore = self.data.scoresList.score.count,
-          futureScore = curScore + self.settings.minimalAddingScore + ((countPoints - self.settings.pointsAmountInLineForRemove) * self.settings.minimalAddingScore * self.settings.percentScoreForAddingPoints);
-
-      var changingDigitalIndexes = self.getDataNextToValue(curScore, futureScore);
-
-      self.data.scoresList.score.count = futureScore;
-
-      futureScore = (futureScore + '').split('');
-      curScore = (curScore + '').split('');
-
-      var scoreHtml = '';
-
-      if (curScore.length < futureScore.length) {
-        var diffValue = futureScore.length - curScore.length;
-
-        while (diffValue !== 0) {
-          scoreHtml = '<p class="game__scoreboard-count-digit" data-value="' + ' &nbsp;&nbsp; ' + '"></p>'
-          diffValue--;
-        }
-      }
-
-      for(var i = 0; i < curScore.length; i++) {
-        scoreHtml += '<p class="game__scoreboard-count-digit" data-value="' + curScore[i] + '"></p>';
-      }
-      self.data.scoresList.score._element.innerHTML = scoreHtml;
-
-      self.setDataNextToValue(changingDigitalIndexes, futureScore);
+      self.updateScore(newScore);
 
       self.updateHighScore(self.settings.id);
     };
@@ -216,7 +170,7 @@ var Orbs;
           }
         }
 
-        self.updateScore(points.length);
+        self.increaseScore(points.length);
       }
     };
 
@@ -353,7 +307,6 @@ var Orbs;
         self.generateRandomPoints(coloredPointsAmount.length ? self.settings.pointsAmountAfterRemove() : self.settings.pointsAmountAfterMove());
 
         localStorage['points'] = JSON.stringify(self.data.points);
-        localStorage['score'] = self.data.scoresList.score.count;
         localStorage['oldScore'] = oldScore;
 
         if ((self.data.points.length === self.settings.size * self.settings.size) && self.checkGameOver()) {
@@ -436,7 +389,7 @@ var Orbs;
 
       if (self.config.modes.hard.settings.randomMode && self.settings.id === 'hard') {
         colors = self.settings.colors.slice(0);
-      } else  if (!force && (self.data.points.length <= minPointsAmount) && !self.data.init) {
+      } else if (!force && (self.data.points.length <= minPointsAmount) && !self.data.init) {
         colors = self.checkColorOfPoints().slice(0);
       } else {
         colors = self.settings.colors.slice(0);
@@ -520,6 +473,53 @@ var Orbs;
       self.data.running = true;
     };
 
+    self.getDataNextToValue = function (curScore, futureScore) {
+      var arrCurScore = (curScore + '').split(''),
+          arrFutureScore = (futureScore + '').split('');
+
+      var changingNumIndexes = [];
+
+      for (var i = 0; i < Math.max(arrCurScore.length, arrFutureScore.length); i++) {
+        if (arrCurScore.length <= i || arrFutureScore.length <= i || arrCurScore[i] !== arrFutureScore[i]) {
+          changingNumIndexes.push(i);
+        }
+      }
+
+      return changingNumIndexes;
+    };
+
+    self.updateScore = function (futureScore) {
+      var currentScore = self.data.scoresList.score.count;
+
+      var changingDigitalIndexes = self.getDataNextToValue(currentScore, futureScore);
+
+      if (changingDigitalIndexes.length) {
+        self.data.scoresList.score.count = futureScore;
+
+        futureScore = (futureScore + '').split('');
+        currentScore = (currentScore + '').split('');
+
+        self.data.scoresList.score._element.innerHTML = '';
+
+        for (var i = 0; i < Math.max(futureScore.length, currentScore.length); i++) {
+          var _p = document.createElement('p');
+          _p.setAttribute('data-value', (currentScore.length > i ? currentScore[i] : '\b'));
+
+          if (changingDigitalIndexes.indexOf(i) > -1) {
+            _p.setAttribute('data-to-next-value', (futureScore.length > i ? futureScore[i] : ' '));
+          }
+
+          self.data.scoresList.score._element.appendChild(_p);
+        }
+
+        self.data.scoresList.score._element.classList.remove(self.config.classes.scoreboard[self.data.scoresList.score.event]);
+        self.data.scoresList.score.event = Number(futureScore.join('')) >= Number(currentScore.join('')) ? 'increase' : 'decrease';
+        self.data.scoresList.score._element.classList.add(self.config.classes.scoreboard[self.data.scoresList.score.event]);
+
+        localStorage['score'] = self.data.scoresList.score.count;
+      }
+    };
+
     self.undo = function () {
       if (self.checkLocalStorage(localStorage['hasUndo'])) {
         self.sound('undo');
@@ -534,10 +534,7 @@ var Orbs;
           self.data._board.classList.remove(self.config.classes.boardWinning);
         }
 
-        self.data.scoresList.score.count = parseInt(localStorage['oldScore']);
-        self.data.scoresList.score._element.textContent = self.data.scoresList.score.count;
-
-        localStorage['score'] = self.data.scoresList.score.count;
+        self.updateScore(parseInt(localStorage['oldScore']));
         localStorage.removeItem('oldScore');
 
         for (var i = self.data.points.length - 1; i >= 0; i--) {
@@ -662,13 +659,13 @@ var Orbs;
       canvas.id = 'grid';
 
       context.strokeStyle = 'rgba(155, 155, 155, 0.03)';
-      for (var i = step/2; i < canvas.width; i += step) {
+      for (var i = step / 2; i < canvas.width; i += step) {
         context.moveTo(i, 0);
         context.lineTo(i, canvas.height);
         context.stroke();
       }
 
-      for (var i = step/2; i < canvas.height; i += step) {
+      for (var i = step / 2; i < canvas.height; i += step) {
         context.moveTo(0, i);
         context.lineTo(canvas.width, i);
         context.stroke();
@@ -938,7 +935,7 @@ var Orbs;
 
     self.generateSidebar = function () {
       var _scoreboardContainer = document.createElement('div'),
-          _scoreboardCount = document.createElement('span');
+          _scoreboardCount = document.createElement('div');
 
       _scoreboardContainer.classList.add(self.config.classes.scoreboard.container);
       _scoreboardCount.classList.add(self.config.classes.scoreboard.count);
@@ -1007,7 +1004,7 @@ var Orbs;
             self.movePoints('right');
             break;
           case 40: // Arrow Down
-              self.movePoints('bottom');
+            self.movePoints('bottom');
             break;
           case 82: // R
             if (!self.data.hasOpenedConfirm) {

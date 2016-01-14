@@ -32,7 +32,9 @@
         digit: 'game__scoreboard-count-digit',
         container: 'game__scoreboard',
         name: 'game__scoreboard-title',
-        count: 'game__scoreboard-count'
+        count: 'game__scoreboard-count',
+        increase: 'game__scoreboard-count--increase',
+        decrease: 'game__scoreboard-count--decrease'
       },
       modesBoard: {
         list: 'game__modes',
