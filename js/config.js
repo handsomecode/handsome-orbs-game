@@ -52,8 +52,8 @@
     confirmHtml: '' +
     '<div class="game__confirm" id="confirm">' +
     '  <p class="game__confirm-text">%text%</p>' +
-    '  <button class="game__confirm-button game__confirm-button--yes" id="confirm-yes">Yes</button>' +
-    '  <button class="game__confirm-button game__confirm-button--no" id="confirm-no">No</button>' +
+    '  <button class="game__confirm-button game__confirm-button--no" id="confirm-yes">No</button>' +
+    '  <button class="game__confirm-button game__confirm-button--yes" id="confirm-no">Yes</button>' +
     '</div>',
 
     confirmRestartText: 'Would you like to continue on and do the restart? All data will be saved.',
