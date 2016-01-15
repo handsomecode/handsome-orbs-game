@@ -85,7 +85,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(32, 32, 32, 0.4);
+  background-color: rgba(32, 32, 32, 0.8);
   -webkit-animation: overlayShowing 0.2s ease;
           animation: overlayShowing 0.2s ease;
   z-index: 2;
@@ -578,15 +578,15 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 18.33333333em;
-  margin-left: -9.16666667em;
-  padding-bottom: 0.83333333em;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background-color: #343638;
-  opacity: 1;
+  width: 22.22222222em;
+  margin-left: -11.11111111em;
+  padding-bottom: 2em;
+  border: 1px solid #6D7579;
+  background-color: #272C2E;
+  opacity: 0.9;
   text-align: center;
   box-shadow: 0 0 30px 5px rgba(255, 255, 255, 0.02);
-  border-radius: 0.55555556em;
+  border-radius: 0.27777778em;
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%);
   -webkit-animation: confirmShowing 0.2s ease;
@@ -611,7 +611,7 @@ body {
 }
 .game__confirm-text {
   height: 5.55555556em;
-  margin-top: 1.66666667em;
+  margin-top: 2.33333333em;
   margin-left: 2.22222222em;
   margin-right: 2.22222222em;
   font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
@@ -634,7 +634,7 @@ body {
   cursor: pointer;
 }
 .game__confirm-button--no {
-  margin-left: 0.27777778em;
+  margin-right: 0.22222222em;
   border: 1px solid rgba(211, 73, 73, 0.5);
   background: rgba(211, 73, 73, 0.1);
   color: #d34949;
@@ -644,7 +644,7 @@ body {
   color: #fff;
 }
 .game__confirm-button--yes {
-  margin-right: 0.27777778em;
+  margin-left: 0.22222222em;
   border: 1px solid rgba(84, 158, 201, 0.5);
   background-color: rgba(84, 158, 201, 0.1);
   color: #42748f;
