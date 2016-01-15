@@ -7,4 +7,144 @@
 
     .em(padding-left, 50px, 18px);
   }
+  &__scoreboard {
+    position: relative;
+
+    .em(height, 100px, 18px);
+
+    font-family: @font-stack-avenir-roman;
+
+    &:before {
+      content: 'current score';
+
+      .em(font-size, 12px, 18px);
+      color: #aaaaaa;
+      .em(letter-spacing, 4.59px, 12px);
+      text-transform: uppercase;
+    }
+    &-count {
+      position: relative;
+
+      .em(padding-top, 10px, 90px);
+
+      .em(font-size, 90px, 18px);
+      color: #37c97c;
+
+      p {
+        float: left;
+
+        position: relative;
+
+        transform: translateY(0) scale(1, 1);
+
+        &:before {
+          content: attr(data-value);
+
+          float: left;
+        }
+        &:after {
+          content: attr(data-to-next-value);
+
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+        }
+      }
+      &--increase > p[data-to-next-value] {
+        &:before {
+          opacity: 0;
+
+          animation: increaseDisappearDigitalsAnimation @animationDuration cubic-bezier(0.25, 0.1, 0.25, 0.1);
+
+          @keyframes increaseDisappearDigitalsAnimation {
+            0% {
+              opacity: 1;
+
+              transform: translateY(0) scale(1, 1);
+            }
+            50% {
+              opacity: 0.4;
+
+              transform: translateY(20%) scale(0.8, 0.8);
+            }
+            100% {
+              opacity: 0;
+
+              transform: translateY(40%) scale(0.6, 0.6);
+            }
+          }
+        }
+        &:after {
+          animation: increaseAppearDigitalsAnimation @animationDuration cubic-bezier(0.25, 0.1, 0.25, 0.1);
+
+          @keyframes increaseAppearDigitalsAnimation {
+            0% {
+              opacity: 0;
+
+              transform: translateY(-40%) scale(0.6, 0.6);
+            }
+            50% {
+              opacity: 1;
+
+              transform: translateY(-20%) scale(0.8, 0.8);
+            }
+            100% {
+              opacity: 1;
+
+              transform: translateY(0) scale(1, 1);
+            }
+          }
+        }
+      }
+      &--decrease {
+        > p[data-to-next-value] {
+          &:before {
+            opacity: 0;
+
+            animation: decreaseDisappearDigitalsAnimation @animationDuration cubic-bezier(0.25, 0.1, 0.25, 0.1);
+
+            @keyframes decreaseDisappearDigitalsAnimation {
+              0% {
+                opacity: 1;
+
+                transform: translateY(0) scale(1, 1);
+              }
+              25% {
+                opacity: 0.4;
+              }
+              50% {
+                opacity: 0;
+              }
+              100% {
+                opacity: 0;
+              }
+            }
+          }
+          &:after {
+            animation: decreaseAppearDigitalsAnimation @animationDuration cubic-bezier(0.25, 0.1, 0.25, 0.1);
+
+            @keyframes decreaseAppearDigitalsAnimation {
+              0% {
+                opacity: 0;
+
+                transform: translateY(40%) scale(0.6, 0.6);
+              }
+              50% {
+                opacity: 1;
+
+                transform: translateY(20%) scale(0.8, 0.8);
+              }
+              100% {
+                opacity: 1;
+
+                transform: translateY(0) scale(1, 1);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

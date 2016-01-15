@@ -44,7 +44,8 @@ var Orbs;
         },
         score: {
           _element: undefined,
-          count: 0
+          count: 0,
+          event: 'increase'
         }
       },
       buttonsList: {
@@ -138,9 +139,10 @@ var Orbs;
       }
     };
 
-    self.updateScore = function (countPoints) {
-      self.data.scoresList.score.count += self.settings.minimalAddingScore + ((countPoints - self.settings.pointsAmountInLineForRemove) * self.settings.minimalAddingScore * self.settings.percentScoreForAddingPoints);
-      self.data.scoresList.score._element.textContent = self.data.scoresList.score.count;
+    self.increaseScore = function (countPoints) {
+      var newScore = self.data.scoresList.score.count + self.settings.minimalAddingScore + ((countPoints - self.settings.pointsAmountInLineForRemove) * self.settings.minimalAddingScore * self.settings.percentScoreForAddingPoints);
+
+      self.updateScore(newScore);
 
       self.updateHighScore(self.settings.id);
     };
@@ -170,7 +172,7 @@ var Orbs;
           }
         }
 
-        self.updateScore(points.length);
+        self.increaseScore(points.length);
       }
     };
 
@@ -474,6 +476,53 @@ var Orbs;
       self.data.running = true;
     };
 
+    self.getDataNextToValue = function (curScore, futureScore) {
+      var arrCurScore = (curScore + '').split(''),
+          arrFutureScore = (futureScore + '').split('');
+
+      var changingNumIndexes = [];
+
+      for (var i = 0; i < Math.max(arrCurScore.length, arrFutureScore.length); i++) {
+        if (arrCurScore.length <= i || arrFutureScore.length <= i || arrCurScore[i] !== arrFutureScore[i]) {
+          changingNumIndexes.push(i);
+        }
+      }
+
+      return changingNumIndexes;
+    };
+
+    self.updateScore = function (futureScore) {
+      var currentScore = self.data.scoresList.score.count;
+
+      var changingDigitalIndexes = self.getDataNextToValue(currentScore, futureScore);
+
+      if (changingDigitalIndexes.length) {
+        self.data.scoresList.score.count = futureScore;
+
+        futureScore = (futureScore + '').split('');
+        currentScore = (currentScore + '').split('');
+
+        self.data.scoresList.score._element.innerHTML = '';
+
+        for (var i = 0; i < Math.max(futureScore.length, currentScore.length); i++) {
+          var _p = document.createElement('p');
+          _p.setAttribute('data-value', (currentScore.length > i ? currentScore[i] : '\b'));
+
+          if (changingDigitalIndexes.indexOf(i) > -1) {
+            _p.setAttribute('data-to-next-value', (futureScore.length > i ? futureScore[i] : ' '));
+          }
+
+          self.data.scoresList.score._element.appendChild(_p);
+        }
+
+        self.data.scoresList.score._element.classList.remove(self.config.classes.scoreboard[self.data.scoresList.score.event]);
+        self.data.scoresList.score.event = Number(futureScore.join('')) >= Number(currentScore.join('')) ? 'increase' : 'decrease';
+        self.data.scoresList.score._element.classList.add(self.config.classes.scoreboard[self.data.scoresList.score.event]);
+
+        localStorage['score'] = self.data.scoresList.score.count;
+      }
+    };
+
     self.undo = function () {
       if (self.checkLocalStorage(localStorage['hasUndo'])) {
         self.sound('undo');
@@ -488,10 +537,7 @@ var Orbs;
           self.data._board.classList.remove(self.config.classes.boardWinning);
         }
 
-        self.data.scoresList.score.count = parseInt(localStorage['oldScore']);
-        self.data.scoresList.score._element.textContent = self.data.scoresList.score.count;
-
-        localStorage['score'] = self.data.scoresList.score.count;
+        self.updateScore(parseInt(localStorage['oldScore']));
         localStorage.removeItem('oldScore');
 
         for (var i = self.data.points.length - 1; i >= 0; i--) {
@@ -892,7 +938,7 @@ var Orbs;
 
     self.generateSidebar = function () {
       var _scoreboardContainer = document.createElement('div'),
-          _scoreboardCount = document.createElement('span');
+          _scoreboardCount = document.createElement('div');
 
       _scoreboardContainer.classList.add(self.config.classes.scoreboard.container);
       _scoreboardCount.classList.add(self.config.classes.scoreboard.count);

@@ -29,9 +29,12 @@
       point: 'game__point',
       removePoint: 'game__point--removed',
       scoreboard: {
+        digit: 'game__scoreboard-count-digit',
         container: 'game__scoreboard',
         name: 'game__scoreboard-title',
-        count: 'game__scoreboard-count'
+        count: 'game__scoreboard-count',
+        increase: 'game__scoreboard-count--increase',
+        decrease: 'game__scoreboard-count--decrease'
       },
       modesBoard: {
         list: 'game__modes',
@@ -49,12 +52,12 @@
     confirmHtml: '' +
     '<div class="game__confirm" id="confirm">' +
     '  <p class="game__confirm-text">%text%</p>' +
-    '  <button class="game__confirm-button game__confirm-button--yes" id="confirm-yes">Yes</button>' +
     '  <button class="game__confirm-button game__confirm-button--no" id="confirm-no">No</button>' +
+    '  <button class="game__confirm-button game__confirm-button--yes" id="confirm-yes">Yes</button>' +
     '</div>',
 
     confirmRestartText: 'Would you like to continue on and do the restart? All data will be saved.',
-    confirmGameOverText: 'Oh no! You lost, would you like to try again?',
+    confirmGameOverText: 'Oh no, you lost. Play again?',
     confirmChangeDifficultyText: 'Would you like to continue on and change difficulty level? All data will be saved.',
     confirmWinningText: 'Awesome, You are cool!!! would you like to improve your high-score?',
     moveTimeout: 500,
