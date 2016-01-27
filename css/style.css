@@ -85,6 +85,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
+  box-shadow: inset 0 0 15px 5px #243a31;
   background-color: rgba(32, 32, 32, 0.8);
   -webkit-animation: overlayShowing 0.2s ease;
           animation: overlayShowing 0.2s ease;
@@ -201,7 +202,7 @@ body {
   overflow: hidden;
   position: absolute;
   top: 35em;
-  left: 10em;
+  left: 6em;
   padding: 0;
 }
 .game__buttons-item {
@@ -242,6 +243,16 @@ body {
   background-color: #d34949;
   color: #fff;
 }
+.game__buttons-item--instructions {
+  width: 7.88888889em;
+  border: 1px solid rgba(83, 84, 85, 0.5);
+  background: rgba(33, 35, 37, 0.1);
+  color: #959595;
+}
+.game__buttons-item--instructions:hover {
+  background-color: #535455;
+  color: #fff;
+}
 .game__buttons-item--disabled {
   opacity: 0.3;
   cursor: default;
@@ -251,6 +262,7 @@ body {
   width: 31.66666667em;
   height: 32em;
   padding-left: 2.77777778em;
+  padding-top: 5.55555556em;
 }
 .game__scoreboard {
   position: relative;
@@ -540,38 +552,174 @@ body {
   opacity: 1;
   color: #fff;
 }
-.game__help-button {
-  display: inline-block;
-  margin-top: 5.35714286em;
+.game__instructions {
+  visibility: visible;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 55.55555556em;
+  margin-left: -27.77777778em;
+  padding-bottom: 4.72222222em;
+  padding-top: 4.22222222em;
+  padding-left: 6.66666667em;
+  padding-right: 6.66666667em;
+  border: 1px solid #6D7579;
+  background-color: #272C2E;
+  opacity: 0.9;
+  box-shadow: 0 0 30px 5px rgba(255, 255, 255, 0.02);
+  border-radius: 0.27777778em;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  -webkit-animation: confirmShowing 0.2s ease;
+          animation: confirmShowing 0.2s ease;
+  z-index: 100;
+}
+@-webkit-keyframes confirmShowing {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes confirmShowing {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.game__instructions-title {
+  margin-bottom: 1.07142857em;
   font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
   font-size: 0.77777778em;
-  color: #aaa;
-  letter-spacing: 0.32785714em;
-  line-height: 1.14285714em;
+  font-weight: bold;
+  color: #fff;
   text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+.game__instructions-title--general {
+  font-size: 2em;
+  text-align: center;
+}
+.game__instructions-title--general:after {
+  content: "";
+  display: block;
+  width: 3.25em;
+  height: 0.11111111em;
+  margin: 0 auto;
+  margin-top: 0.41666667em;
+  margin-bottom: 0.69444444em;
+  background-color: #3d4042;
+}
+.game__instructions-text {
+  font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
+  font-size: 0.88888889em;
+  color: #939596;
+  line-height: 1.35;
+}
+.game__instructions-text span {
+  font-weight: bold;
+  font-style: italic;
+}
+.game__instructions-text--general {
+  width: 23.4375em;
+  margin: 0 auto;
+  margin-bottom: 5.9375em;
+  text-align: center;
+}
+.game__instructions-moving {
+  float: left;
+  position: relative;
+  width: 35%;
+}
+.game__instructions-moving-tiles {
+  margin-top: 4.16666667em;
+}
+.game__instructions-tile {
+  float: left;
+  display: block;
+  margin-right: 0.27777778em;
+  padding: 0.27777778em;
+  width: 2.27777778em;
+  height: 2.27777778em;
+  border: 1px solid #565859;
+  border-radius: 0.38888889em;
+}
+.game__instructions-tile:last-child {
+  margin-right: 0;
+}
+.game__instructions-tile--left {
+  background: url('../images/arrow.png') no-repeat 50% 50%;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.game__instructions-tile--right {
+  background: url('../images/arrow.png') no-repeat 50% 50%;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+.game__instructions-tile--bottom {
+  background: url('../images/arrow.png') no-repeat 50% 50%;
+}
+.game__instructions-tile--bottom:before {
+  content: '';
+  display: block;
+  position: relative;
+  bottom: 3.05555556em;
+  right: 0.33333333em;
+  width: 2.22222222em;
+  height: 2.22222222em;
+  background: url('../images/arrow.png') no-repeat 50% 50%;
+  border: 1px solid #565859;
+  border-radius: 0.38888889em;
+  -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+}
+.game__instructions-earning {
+  margin-left: 45%;
+}
+.game__instructions-earning-tiles {
+  display: block;
+  height: 2.88888889em;
+  width: 8.05555556em;
+  margin-top: 2.5em;
+  margin-bottom: 0.83333333em;
+  padding: 0.27777778em;
+  border: 1px solid #939596;
+  border-radius: 0.38888889em;
+}
+.game__instructions-score {
+  margin-bottom: 0.83333333em;
+  font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
+  font-size: 0.77777778em;
+  color: #939596;
+  text-transform: uppercase;
+  line-height: 1.35;
+  letter-spacing: 0.2em;
+}
+.game__instructions-button {
+  position: relative;
+  bottom: -1.94444444em;
+  left: 50%;
+  width: 4.44444444em;
+  height: 1.94444444em;
+  margin-left: -2.22222222em;
+  border: 1px solid rgba(83, 84, 85, 0.5);
+  background-color: #272C2E;
+  color: #535455;
+  font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  text-transform: lowercase;
+  text-align: center;
+  line-height: 1;
+  border-radius: 0.33333333em;
   cursor: pointer;
 }
-.game__help-button:hover {
-  border-bottom: 1px solid #aaa;
-}
-.game__help-container {
-  display: none;
-  overflow-y: scroll;
-  width: 29.16666667em;
-  height: 11.11111111em;
-  margin-top: 0.83333333em;
-  padding: 0.55555556em;
-  background-color: #242628;
-}
-.game__help-container:before {
-  content: 'Move the orbs on the field, the up / down / left / right keys on your keyboard to place 3 orbs in a row. Groups of 3 orbs disappear, increasing the score. Enjoy the game';
-  font-size: 0.88888889em;
-  font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
+.game__instructions-button:hover {
+  background-color: #535455;
   color: #fff;
-  line-height: 1.5em;
-}
-.game__help-container--active {
-  display: block;
 }
 .game__confirm {
   visibility: visible;
@@ -592,14 +740,6 @@ body {
   -webkit-animation: confirmShowing 0.2s ease;
           animation: confirmShowing 0.2s ease;
   z-index: 100;
-}
-@-webkit-keyframes confirmShowing {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
 }
 @keyframes confirmShowing {
   0% {

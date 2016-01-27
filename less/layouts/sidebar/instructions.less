@@ -1,0 +1,206 @@
+.game {
+  &__instructions {
+    visibility: visible;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    .em(width, 1000px, 18px);
+
+    .em(margin-left, -500px, 18px);
+    .em(padding-bottom, 85px, 18px);
+    .em(padding-top, 76px, 18px);
+    .em(padding-left, 120px, 18px);
+    .em(padding-right, 120px, 18px);
+
+    border: 1px solid #6D7579;
+    background-color: #272C2E;
+
+    opacity: 0.9;
+
+    box-shadow: 0 0 30px 5px rgba(255, 255, 255, 0.02);
+    .em(border-radius, 5px, 18px);
+
+    transform: translateY(-50%);
+
+    animation: confirmShowing 0.2s ease;
+
+    z-index: 100;
+
+    @keyframes confirmShowing {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    &-title {
+      .em(margin-bottom, 15px, 14px);
+
+      font-family: @font-stack-avenir-roman;
+      .em(font-size, 14px, 18px);
+      font-weight: bold;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+
+      &--general {
+        .em(font-size, 36px, 18px);
+        text-align: center;
+
+        &:after {
+          content: "";
+
+          display: block;
+
+          .em(width, 117px, 36px);
+          .em(height,4px, 36px);
+
+          margin: 0 auto;
+          .em(margin-top, 15px, 36px);
+          .em(margin-bottom, 25px, 36px);
+
+          background-color: #3d4042;
+        }
+      }
+    }
+    &-text {
+      font-family: @font-stack-avenir-roman;
+      .em(font-size, 16px, 18px);
+      color: #939596;
+      line-height: 1.35;
+
+      span {
+        font-weight: bold;
+        font-style: italic;
+      }
+      &--general {
+        .em(width, 375px, 16px);
+
+        margin: 0 auto;
+        .em(margin-bottom, 95px, 16px);
+
+        text-align: center;
+      }
+    }
+    &-moving {
+      float: left;
+      position: relative;
+
+      width: 35%;
+
+      &-tiles {
+        .em(margin-top, 75px, 18px);
+      }
+    }
+    &-tile {
+      float: left;
+      display: block;
+
+      .em(margin-right, 5px, 18px);
+      .em(padding, 5px, 18px);
+
+      .em(width, 41px, 18px);
+      .em(height, 41px, 18px);
+
+      border: 1px solid #565859;
+      .em(border-radius, 7px, 18px);
+
+      &:last-child {
+        margin-right: 0;
+      }
+      &--left {
+        background: url('../images/arrow.png') no-repeat 50% 50%;
+
+        transform: rotate(90deg);
+      }
+      &--right {
+        background: url('../images/arrow.png') no-repeat 50% 50%;
+
+        transform: rotate(-90deg);
+      }
+      &--bottom {
+        background: url('../images/arrow.png') no-repeat 50% 50%;
+
+        &:before {
+          content: '';
+          display: block;
+
+          position: relative;
+          .em(bottom, 55px, 18px);
+          .em(right, 6px, 18px);
+
+          .em(width, 40px, 18px);
+          .em(height, 40px, 18px);
+
+          background: url('../images/arrow.png') no-repeat 50% 50%;
+          border: 1px solid #565859;
+
+          .em(border-radius, 7px, 18px);
+
+          transform: rotate(-180deg);
+        }
+      }
+    }
+    &-earning {
+      margin-left: 45%;
+
+      &-tiles {
+        display: block;
+
+        .em(height, 52px, 18px);
+        .em(width, 145px, 18px);
+
+        .em(margin-top, 45px, 18px);
+        .em(margin-bottom, 15px, 18px);
+        .em(padding, 5px, 18px);
+
+        border: 1px solid #939596;
+
+        .em(border-radius, 7px, 18px);
+      }
+    }
+    &-score {
+      .em(margin-bottom, 15px, 18px);
+
+      font-family: @font-stack-avenir-roman;
+      .em(font-size, 14px, 18px);
+      color: #939596;
+      text-transform: uppercase;
+      line-height: 1.35;
+      letter-spacing: 0.2em;
+    }
+    &-button {
+      position: relative;
+      .em(bottom, -35px, 18px);
+      left: 50%;
+
+      .em(width, 80px, 18px);
+      .em(height, 35px, 18px);
+
+      .em(margin-left, -40px, 18px);
+
+      border: 1px solid rgba(83, 84, 85, 0.50);
+      background-color: #272C2E;
+
+      color: #535455;
+      font-family: @font-stack-avenir-roman;
+      .em(font-size, 18px, 18px);
+      text-transform: lowercase;
+      text-align: center;
+      line-height: 1;
+
+      .em(border-radius, 6px, 18px);
+
+      cursor: pointer;
+
+      &:hover {
+        background-color: #535455;
+
+        color: #fff;
+      }
+    }
+  }
+}

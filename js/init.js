@@ -17,6 +17,7 @@ var Orbs;
       points: [],
       allPointsCoordinates: [],
       hasOpenedConfirm: false,
+      hasOpenedInstructions: false,
       keyDownLock: false,
       running: false,
       init: false,
@@ -63,6 +64,14 @@ var Orbs;
           description: 'Description for Restart (key \'R\')',
           callback: function () {
             self.restart();
+          }
+        },
+        instructions: {
+          _element: undefined,
+          name: 'Instructions',
+          description: 'Description for Instructions (key \'I\')',
+          callback: function () {
+            self.instructions();
           }
         }
       }
@@ -574,6 +583,10 @@ var Orbs;
       });
     };
 
+    self.instructions = function () {
+        self.openInstructions();
+    };
+
     self.checkGameOver = function () {
       for (var i = 0; i < self.data.points.length; i++) {
         if (self.data.points[i].forDeleting) {
@@ -617,8 +630,6 @@ var Orbs;
       localStorage.removeItem('oldScore');
       localStorage['points'] = JSON.stringify([]);
       localStorage['score'] = 0;
-
-      // add some cartoon/animation about winning...
 
       self.openConfirm(self.config.confirmWinningText, function () {
         self.generateBoard();
@@ -733,7 +744,7 @@ var Orbs;
 
       self.clearBoard();
 
-      if (init && self.checkLocalStorage(localStorage['points'])) {
+      if (init && !self.checkLocalStorage(localStorage['points'])) {
         var points = JSON.parse(localStorage['points']);
 
         if (points.length) {
@@ -865,24 +876,47 @@ var Orbs;
       });
     };
 
-    self.addHelp = function () {
-      var _helpButton = document.createElement('div'),
-          _helpContainer = document.createElement('div');
+    self.openInstructions = function () {
+      if (self.data.hasOpenedInstructions) {
+        return false;
+      }
 
-      _helpButton.textContent = 'Help';
-      _helpButton.classList.add(self.config.classes.helpButton);
-      _helpContainer.classList.add(self.config.classes.helpContainer);
+      self.data.hasOpenedInstructions = true;
 
-      _helpButton.addEventListener('click', function () {
-        if (_helpContainer.classList.contains(self.config.classes.helpContainerAct)) {
-          _helpContainer.classList.remove(self.config.classes.helpContainerAct);
-        } else {
-          _helpContainer.classList.add(self.config.classes.helpContainerAct);
+      self.data._container.classList.add(self.config.classes.boardDisabled);
+
+      self.appendChildren(self.data._container, self.config.instructionsHtml);
+
+      self.data.running = false;
+
+      function instructionsKeyDown(e) {
+        if (!self.data.keyDownLock) {
+          self.data.keyDownLock = true;
+          switch (e.keyCode) {
+            case 27: // Esc
+              instructionsClose();
+              break;
+          }
         }
-      });
+      }
 
-      self.data._sidebar.appendChild(_helpButton);
-      self.data._sidebar.appendChild(_helpContainer);
+      function instructionsClose() {
+        self.data.hasOpenedInstructions = false;
+
+        self.data._container.classList.remove(self.config.classes.boardDisabled);
+
+        self.data.running = true;
+
+        self.removeDOMElement(document.getElementById('instructions'));
+
+        document.removeEventListener('keydown', instructionsKeyDown);
+      }
+
+      document.addEventListener('keydown', instructionsKeyDown);
+
+      document.getElementById('instructions-ok').addEventListener('click', function () {
+        instructionsClose();
+      });
     };
 
     self.getCookie = function (name) {
@@ -984,8 +1018,6 @@ var Orbs;
 
       self.generateSidebar(); // add self.generateScoreboard(); // add div and push to it the best high score if it was
 
-      self.addHelp();
-
       self.generateButtons();
       self.binding();
 
@@ -1023,6 +1055,12 @@ var Orbs;
               self.undo();
             }
             break;
+          case 73: // I
+            if (!self.data.hasOpenedInstructions) {
+              self.data.keyDownLock = true;
+              self.instructions();
+            }
+            break;
         }
       });
 
@@ -1036,6 +1074,7 @@ var Orbs;
           case 85: // U
           case 89: // Y
           case 78: // N
+          case 73: // I
           case 27: // Esc
           case 13: // Enter
             self.data.keyDownLock = false;
