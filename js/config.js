@@ -19,11 +19,11 @@
         default: 'game__buttons-item',
         disabled: 'game__buttons-item--disabled',
         restart: 'game__buttons-item--restart',
-        undo: 'game__buttons-item--undo'
+        undo: 'game__buttons-item--undo',
+        instructions: 'game__buttons-item--instructions'
       },
-      helpButton: 'game__help-button',
-      helpContainer: 'game__help-container',
-      helpContainerAct: 'game__help-container--active',
+      instructionsContainer: 'game__instructions-container',
+      instructionsContainerAct: 'game__instructions-container--active',
       modeList: 'game__modes',
       modeItem: 'game__modes-item',
       point: 'game__point',
@@ -48,6 +48,36 @@
         containerDisabled: 'game__confirm--disabled'
       }
     },
+
+    instructionsHtml: '' +
+    '<div class="game__instructions" id="instructions">' +
+    '  <h1 class="game__instructions-title game__instructions-title--general">' + 'Instructions' + '</h1>' +
+    '  <p class="game__instructions-text game__instructions-text--general">' + 'The overall objective of the game is to shift the tiles and align 3 or 4 of the same color' + '</p>' +
+    '  <div class="game__instructions-moving">' +
+    '    <h3 class="game__instructions-title">' + 'Moving tiles' + '</h3>' +
+    '    <p class="game__instructions-text">' + 'Shift all pieces to one side of the board with you arrow keys' + '</p>' +
+    '    <div class="game__instructions-moving-tiles">' +
+    '      <div class="game__instructions-tile game__instructions-tile--left"></div>' +
+    '      <div class="game__instructions-tile game__instructions-tile--bottom"></div>' +
+    '      <div class="game__instructions-tile game__instructions-tile--right"></div>' +
+    '    </div>' +
+    '  </div>' +
+    '  <div class="game__instructions-earning">' +
+    '    <h3 class="game__instructions-title">' + 'Earning points' + '</h3>' +
+    '    <p class="game__instructions-text">' +
+             'Easy: Align 3 tiles to earn' + '<span>' + ' 50 points' + '</span>' + '<br>' +
+             'Medium: Align 3 tiles to earn' + '<span>' + ' 75 points' + '</span>' + '<br>' +
+             'Hard: Align 3 tiles to earn' + '<span>' + ' 100 points' + '</span>' + '<br>' +
+    '    </p>' +
+    '    <div class="game__instructions-earning-tiles">' +
+    '      <div class="game__instructions-tile"></div>' +
+    '      <div class="game__instructions-tile"></div>' +
+    '      <div class="game__instructions-tile"></div>' +
+    '    </div>' +
+    '    <span class="game__instructions-score">' + '50, 75, 100 points' + '</span>' +
+    '  </div>' +
+    '  <button class="game__instructions-button" id="instructions-ok">Ok</button>' +
+    '</div>',
 
     confirmHtml: '' +
     '<div class="game__confirm" id="confirm">' +
