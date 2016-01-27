@@ -631,8 +631,6 @@ var Orbs;
       localStorage['points'] = JSON.stringify([]);
       localStorage['score'] = 0;
 
-      // add some cartoon/animation about winning...
-
       self.openConfirm(self.config.confirmWinningText, function () {
         self.generateBoard();
       });
