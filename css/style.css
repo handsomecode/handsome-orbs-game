@@ -727,6 +727,7 @@ html body {
   margin-top: 2.5em;
   margin-bottom: 0.83333333em;
   padding: 0.27777778em;
+  padding-right: 0;
   border: 1px solid #939596;
   border-radius: 0.38888889em;
 }
