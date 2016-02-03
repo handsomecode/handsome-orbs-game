@@ -27,6 +27,9 @@
       modeList: 'game__modes',
       modeItem: 'game__modes-item',
       point: 'game__point',
+      pointInnerContainer: 'game__point-inner-container',
+      pointsContainer: 'game__point-container',
+      removePointsContainer: 'game__point-container--removed',
       removePoint: 'game__point--removed',
       scoreboard: {
         digit: 'game__scoreboard-count-digit',
@@ -90,8 +93,9 @@
     confirmGameOverText: 'Oh no, you lost. Play again?',
     confirmChangeDifficultyText: 'Would you like to continue on and change difficulty level? All data will be saved.',
     confirmWinningText: 'Awesome, You are cool!!! would you like to improve your high-score?',
-    moveTimeout: 500,
-    animationDuration: 500,
+    moveTimeout: 700,
+    removeTimeout: 600,
+    increaseScoreTimeout: 400,
 
     sounds: {
       move: 'sounds/soundMove.mp3',
@@ -104,14 +108,14 @@
       easy: {
         settings: {
           name: 'Easy',
-          size: 10,
+          size: 9,
 
           colors: [
-            '#c64e4e',
-            '#599abe',
-            '#d6d05c',
-            '#d77d4f',
-            '#3bb675'
+            'rgb(224, 122, 70)',
+            'rgb(224, 217, 85)',
+            'rgb(84, 159, 201)',
+            'rgb(211, 73, 73)',
+            'rgb(55, 201, 124)'
           ],
 
           pointsAmountAfterStart: 60,
@@ -133,11 +137,11 @@
           size: 8,
 
           colors: [
-            '#c64e4e',
-            '#599abe',
-            '#d6d05c',
-            '#d77d4f',
-            '#3bb675'
+            'rgba(224, 122, 70, 1)',
+            'rgba(224, 217, 85, 1)',
+            'rgba(84, 159, 201, 1)',
+            'rgba(211, 73, 73, 1)',
+            'rgba(55, 201, 124,1 )'
           ],
 
           pointsAmountAfterStart: 18,
@@ -159,11 +163,11 @@
           size: 7,
 
           colors: [
-            '#c64e4e',
-            '#599abe',
-            '#d6d05c',
-            '#d77d4f',
-            '#3bb675'
+            'rgb(224, 122, 70)',
+            'rgb(224, 217, 85)',
+            'rgb(84, 159, 201)',
+            'rgb(211, 73, 73)',
+            'rgb(55, 201, 124)'
           ],
 
           pointsAmountAfterStart: 12,

@@ -169,6 +169,8 @@ var Orbs;
       for (var i = 0; i < pointsList.length; i++) {
         var points = pointsList[i];
 
+        self.generateRemovingAnimation(points);
+
         for (var j = 0; j < points.length; j++) {
           var point = points[j],
               _point = point._element,
@@ -181,8 +183,44 @@ var Orbs;
           }
         }
 
-        self.increaseScore(points.length);
+        setTimeout(function () {
+          self.increaseScore(points.length);
+        }, self.config.increaseScoreTimeout);
       }
+    };
+
+    self.generateRemovingAnimation = function (points) {
+      var _pointsContainer = document.createElement('div'),
+          verticalLine = false;
+
+      _pointsContainer.classList.add(self.config.classes.pointsContainer);
+
+      for (var i = 1; i < points.length; i++) {
+        if (points[i].x === points[i-1].x && Math.abs(points[i].y - points[i-1].y) === 1) {
+          verticalLine = true;
+        }
+      }
+
+      if (verticalLine) {
+        _pointsContainer.style.width = self.data.itemSize + '%';
+        _pointsContainer.style.height = self.data.itemSize * points.length + '%';
+      } else {
+        _pointsContainer.style.width = self.data.itemSize * points.length + '%';
+        _pointsContainer.style.height = self.data.itemSize + '%';
+      }
+
+      _pointsContainer.style.top = (points[0].y * self.data.itemSize) + '%';
+      _pointsContainer.style.left = (points[0].x * self.data.itemSize) + '%';
+
+      _pointsContainer.style['background-color'] = points[0].color;
+
+      _pointsContainer.classList.add(self.config.classes.removePointsContainer);
+
+      self.data._board.appendChild(_pointsContainer);
+
+      setTimeout(function () {
+        self.removeDOMElement(_pointsContainer);
+      }, self.config.removeTimeout);
     };
 
     self.sortByProperties = function (array, propertyFirst, propertySecond) {
@@ -345,12 +383,16 @@ var Orbs;
         forDeleting = false;
       }
 
-      var _point = document.createElement('li');
+      var _point = document.createElement('li'),
+          _pointInnerContainer = document.createElement('div');
 
       _point.classList.add(self.config.classes.point);
       _point.style.width = self.data.itemSize + '%';
       _point.style.height = self.data.itemSize + '%';
-      _point.style['background-color'] = color;
+      _point.style['background-color'] = 'transparent';
+
+      _pointInnerContainer.classList.add(self.config.classes.pointInnerContainer);
+      _pointInnerContainer.style['background-color'] = color;
 
       var point = {
         x: x,
@@ -365,6 +407,8 @@ var Orbs;
       self.changeCoordinates(point);
 
       self.data.points.push(point);
+
+      _point.appendChild(_pointInnerContainer);
 
       self.data._board.appendChild(_point); // add on board
 
