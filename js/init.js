@@ -699,40 +699,11 @@ var Orbs;
 
       self.data._board.innerHTML = '';
 
-      self.removeGrid();
       self.resetScore();
     };
 
-    self.removeGrid = function () {
-      var grid = document.getElementById('grid');
-      self.removeDOMElement(grid);
-    };
-
     self.generateGrid = function () {
-
-      var canvas = document.createElement('canvas'),
-          context = canvas.getContext('2d'),
-          step = self.data._board.offsetWidth / self.settings.size;
-
-      canvas.height = self.data._board.offsetHeight;
-      canvas.width = self.data._board.offsetWidth;
-      canvas.classList.add(self.config.classes.boardGrid);
-      canvas.id = 'grid';
-
-      context.strokeStyle = 'rgba(155, 155, 155, 0.03)';
-      for (var i = step / 2; i < canvas.width; i += step) {
-        context.moveTo(i, 0);
-        context.lineTo(i, canvas.height);
-        context.stroke();
-      }
-
-      for (var i = step / 2; i < canvas.height; i += step) {
-        context.moveTo(0, i);
-        context.lineTo(canvas.width, i);
-        context.stroke();
-      }
-
-      self.data._container.appendChild(canvas);
+      self.data._board.style['background-size'] = self.data.itemSize + '%';
     };
 
     self.generateCoordinatesList = function () {
@@ -745,8 +716,6 @@ var Orbs;
           self.data.allPointsCoordinates[x][y] = true;
         }
       }
-
-      self.generateGrid();
     };
 
     self.generateStartPoints = function (mode) {
@@ -775,11 +744,13 @@ var Orbs;
         self.data.scoresList.modesButton[difficultyId]._element.classList.remove(self.config.classes.modesBoard.active);
       }
 
-      self.data.scoresList.modesButton[self.settings.id]._element.classList.add(self.config.classes.modesBoard.active); // why element is undefined???
+      self.data.scoresList.modesButton[self.settings.id]._element.classList.add(self.config.classes.modesBoard.active);
 
       self.data.itemSize = 100 / self.settings.size;
 
       self.generateCoordinatesList(); // array of object with pairs (x, y)
+
+      self.generateGrid();
     };
 
     self.generateBoard = function (mode, init) {
@@ -1083,6 +1054,11 @@ var Orbs;
       self.data._sidebar = _sidebar;
 
       self.data._container.appendChild(_sidebar);
+
+      var _mobile = document.createElement('div');
+      _mobile.id = 'is_mobile';
+
+      self.data._container.appendChild(_mobile);
 
       self.preloadSound();
 

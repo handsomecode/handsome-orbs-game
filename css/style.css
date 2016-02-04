@@ -46,15 +46,22 @@ html body {
   -moz-osx-font-smoothing: grayscale;
   font-size: 18px;
 }
+body {
+  overflow: hidden;
+}
+#is_mobile {
+  display: none;
+  visibility: hidden;
+}
 .game {
   box-sizing: border-box;
   position: relative;
-  width: 65.55555556em;
+  width: 68.33333333em;
   min-width: 42.77777778em;
   height: 38.33333333em;
   min-height: 18.05555556em;
   margin: 0 auto;
-  padding-top: 1.38888889em;
+  padding: 1.38888889em;
   background-color: #212325;
 }
 .game__grid {
@@ -70,7 +77,7 @@ html body {
   position: relative;
   width: 32em;
   height: 32em;
-  background: transparent;
+  background: url('../images/grid.png') repeat 0 0;
   box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5), 0 0 30px 5px rgba(255, 255, 255, 0.02);
   border-radius: 0.55555556em;
   z-index: 1;
@@ -300,7 +307,7 @@ html body {
 .game__sidebar {
   float: left;
   position: relative;
-  width: 31.66666667em;
+  width: 32em;
   height: 32em;
   padding-left: 2.77777778em;
   padding-top: 5.55555556em;
@@ -311,7 +318,7 @@ html body {
   right: 0;
   width: 28px;
   height: 28px;
-  background: url('../images/sprites/volume.png') no-repeat 0 115%;
+  background: url('../images/sprites/volume.png') no-repeat 0 120%;
 }
 .game__sidebar-mute-button--active {
   background: url('../images/sprites/volume.png') no-repeat 0 0;
@@ -522,6 +529,11 @@ html body {
   line-height: 1.33333333em;
   letter-spacing: 0.3825em;
   text-transform: uppercase;
+}
+.game__modes:after {
+  content: '';
+  display: table;
+  clear: both;
 }
 .game__modes-item {
   float: left;
