@@ -22,6 +22,8 @@
         undo: 'game__buttons-item--undo',
         instructions: 'game__buttons-item--instructions'
       },
+      muteButton: 'game__sidebar-mute-button',
+      muteButtonActive: 'game__sidebar-mute-button--active',
       instructionsContainer: 'game__instructions-container',
       instructionsContainerAct: 'game__instructions-container--active',
       modeList: 'game__modes',

@@ -90,7 +90,10 @@ var Orbs;
         self.data.sounds[soundName] = new Audio();
         self.data.sounds[soundName].preload = 'auto';
         self.data.sounds[soundName].src = soundSrc;
+        self.data.sounds[soundName].muted = false;
       }
+
+      self.generateMuteButton();
     };
 
     self.sound = function (soundName) {
@@ -850,6 +853,29 @@ var Orbs;
       }
 
       self.data._container.appendChild(_buttonsList);
+    };
+
+    self.generateMuteButton = function () {
+      var _muteButton = document.createElement('div');
+      _muteButton.classList.add(self.config.classes.muteButton);
+
+      _muteButton.addEventListener("click", function () {
+        if (!_muteButton.classList.contains(self.config.classes.muteButtonActive)) {
+          _muteButton.classList.add(self.config.classes.muteButtonActive);
+
+          for (var soundName in self.config.sounds) {
+            self.data.sounds[soundName].muted = true;
+          }
+        } else {
+          _muteButton.classList.remove(self.config.classes.muteButtonActive);
+
+          for (var soundName in self.config.sounds) {
+            self.data.sounds[soundName].muted = false;
+          }
+        }
+      });
+
+      self.data._sidebar.appendChild(_muteButton);
     };
 
     self.openConfirm = function (text, callback) {

@@ -299,10 +299,22 @@ html body {
 }
 .game__sidebar {
   float: left;
+  position: relative;
   width: 31.66666667em;
   height: 32em;
   padding-left: 2.77777778em;
   padding-top: 5.55555556em;
+}
+.game__sidebar-mute-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  background: url('../images/sprites/volume.png') no-repeat 0 115%;
+}
+.game__sidebar-mute-button--active {
+  background: url('../images/sprites/volume.png') no-repeat 0 0;
 }
 .game__scoreboard {
   position: relative;

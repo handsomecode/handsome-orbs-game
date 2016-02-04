@@ -1,12 +1,28 @@
 .game {
   &__sidebar {
     float: left;
+    position: relative;
 
     .em(width, 570px, 18px);
     .em(height, 576px, 18px);
 
     .em(padding-left, 50px, 18px);
     .em(padding-top, 100px, 18px);
+
+    &-mute-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+
+      width: 28px;
+      height: 28px;
+
+      background: url('../images/sprites/volume.png') no-repeat 0 115%;
+
+      &--active {
+        background: url('../images/sprites/volume.png') no-repeat 0 0;
+      }
+    }
   }
   &__scoreboard {
     position: relative;
