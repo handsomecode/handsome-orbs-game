@@ -15,14 +15,16 @@
     transform: scale(1);
 
     &--removed {
-      opacity: 0 !important;
+      visibility: hidden;
 
       transform: scale(1.3);
 
       transition: top @generalAnimationDuration ease,
                   left @generalAnimationDuration ease,
-                  opacity @removeAnimationDuration ease @generalAnimationDuration,
-                  transform @removeAnimationDuration ease @generalAnimationDuration;
+                  transform @removeAnimationDuration ease @generalAnimationDuration,
+                  visibility @removeAnimationDuration ease @generalAnimationDuration/2;
+
+      z-index: 3;
     }
     &-inner-container {
       position: relative;
