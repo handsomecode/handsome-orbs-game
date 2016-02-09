@@ -3,8 +3,8 @@
     overflow: hidden;
 
     position: absolute;
-    .em(top, 630px, 18px);
-    .em(left, 108px, 18px);
+    top: em(630px);
+    left: em(108px);
 
     padding: 0;
 
@@ -13,19 +13,19 @@
 
       position: relative;
 
-      .em(width, 100px, 18px);
-      .em(height, 40px, 18px);
+      width: em(100px);
+      height: em(40px);
 
-      .em(margin-right, 10px, 18px);
+      margin-right: em(10px);
 
       list-style: none;
 
-      .em(border-radius, 6px, 18px);
+      border-radius: em(6px);
 
       opacity: 1;
 
-      font-family: @font-stack-avenir-roman;
-      .em(font-size, 18px, 18px);
+      font-family: $font-stack-avenir-roman;
+      font-size: em(18px);
       text-transform: lowercase;
       text-align: center;
       line-height: 2;
@@ -62,7 +62,7 @@
         }
       }
       &--instructions {
-        .em(width, 142px, 18px);
+        width: em(142px);
 
         border: 1px solid rgba(83, 84, 85, 0.50);
         background: rgba(33, 35, 37, 0.10);

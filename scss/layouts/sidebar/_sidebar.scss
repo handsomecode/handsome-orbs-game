@@ -3,11 +3,11 @@
     float: left;
     position: relative;
 
-    .em(width, 576px, 18px);
-    .em(height, 576px, 18px);
+    width: em(576px);
+    height: em(576px);
 
-    .em(padding-left, 50px, 18px);
-    .em(padding-top, 100px, 18px);
+    padding-left: em(50px);
+    padding-top: em(100px);
 
     &-mute-button {
       position: absolute;
@@ -27,24 +27,24 @@
   &__scoreboard {
     position: relative;
 
-    .em(height, 100px, 18px);
+    height: em(100px);
 
-    font-family: @font-stack-avenir-roman;
+    font-family: $font-stack-avenir-roman;
 
     &:before {
       content: 'current score';
 
-      .em(font-size, 12px, 18px);
+      font-size: em(12px);
       color: #aaaaaa;
-      .em(letter-spacing, 4.59px, 12px);
+      letter-spacing: em(4.59px, 12px);
       text-transform: uppercase;
     }
     &-count {
       position: relative;
 
-      .em(padding-top, 10px, 90px);
+      padding-top: em(10px, 90px);
 
-      .em(font-size, 90px, 18px);
+      font-size: em(90px);
       color: #37c97c;
 
       p {
@@ -73,7 +73,7 @@
         &:before {
           opacity: 0;
 
-          animation: increaseDisappearDigitalsAnimation @increaseScoreAnimationDuration cubic-bezier(0.25, 0.1, 0.25, 0.1);
+          animation: increaseDisappearDigitalsAnimation $increaseScoreAnimationDuration cubic-bezier(0.25, 0.1, 0.25, 0.1);
 
           @keyframes increaseDisappearDigitalsAnimation {
             0% {
@@ -94,7 +94,7 @@
           }
         }
         &:after {
-          animation: increaseAppearDigitalsAnimation @increaseScoreAnimationDuration cubic-bezier(0.25, 0.1, 0.25, 0.1);
+          animation: increaseAppearDigitalsAnimation $increaseScoreAnimationDuration cubic-bezier(0.25, 0.1, 0.25, 0.1);
 
           @keyframes increaseAppearDigitalsAnimation {
             0% {
@@ -120,7 +120,7 @@
           &:before {
             opacity: 0;
 
-            animation: decreaseDisappearDigitalsAnimation @generalAnimationDuration cubic-bezier(0.25, 0.1, 0.25, 0.1);
+            animation: decreaseDisappearDigitalsAnimation $generalAnimationDuration cubic-bezier(0.25, 0.1, 0.25, 0.1);
 
             @keyframes decreaseDisappearDigitalsAnimation {
               0% {
@@ -140,7 +140,7 @@
             }
           }
           &:after {
-            animation: decreaseAppearDigitalsAnimation @generalAnimationDuration cubic-bezier(0.25, 0.1, 0.25, 0.1);
+            animation: decreaseAppearDigitalsAnimation $generalAnimationDuration cubic-bezier(0.25, 0.1, 0.25, 0.1);
 
             @keyframes decreaseAppearDigitalsAnimation {
               0% {

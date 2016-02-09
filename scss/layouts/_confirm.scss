@@ -6,10 +6,10 @@
     top: 50%;
     left: 50%;
 
-    .em(width, 400px, 18px);
+    width: em(400px);
 
-    .em(margin-left, -200px, 18px);
-    .em(padding-bottom, 36px, 18px);
+    margin-left: em(-200px);
+    padding-bottom: em(36px);
 
     border: 1px solid #6D7579;
     background-color: #272C2E;
@@ -19,7 +19,7 @@
     text-align: center;
 
     box-shadow: 0 0 30px 5px rgba(255, 255, 255, 0.02);
-    .em(border-radius, 5px, 18px);
+    border-radius: em(5px);
 
     transform: translateY(-50%);
 
@@ -36,38 +36,38 @@
       }
     }
     &-text {
-      .em(height, 100px, 18px);
+      height: em(100px);
 
-      .em(margin-top, 42px, 18px);
-      .em(margin-left, 40px, 18px);
-      .em(margin-right, 40px, 18px);
+      margin-top: em(42px);
+      margin-left: em(40px);
+      margin-right: em(40px);
 
-      font-family: @font-stack-avenir-roman;
-      .em(font-size, 18px, 18px);
+      font-family: $font-stack-avenir-roman;
+      font-size: em(18px);
       color: #fff;
-      .em(line-height, 24px, 18px);
+      line-height: em(24px);
     }
     &-button {
-      .em(min-width, 80px, 18px);
-      .em(height, 40px, 18px);
+      min-width: em(80px);
+      height: em(40px);
       
-      .em(padding-left, 10px, 18px);
-      .em(padding-right, 10px, 18px);
+      padding-left: em(10px);
+      padding-right: em(10px);
 
       opacity: 1;
 
-      font-family: @font-stack-avenir-roman;
-      .em(font-size, 18px, 18px);
+      font-family: $font-stack-avenir-roman;
+      font-size: em(18px);
       text-transform: lowercase;
       text-align: center;
       line-height: 2;
 
-      .em(border-radius, 6px, 18px);
+      border-radius: em(6px);
 
       cursor: pointer;
 
       &--no {
-        .em(margin-right, 4px, 18px);
+        margin-right: em(4px);
 
         border: 1px solid rgba(211, 73, 73, 0.50);
         background: rgba(211, 73, 73, 0.10);
@@ -81,7 +81,7 @@
         }
       }
       &--yes {
-        .em(margin-left, 4px, 18px);
+        margin-left: em(4px);
 
         border: 1px solid rgba(84, 158, 201, 0.50);
         background-color: rgba(84, 158, 201, 0.10);

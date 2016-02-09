@@ -1,0 +1,151 @@
+//.em(@selector, @amt) when (isem(@amt))
+//{
+//  @{selector}: @amt;
+//}
+//.em(@selector, @amt, @emInPx: @emInPx) when (ispixel(@amt))
+//{
+//  @{selector}: unit((@amt / @emInPx), em);
+//}
+@function em($target, $context: $fontSize) {
+  @if ($target == 0px or $target == 0) {
+    @return 0
+  }
+  @return round(($target / $context * 1em) * 100) / 100;
+}
+@function retina-filename($filename, $extention: '.png') {
+  @return $filename + '@2x' + $extention;
+}
+@mixin retina-image {
+  @media (-webkit-min-device-pixel-ratio: 1.3),
+  (min--moz-device-pixel-ratio: 1.3),
+  (-o-min-device-pixel-ratio: 2.6/2),
+  (min-device-pixel-ratio: 1.3),
+  (min-resolution: 1.3dppx) {
+    @content
+  }
+}
+@mixin background-image-2x($filename, $width, $height, $extention: '.png') {
+  background-repeat: no-repeat;
+  @include background-image(url('#{$filename}#{$extention}'));
+  @include background-size($width $height);
+  @include retina-image {
+    @include background-image(url('#{retina-filename($filename, $extention)}'));
+  }
+}
+@mixin gradient-hr($wing_width: 300px, $color: #eff2f4) {
+  background: $color;
+  height: 1px;
+  position: relative;
+  width: 100%;
+  &:after,
+  &:before {
+    content: '';
+    display: block;
+    height: 1px;
+    position: absolute;
+    top: 0;
+    width: $wing_width;
+  }
+  &:before {
+    @include v-gradient(rgba(255, 255, 255, 0), $color, to right);
+    left: -$wing_width;
+  }
+  &:after {
+    @include v-gradient($color, rgba(255, 255, 255, 0), to right);
+    right: -$wing_width;
+  }
+}
+@mixin v-gradient($start-color, $end-color, $orientation: vertical) {
+  $experimental-support-for-svg: true;
+  @if $orientation == vertical {
+    @include background-image(linear-gradient($start-color, $end-color));
+  } @else {
+    @include background-image(linear-gradient($orientation, $start-color, $end-color));
+  }
+  .oldie & {
+    @include filter-gradient($start-color, $end-color, $orientation);
+  }
+}
+@mixin font-smoothing($value: on) {
+  @if $value == on {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+@mixin orientation($orientation: landscape) {
+  @media (orientation: $orientation) {
+    @content
+  }
+}
+@mixin breakpoint($width) {
+  @media (max-width: $width) {
+    @content
+  }
+}
+@mixin breakpoint-min-width($width) {
+  @media (min-width: $width) {
+    @content
+  }
+}
+@mixin breakpoint-max-height($height) {
+  @media (max-height: $height) {
+    @content
+  }
+}
+@mixin breakpoint-max-size($width, $height) {
+  @media (max-width: $width) and (max-height: $height) {
+    @content
+  }
+}
+@mixin breakpoint-min-size($width, $height) {
+  @media (min-width: $width) and (min-height: $height) {
+    @content
+  }
+}
+@mixin breakpoint-tablet {
+  @include breakpoint($tabletMaxWidth) {
+    @content
+  }
+}
+@mixin breakpoint-phone {
+  @include breakpoint($mobileMaxWidth) {
+    @content
+  }
+}
+@mixin breakpoint-not-phone {
+  @include breakpoint-min-width($mobileMaxWidth + 1px) {
+    @content
+  }
+}
+@mixin roboto-light {
+  font-family: 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 300;
+}
+@mixin roboto {
+  font-family: 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+}
+@mixin roboto-medium {
+  font-family: 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+}
+@mixin roboto-bold {
+  font-family: 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+}
+@mixin roboto-black {
+  font-family: 'Roboto Black', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+}
+@mixin source-sans-pro {
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+}
+@mixin quicksand {
+  font-family: 'Quicksand', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 400;
+}

@@ -1,8 +1,0 @@
-.em(@selector, @amt) when (isem(@amt))
-{
-  @{selector}: @amt;
-}
-.em(@selector, @amt, @emInPx: @emInPx) when (ispixel(@amt))
-{
-  @{selector}: unit((@amt / @emInPx), em);
-}

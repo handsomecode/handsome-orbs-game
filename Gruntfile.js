@@ -1,9 +1,9 @@
 module.exports = function (grunt) {
   grunt.initConfig({
-    less: {
+    sass: {
       development: {
         files: {
-          'css/style.css': 'less/index.less'
+          'css/style.css': 'scss/index.scss'
         }
       }
     },
@@ -21,9 +21,9 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-autoprefixer');
 
-  grunt.registerTask('styles', ['less', 'autoprefixer']);
-  grunt.registerTask('default', ['less', 'autoprefixer']);
+  grunt.registerTask('styles', ['sass', 'autoprefixer']);
+  grunt.registerTask('default', ['sass', 'autoprefixer']);
 };

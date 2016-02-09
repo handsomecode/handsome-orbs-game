@@ -3,19 +3,19 @@
 
   position: relative;
 
-  .em(width, 1230px, 18px);
-  .em(min-width, 770px, 18px);
-  .em(height, 690px, 18px);
-  .em(min-height, 325px, 18px);
+  width: em(1230px);
+  min-width: em(770px);
+  height: em(690px);
+  min-height: em(325px);
 
   margin: 0 auto;
-  .em(padding, 25px, 18px);
+  padding: em(25px);
 
   background-color: #212325;
 
   &__grid {
     position: absolute;
-    .em(top, 25px, 18px);
+    top: em(25px);
     left: 0;
 
     opacity: 0.6;
@@ -28,14 +28,14 @@
 
     position: relative;
 
-    .em(width, 576px, 18px);
-    .em(height, 576px, 18px);
+    width: em(576px);
+    height: em(576px);
 
     background: url('../images/grid.png') repeat 0 0;
 
     box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5),
                 0 0 30px 5px rgba(255, 255, 255, 0.02);
-    .em(border-radius, 10px, 18px);
+    border-radius: em(10px);
 
     z-index: 1;
   }
@@ -74,20 +74,20 @@
 
       position: relative;
 
-      .em(padding-top, 264px, 44px);
-      .em(padding-bottom, 264px, 44px);
+      padding-top: em(264px, 44px);
+      padding-bottom: em(264px, 44px);
 
       border: 2px solid rgba(105, 105, 105, 0.4);
       background-color: rgba(45, 45, 45, 0.9);
 
-      font-family: @font-stack-avenir-roman;
-      .em(font-size, 44px, 18px);
+      font-family: $font-stack-avenir-roman;
+      font-size: em(44px);
       font-weight: bold;
       color: #fff;
       text-align: center;
       text-transform: uppercase;
 
-      .em(border-radius, 10px, 44px);
+      border-radius: em(10px, 44px);
 
       animation: overlayShowing 0.5s ease;
 
