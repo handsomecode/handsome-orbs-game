@@ -10,6 +10,7 @@ var Orbs;
     self.settings = {};
 
     self.data = {
+      _html: document.documentElement,
       _container: _container,
       _board: undefined,
       _sidebar: undefined,
@@ -444,7 +445,7 @@ var Orbs;
       }
 
       var colors,
-          minPointsAmount = (self.settings.size * self.settings.size) / 3 - 1;
+          minPointsAmount = (self.settings.size * self.settings.size) / 2 - 1;
 
       if (self.config.modes.hard.settings.randomMode && self.settings.id === 'hard') {
         colors = self.settings.colors.slice(0);
@@ -857,9 +858,9 @@ var Orbs;
       self.data.hasOpenedConfirm = true;
 
       if (text !== self.config.confirmGameOverText) {
-        self.data._container.classList.add(self.config.classes.boardDisabled);
+        self.data._html.classList.add(self.config.classes.boardDisabled);
       }
-      self.data._container.classList.add(self.config.classes.boardDisabled);
+      self.data._html.classList.add(self.config.classes.boardDisabled);
       self.appendChildren(self.data._container, self.config.confirmHtml.replace(/%text%/g, text));
 
       self.data.running = false;
@@ -885,7 +886,7 @@ var Orbs;
 
         self.removeDOMElement(document.getElementById('confirm'));
 
-        self.data._container.classList.remove(self.config.classes.boardDisabled);
+        self.data._html.classList.remove(self.config.classes.boardDisabled);
 
         document.removeEventListener('keydown', confirmKeyDown);
 
@@ -897,7 +898,7 @@ var Orbs;
       function confirmNo() {
         self.data.hasOpenedConfirm = false;
 
-        self.data._container.classList.remove(self.config.classes.boardDisabled);
+        self.data._html.classList.remove(self.config.classes.boardDisabled);
 
         self.data.running = true;
 
@@ -924,7 +925,7 @@ var Orbs;
 
       self.data.hasOpenedInstructions = true;
 
-      self.data._container.classList.add(self.config.classes.boardDisabled);
+      self.data._html.classList.add(self.config.classes.boardDisabled);
 
       self.appendChildren(self.data._container, self.config.instructionsHtml);
 
@@ -944,7 +945,7 @@ var Orbs;
       function instructionsClose() {
         self.data.hasOpenedInstructions = false;
 
-        self.data._container.classList.remove(self.config.classes.boardDisabled);
+        self.data._html.classList.remove(self.config.classes.boardDisabled);
 
         self.data.running = true;
 
@@ -980,16 +981,16 @@ var Orbs;
 
     self.generateModeButton = function (_modesButtonList, mode) {
       var _mode = document.createElement('li'),
-          _modeTitle = document.createElement('span'),
-          _modeLabel = document.createElement('span'),
-          _modeCounter = document.createElement('span');
+          _modeTitle = document.createElement('p'),
+          _modeLabel = document.createElement('p'),
+          _modeCounter = document.createElement('div');
 
       _mode.classList.add(self.config.classes.modesBoard.default);
       _mode.classList.add(self.config.classes.modesBoard.default + '--' + mode.id);
       _modeTitle.classList.add(self.config.classes.modesBoard.title);
       _modeTitle.textContent = mode.name;
       _modeLabel.classList.add(self.config.classes.modesBoard.label);
-      _modeLabel.textContent = 'Highscore';
+      _modeLabel.textContent = 'High Score';
       _modeCounter.classList.add(self.config.classes.modesBoard.count);
       _modeCounter.textContent = mode.count;
 
@@ -1066,8 +1067,55 @@ var Orbs;
 
       self.generateButtons();
       self.binding();
+      self.touchBinding();
 
       self.generateBoard('medium', true);
+    };
+
+    self.touchBinding = function () {
+
+      var startX = 0,
+          startY = 0,
+          endX = 0,
+          endY = 0,
+          distX = 0,
+          distY = 0,
+          direction = '',
+          criticalDistance = 50;
+
+      self.data._board.addEventListener('touchstart', function(e){
+        var touchobj = e.changedTouches[0]; // reference first touch point (ie: first finger)
+
+        startX = parseInt(touchobj.clientX); // get x position of touch point relative to left edge of browser
+        startY = parseInt(touchobj.clientY);
+
+        e.preventDefault();
+      }, false);
+
+      self.data._board.addEventListener('touchend', function(e){
+        var touchobj = e.changedTouches[0]; // reference first touch point for this event
+
+        endX = parseInt(touchobj.clientX);
+        endY = parseInt(touchobj.clientY);
+
+        e.preventDefault();
+
+        distX = Math.abs(endX - startX);
+        distY = Math.abs(endY - startY);
+
+        if (distY < distX) {
+          if (distX > criticalDistance) {
+            direction = endX - startX > 0 ? 'right' : 'left';
+          }
+        } else if (distY > criticalDistance) {
+          direction = endY - startY > 0 ? 'bottom' : 'top';
+        }
+
+        self.movePoints(direction);
+
+        self.data.keyDownLock = false;
+        self.data.running = false;
+      });
     };
 
     self.binding = function () {
