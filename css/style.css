@@ -246,18 +246,20 @@ body {
 .game__point {
   box-sizing: border-box;
   position: absolute;
+  top: 0;
+  left: 0;
   list-style: none;
   opacity: 1;
-  -webkit-transition: top 0.3s ease, left 0.3s ease, opacity 0.3s ease;
-          transition: top 0.3s ease, left 0.3s ease, opacity 0.3s ease;
   -webkit-transform: scale(1);
-          transform: scale(1); }
+          transform: scale(1);
+  -webkit-transition: -webkit-transform 0.3s ease, opacity 0.3s ease;
+          transition: transform 0.3s ease, opacity 0.3s ease; }
   .game__point--removed {
     visibility: hidden;
     -webkit-transform: scale(1.3);
             transform: scale(1.3);
-    -webkit-transition: top 0.3s ease, left 0.3s ease, -webkit-transform 0.3s ease 0.3s, visibility 0.3s ease 0.15s;
-            transition: top 0.3s ease, left 0.3s ease, transform 0.3s ease 0.3s, visibility 0.3s ease 0.15s;
+    -webkit-transition: -webkit-transform 0.3s ease, visibility 0.3s ease 0.15s;
+            transition: transform 0.3s ease, visibility 0.3s ease 0.15s;
     z-index: 3; }
   .game__point-inner-container {
     position: relative;

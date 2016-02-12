@@ -378,8 +378,10 @@ var Orbs;
     };
 
     self.changeCoordinates = function (point) {
-      point._element.style.top = (point.y * self.data.itemSize) + '%';
-      point._element.style.left = (point.x * self.data.itemSize) + '%';
+      var translateX =  point.x * 100,
+          translateY = point.y * 100;
+
+      point._element.style.transform = 'translateX(' + translateX + '%) translateY(' + translateY + '%) translateZ(0)';
     };
 
     self.createPoint = function (x, y, color, oldX, oldY, forDeleting) {
