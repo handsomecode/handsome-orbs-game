@@ -12,10 +12,18 @@ function DOMReRender() {
   document.body.removeChild(DOMTestElement);
 }
 
-var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/);
+var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playbook|silk|BlackBerry|BB10|Windows Phone|Tizen|Bada|webOS|IEMobile|Opera Mini)/),
+    iphone4 = navigator.userAgent.match(/iPhone/i) !== null  && window.screen.height == (960 / 2);
 
 (function () {
   'use strict';
+
+  if (iphone4) {
+    var _html = document.documentElement;
+    _html.classList.add('iphone4');
+
+    return false;
+  }
 
   function triggerResize() {
     var event = document.createEvent('UIEvents');

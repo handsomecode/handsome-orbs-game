@@ -9,6 +9,16 @@
     padding-left: em(50px);
     padding-top: em(100px);
 
+    @include breakpoint-mobile {
+      display: table-header-group;
+      float: none;
+
+      width: 100%;
+      height: auto;
+
+      padding-left: 0;
+      padding-top: 0;
+    }
     &-mute-button {
       position: absolute;
       top: 0;
@@ -19,6 +29,9 @@
 
       background: url('../images/sprites/volume.png') no-repeat 0 120%;
 
+      @include breakpoint-mobile {
+        top: 2%;
+      }
       &--active {
         background: url('../images/sprites/volume.png') no-repeat 0 0;
       }
@@ -31,6 +44,15 @@
 
     font-family: $font-stack-avenir-roman;
 
+    @include breakpoint-mobile {
+      height: auto;
+
+      &:after {
+        content: '';
+        display: table;
+        clear: both;
+      }
+    }
     &:before {
       content: 'current score';
 
@@ -38,6 +60,10 @@
       color: #aaaaaa;
       letter-spacing: em(4.59px, 12px);
       text-transform: uppercase;
+
+      @include breakpoint-mobile {
+        font-size: 8px;
+      }
     }
     &-count {
       position: relative;
@@ -46,6 +72,12 @@
 
       font-size: em(90px);
       color: #37c97c;
+
+      @include breakpoint-mobile {
+        font-size: 30px;
+
+        padding-top: 0;
+      }
 
       p {
         float: left;

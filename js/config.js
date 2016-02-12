@@ -24,8 +24,6 @@
       },
       muteButton: 'game__sidebar-mute-button',
       muteButtonActive: 'game__sidebar-mute-button--active',
-      instructionsContainer: 'game__instructions-container',
-      instructionsContainerAct: 'game__instructions-container--active',
       modeList: 'game__modes',
       modeItem: 'game__modes-item',
       point: 'game__point',
@@ -57,29 +55,30 @@
     instructionsHtml: '' +
     '<div class="game__instructions" id="instructions">' +
     '  <h1 class="game__instructions-title game__instructions-title--general">' + 'Instructions' + '</h1>' +
-    '  <p class="game__instructions-text game__instructions-text--general">' + 'The overall objective of the game is to shift the tiles and align 3 or 4 of the same color' + '</p>' +
+    '  <p class="game__instructions-text game__instructions-text--general">' + 'The overall objective of the game is to shift the tiles and align 3 or 4 of the same color.' + '</p>' +
     '  <div class="game__instructions-moving">' +
     '    <h3 class="game__instructions-title">' + 'Moving tiles' + '</h3>' +
-    '    <p class="game__instructions-text">' + 'Shift all pieces to one side of the board with you arrow keys' + '</p>' +
+    '    <p class="game__instructions-text">' + 'Shift all pieces to one side of the board with your arrow keys.' + '</p>' +
     '    <div class="game__instructions-moving-tiles">' +
-    '      <div class="game__instructions-tile game__instructions-tile--left"></div>' +
-    '      <div class="game__instructions-tile game__instructions-tile--bottom"></div>' +
-    '      <div class="game__instructions-tile game__instructions-tile--right"></div>' +
+    '      <div class="game__instructions-moving-tile game__instructions-moving-tile--up"></div>' +
+    '      <div class="game__instructions-moving-tile game__instructions-moving-tile--left"></div>' +
+    '      <div class="game__instructions-moving-tile game__instructions-moving-tile--down"></div>' +
+    '      <div class="game__instructions-moving-tile game__instructions-moving-tile--right"></div>' +
     '    </div>' +
     '  </div>' +
     '  <div class="game__instructions-earning">' +
     '    <h3 class="game__instructions-title">' + 'Earning points' + '</h3>' +
     '    <p class="game__instructions-text">' +
-             'Easy: Align 3 tiles to earn' + '<span>' + ' 50 points' + '</span>' + '<br>' +
-             'Medium: Align 3 tiles to earn' + '<span>' + ' 75 points' + '</span>' + '<br>' +
-             'Hard: Align 3 tiles to earn' + '<span>' + ' 100 points' + '</span>' + '<br>' +
+             'Easy: Align 3 tiles to earn' + '<span>' + ' 15 points' + '</span>' + '<br>' +
+             'Medium: Align 3 tiles to earn' + '<span>' + ' 30 points' + '</span>' + '<br>' +
+             'Hard: Align 3 tiles to earn' + '<span>' + ' 45 points' + '</span>' + '<br>' +
     '    </p>' +
     '    <div class="game__instructions-earning-tiles">' +
-    '      <div class="game__instructions-tile"></div>' +
-    '      <div class="game__instructions-tile"></div>' +
-    '      <div class="game__instructions-tile"></div>' +
+    '      <div class="game__instructions-earning-tile"></div>' +
+    '      <div class="game__instructions-earning-tile"></div>' +
+    '      <div class="game__instructions-earning-tile"></div>' +
     '    </div>' +
-    '    <span class="game__instructions-score">' + '50, 75, 100 points' + '</span>' +
+    '    <span class="game__instructions-score">' + '15, 30, 45 points' + '</span>' +
     '  </div>' +
     '  <button class="game__instructions-button" id="instructions-ok">Ok</button>' +
     '</div>',
@@ -91,10 +90,10 @@
     '  <button class="game__confirm-button game__confirm-button--yes" id="confirm-yes">Yes</button>' +
     '</div>',
 
-    confirmRestartText: 'Would you like to continue on and do the restart? All data will be saved.',
-    confirmGameOverText: 'Oh no, you lost. Play again?',
-    confirmChangeDifficultyText: 'Would you like to continue on and change difficulty level? All data will be saved.',
-    confirmWinningText: 'Awesome, You are cool!!! would you like to improve your high-score?',
+    confirmRestartText: 'Would you like to continue on and do the restart?',
+    confirmGameOverText: 'Oh no! There are no more moves.<br><span class="game__confirm-text-game-over">Play again?',
+    confirmChangeDifficultyText: 'Would you like to continue on and change difficulty level?',
+    confirmWinningText: 'Awesome, You are cool!!! Would you like to improve your high score?',
     moveTimeout: 700,
     removeTimeout: 600,
     increaseScoreTimeout: 400,
@@ -110,7 +109,7 @@
       easy: {
         settings: {
           name: 'Easy',
-          size: 9,
+          size: 6,
 
           colors: [
             'rgb(224, 122, 70)',
@@ -120,7 +119,7 @@
             'rgb(55, 201, 124)'
           ],
 
-          pointsAmountAfterStart: 60,
+          pointsAmountAfterStart: 12,
           pointsAmountAfterMove: function () {
             return 1;
           },
@@ -129,7 +128,7 @@
           },
           pointsAmountInLineForRemove: 3,
 
-          minimalAddingScore: 25,
+          minimalAddingScore: 15,
           percentScoreForAddingPoints: 2
         }
       },
@@ -155,14 +154,14 @@
           },
           pointsAmountInLineForRemove: 3,
 
-          minimalAddingScore: 50,
+          minimalAddingScore: 30,
           percentScoreForAddingPoints: 2
         }
       },
       hard: {
         settings: {
           name: 'Hard',
-          size: 7,
+          size: 5,
 
           colors: [
             'rgb(224, 122, 70)',
@@ -172,19 +171,16 @@
             'rgb(55, 201, 124)'
           ],
 
-          pointsAmountAfterStart: 12,
+          pointsAmountAfterStart: 23,
           pointsAmountAfterMove: function () {
-            return game.data.points.length <= 16 ? 1 : 2;
-          }
-
-          ,
+            return 1;
+          },
           pointsAmountAfterRemove: function () {
-            return game.data.points.length <= 16 ? 1 : 2;
-          }
-          ,
+            return 0;
+          },
           pointsAmountInLineForRemove: 3,
 
-          minimalAddingScore: 75,
+          minimalAddingScore: 45,
           percentScoreForAddingPoints: 2,
 
           randomMode: true

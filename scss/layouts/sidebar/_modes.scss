@@ -9,6 +9,12 @@
 
     list-style: none;
 
+    @include breakpoint-mobile {
+      height: auto;
+
+      margin-top: 5%;
+      margin-bottom: 2%;
+    }
     &:before {
       content: 'game mode';
 
@@ -22,6 +28,12 @@
       line-height: em(16px, 12px);
       letter-spacing: em(4.59px, 12px);
       text-transform: uppercase;
+
+      @include breakpoint-mobile {
+        top: -32%;
+
+        font-size: 7px;
+      }
     }
     &:after {
       content: '';
@@ -37,6 +49,7 @@
       height: em(160px);
 
       margin-left: em(20px);
+      padding: em(18px);
 
       border: 3px solid rgba(255, 255, 255, 0.01);
       background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.004) 0%, rgba(0, 0, 0, 0.022) 100%);
@@ -51,6 +64,15 @@
 
       &:nth-child(1) {
         margin-left: 0;
+      }
+      @include breakpoint-mobile {
+        width: 31%;
+        height: auto;
+
+        margin-left: 3%;
+        padding: 2% 2% 1%;
+
+        border-radius: 6px;
       }
       &--easy &-count {
         color: #e0d955;
@@ -68,40 +90,50 @@
         color: #fff;
 
         transition: opacity 0.3s ease-out;
+
+        @include breakpoint-mobile {
+          transition: none;
+        }
       }
       &-title {
-        position: absolute;
-        top: em(15px, 20px);
-        left: em(20px, 20px);
-
         opacity: 0.1;
 
         font-size: em(20px);
         font-weight: bold;
         color: #fff;
-        line-height: em(25px, 20px);
         letter-spacing: em(2px, 20px);
         text-transform: uppercase;
+
+        @include breakpoint-mobile {
+
+          font-size: 10px;
+        }
       }
       &-label {
-        position: absolute;
-        top: em(85px, 12px);
-        left: em(20px, 12px);
+        margin-top: em(80px);
 
         opacity: 0.1;
 
         font-size: em(12px);
         color: #fff;
-        line-height: em(28.79px, 12px);
+
+        @include breakpoint-mobile {
+          margin-top: 2%;
+
+          font-size: 8px;
+        }
       }
       &-count {
-        position: absolute;
-        top: em(115px, 24px);
-        left: em(20px, 24px);
+        margin-top: em(10px);
 
         font-size: em(24px);
         font-weight: bold;
-        line-height: em(28.79px, 24px);
+
+        @include breakpoint-mobile {
+          margin-top: 4%;
+
+          font-size: 12px;
+        }
       }
       &--active {
         opacity: 1;

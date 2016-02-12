@@ -1,11 +1,3 @@
-//.em(@selector, @amt) when (isem(@amt))
-//{
-//  @{selector}: @amt;
-//}
-//.em(@selector, @amt, @emInPx: @emInPx) when (ispixel(@amt))
-//{
-//  @{selector}: unit((@amt / @emInPx), em);
-//}
 @function em($target, $context: $fontSize) {
   @if ($target == 0px or $target == 0) {
     @return 0
@@ -111,7 +103,7 @@
     @content
   }
 }
-@mixin breakpoint-phone {
+@mixin breakpoint-mobile {
   @include breakpoint($mobileMaxWidth) {
     @content
   }

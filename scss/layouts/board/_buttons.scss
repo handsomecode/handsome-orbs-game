@@ -8,6 +8,16 @@
 
     padding: 0;
 
+    @include breakpoint-mobile {
+      position: relative;
+      top: auto;
+      left: auto;
+
+      margin-top: 7%;
+      padding-bottom: 1%;
+
+      text-align: center;
+    }
     &-item {
       float: left;
 
@@ -33,6 +43,23 @@
       z-index: 1;
       cursor: pointer;
 
+      @include breakpoint-mobile {
+        display: inline-block;
+
+        float: none;
+
+        width: 20%;
+
+        margin-right: 2%;
+        padding: 6px;
+
+        font-size: 12px;
+        line-height: 1;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
       &--undo,
       &--undo.game__buttons-item--disabled:hover {
         position: relative;
@@ -60,6 +87,13 @@
 
           color: #fff;
         }
+        @include breakpoint-mobile {
+          &:hover {
+            background: rgba(211, 73, 73, 0.10);
+
+            color: #d34949;
+          }
+        }
       }
       &--instructions {
         width: em(142px);
@@ -73,6 +107,15 @@
           background-color: #535455;
 
           color: #fff;
+        }
+        @include breakpoint-mobile {
+          width: 35%;
+
+          &:hover {
+            background: rgba(33, 35, 37, 0.10);
+
+            color: #959595;
+          }
         }
       }
       &--disabled {

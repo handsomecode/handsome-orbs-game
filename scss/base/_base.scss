@@ -9,10 +9,9 @@ html body {
 
   background-color: #212325;
 
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
   font-size: $fontSize;
+
+  @include font-smoothing(on);
 }
 
 body {
@@ -22,4 +21,34 @@ body {
 #is_mobile {
   display: none;
   visibility: hidden;
+
+  @include breakpoint-mobile {
+    display: block;
+  }
+}
+
+.iphone4 {
+  body {
+    opacity: 0;
+  }
+  &:before {
+    content: 'Sorry, but we don\'t support your device, because it has a low resolution. Please try another device. Thanks!';
+    display: block;
+    
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    width: 90%;
+
+    margin-left: -45%;
+
+    font-size: 22px;
+    font-family: $font-stack-avenir-roman;
+    color: #fff;
+    line-height: 1.35;
+    text-align: center;
+
+    transform: translateY(-50%);
+  }
 }

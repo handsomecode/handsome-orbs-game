@@ -28,6 +28,12 @@
 
     z-index: 100;
 
+    @include breakpoint-mobile {
+      width: 90%;
+
+      margin-left: -45%;
+      padding: 10% 12% 2%;
+    }
     @keyframes confirmShowing {
       0% {
         opacity: 0;
@@ -46,10 +52,18 @@
       text-transform: uppercase;
       letter-spacing: 0.2em;
 
+      @include breakpoint-mobile {
+        margin-bottom: 2%;
+
+        font-size: 10px;
+      }
       &--general {
         font-size: em(36px);
         text-align: center;
 
+        @include breakpoint-mobile {
+          font-size: 18px;
+        }
         &:after {
           content: "";
 
@@ -63,6 +77,14 @@
           margin-bottom: em(25px, 36px);
 
           background-color: #3d4042;
+
+          @include breakpoint-mobile {
+            width: 40%;
+            height: 2px;
+
+            margin-top: 5%;
+            margin-bottom: 5%;
+          }
         }
       }
     }
@@ -72,6 +94,9 @@
       color: #939596;
       line-height: 1.35;
 
+      @include breakpoint-mobile {
+        font-size: 10px;
+      }
       span {
         font-weight: bold;
         font-style: italic;
@@ -83,6 +108,14 @@
         margin-bottom: em(95px, 16px);
 
         text-align: center;
+
+        @include breakpoint-mobile {
+          width: 100%;
+
+          margin-bottom: 15%;
+
+          font-size: 10px;
+        }
       }
     }
     &-moving {
@@ -91,62 +124,90 @@
 
       width: 35%;
 
+      @include breakpoint-mobile {
+        width: 100%;
+      }
       &-tiles {
+        position: relative;
+        top: 0;
+        left: 0;
         margin-top: em(75px);
+
+        @include breakpoint-mobile {
+          display: inline-block;
+
+          width: 50%;
+          height: auto;
+
+          margin-top: 12%;
+          margin-bottom: 4%;
+          padding: 1%;
+
+          border-radius: 5px;
+        }
       }
-    }
-    &-tile {
-      float: left;
-      display: block;
+      &-tile {
+        float: left;
+        display: block;
 
-      margin-right: em(5px);
-      padding: em(5px);
+        margin-right: em(5px);
+        padding: em(5px);
 
-      width: em(41px);
-      height: em(41px);
+        width: em(41px);
+        height: em(41px);
 
-      border: 1px solid #565859;
-      border-radius: em(7px);
+        border: 1px solid #565859;
+        border-radius: em(7px);
 
-      &:last-child {
-        margin-right: 0;
-      }
-      &--left {
-        background: url('../images/arrow.png') no-repeat 50% 50%;
+        &:last-child {
+          margin-right: 0;
+        }
+        @include breakpoint-mobile {
+          width: 10%;
+          height: auto;
 
-        transform: rotate(90deg);
-      }
-      &--right {
-        background: url('../images/arrow.png') no-repeat 50% 50%;
+          margin-right: 2%;
+          padding: 8%;
 
-        transform: rotate(-90deg);
-      }
-      &--bottom {
-        background: url('../images/arrow.png') no-repeat 50% 50%;
+          border-radius: 5px;
+        }
+        &--left {
+          background: url('../images/arrow-up.png') no-repeat 50% 50%;
 
-        &:before {
-          content: '';
-          display: block;
+          transform: rotate(-90deg);
+        }
+        &--right {
+          background: url('../images/arrow-up.png') no-repeat 50% 50%;
 
-          position: relative;
-          bottom: em(55px);
-          right: em(6px);
-
-          width: em(40px);
-          height: em(40px);
-
-          background: url('../images/arrow.png') no-repeat 50% 50%;
-          border: 1px solid #565859;
-
-          border-radius: em(7px);
+          transform: rotate(90deg);
+        }
+        &--down {
+          background: url('../images/arrow-up.png') no-repeat 50% 50%;
 
           transform: rotate(-180deg);
+        }
+        &--up {
+          position: absolute;
+          top: em(-45px);
+          left: em(45px);
+          
+          background: url('../images/arrow-up.png') no-repeat 50% 50%;
+
+          @include breakpoint-mobile {
+            top: -85%;
+            left: 21%;
+          }
         }
       }
     }
     &-earning {
       margin-left: 45%;
 
+      @include breakpoint-mobile {
+        width: 100%;
+
+        margin-left: 0;
+      }
       &-tiles {
         display: block;
 
@@ -161,6 +222,45 @@
         border: 1px solid #939596;
 
         border-radius: em(7px);
+
+        @include breakpoint-mobile {
+          display: inline-block;
+
+          width: 28%;
+          height: auto;
+
+          margin-top: 5%;
+          margin-bottom: 2%;
+          padding: 1%;
+
+          border-radius: 5px;
+        }
+      }
+      &-tile {
+        float: left;
+        display: block;
+
+        margin-right: em(5px);
+        padding: em(5px);
+
+        width: em(41px);
+        height: em(41px);
+
+        border: 1px solid #565859;
+        border-radius: em(7px);
+
+        &:last-child {
+          margin-right: 0;
+        }
+        @include breakpoint-mobile {
+          width: 32%;
+          height: auto;
+
+          margin-right: 2%;
+          padding: 14%;
+
+          border-radius: 5px;
+        }
       }
     }
     &-score {
@@ -172,6 +272,14 @@
       text-transform: uppercase;
       line-height: 1.35;
       letter-spacing: 0.2em;
+
+      @include breakpoint-mobile {
+        display: block;
+
+        margin-bottom: 2%;
+
+        font-size: 8px;
+      }
     }
     &-button {
       position: relative;
@@ -197,6 +305,25 @@
 
       cursor: pointer;
 
+      @include breakpoint-mobile {
+        width: 20%;
+        height: auto;
+
+        bottom: 0;
+        left: 50%;
+
+        margin-bottom: 0;
+        margin-left: -10%;
+        padding: 2% 5%;
+
+        font-size: 12px;
+
+        &:hover {
+          background-color: #272C2E;
+
+          color: #535455;
+        }
+      }
       &:hover {
         background-color: #535455;
 

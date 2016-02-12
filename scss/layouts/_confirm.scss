@@ -6,9 +6,9 @@
     top: 50%;
     left: 50%;
 
-    width: em(400px);
+    width: em(380px);
 
-    margin-left: em(-200px);
+    margin-left: em(-190px);
     padding-bottom: em(36px);
 
     border: 1px solid #6D7579;
@@ -27,6 +27,12 @@
 
     z-index: 100;
 
+    @include breakpoint-mobile {
+      width: 70%;
+
+      margin-left: -35%;
+      padding-bottom: 5%;
+    }
     @keyframes confirmShowing {
       0% {
         opacity: 0;
@@ -36,8 +42,7 @@
       }
     }
     &-text {
-      height: em(100px);
-
+      margin-bottom: em(20px);
       margin-top: em(42px);
       margin-left: em(40px);
       margin-right: em(40px);
@@ -46,13 +51,29 @@
       font-size: em(18px);
       color: #fff;
       line-height: em(24px);
+
+      @include breakpoint-mobile {
+        margin: 10% 10% 5%;
+
+        font-size: 12px;
+      }
+      &-game-over  {
+        font-family: $font-stack-avenir-roman;
+        font-size: em(28px);
+        color: #fff;
+        font-weight: bold;
+        line-height: em(46px, 28px);
+
+        @include breakpoint-mobile {
+          font-size: 20px;
+        }
+      }
     }
     &-button {
-      min-width: em(80px);
-      height: em(40px);
-      
-      padding-left: em(10px);
-      padding-right: em(10px);
+      padding-left: em(20px);
+      padding-right: em(20px);
+      padding-top: em(6px);
+      padding-bottom: em(6px);
 
       opacity: 1;
 
@@ -60,12 +81,17 @@
       font-size: em(18px);
       text-transform: lowercase;
       text-align: center;
-      line-height: 2;
+      line-height: 1;
 
       border-radius: em(6px);
 
       cursor: pointer;
 
+      @include breakpoint-mobile {
+        padding: 2% 5%;
+
+        font-size: 12px;
+      }
       &--no {
         margin-right: em(4px);
 
@@ -78,6 +104,13 @@
           background-color: #d34949;
 
           color: #fff;
+        }
+        @include breakpoint-mobile {
+          &:hover {
+            background: rgba(211, 73, 73, 0.10);
+
+            color: #d34949;
+          }
         }
       }
       &--yes {
@@ -92,6 +125,13 @@
           background-color: #42748f;
 
           color: #fff;
+        }
+        @include breakpoint-mobile {
+          &:hover {
+            background-color: rgba(84, 158, 201, 0.10);
+
+            color: #42748f;
+          }
         }
       }
     }
