@@ -171,7 +171,7 @@
             'rgb(55, 201, 124)'
           ],
 
-          pointsAmountAfterStart: 23,
+          pointsAmountAfterStart: 15,
           pointsAmountAfterMove: function () {
             return 1;
           },

@@ -749,7 +749,7 @@ var Orbs;
 
       self.data.scoresList.modesButton[self.settings.id]._element.classList.add(self.config.classes.modesBoard.active);
 
-      self.data.itemSize = 100 / self.settings.size;
+      self.data.itemSize = Math.round(( 100 / self.settings.size) * 10) / 10;
 
       self.generateCoordinatesList(); // array of object with pairs (x, y)
 

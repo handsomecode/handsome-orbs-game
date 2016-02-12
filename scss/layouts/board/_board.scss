@@ -2,23 +2,27 @@
   box-sizing: border-box;
 
   position: relative;
+  top: 50%;
+  left: 50%;
 
   width: em(1230px);
   height: em(690px);
 
-  margin: 0 auto;
-  padding: em(25px);
+  margin-left: em(-615px);
+  margin-top: em(-345px);
 
   background-color: #212325;
 
   @include breakpoint-mobile {
     display: table;
 
+    top: auto;
+    left: auto;
+
     width: 90%;
     height: 90%;
 
     margin: 0 5%;
-    padding: 0;
   }
   &__content {
     box-sizing: border-box;

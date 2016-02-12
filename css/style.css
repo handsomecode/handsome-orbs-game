@@ -72,18 +72,21 @@ body {
 .game {
   box-sizing: border-box;
   position: relative;
+  top: 50%;
+  left: 50%;
   width: 68.33em;
   height: 38.33em;
-  margin: 0 auto;
-  padding: 1.39em;
+  margin-left: -34.17em;
+  margin-top: -19.17em;
   background-color: #212325; }
   @media (max-width: 767px) {
     .game {
       display: table;
+      top: auto;
+      left: auto;
       width: 90%;
       height: 90%;
-      margin: 0 5%;
-      padding: 0; } }
+      margin: 0 5%; } }
   .game__content {
     box-sizing: border-box;
     float: left;
@@ -169,7 +172,7 @@ body {
   position: absolute;
   top: 35em;
   left: 6em;
-  padding: 0; }
+  padding-bottom: 1px; }
   @media (max-width: 767px) {
     .game__buttons {
       position: relative;
@@ -203,7 +206,7 @@ body {
         padding: 6px;
         font-size: 12px;
         line-height: 1; }
-        .game__buttons-item:last-of-type {
+        .game__buttons-item:last-child {
           margin-right: 0; } }
     .game__buttons-item--undo, .game__buttons-item--undo.game__buttons-item--disabled:hover {
       position: relative;
@@ -244,35 +247,55 @@ body {
       cursor: default; }
 
 .game__point {
+  list-style: none;
   box-sizing: border-box;
   position: absolute;
   top: 0;
   left: 0;
-  list-style: none;
+  padding: 2px;
   opacity: 1;
-  -webkit-transform: scale(1);
-          transform: scale(1);
   -webkit-transition: -webkit-transform 0.3s ease, opacity 0.3s ease;
           transition: transform 0.3s ease, opacity 0.3s ease; }
   .game__point--removed {
     visibility: hidden;
-    -webkit-transform: scale(1.3);
-            transform: scale(1.3);
     -webkit-transition: -webkit-transform 0.3s ease, visibility 0.3s ease 0.15s;
             transition: transform 0.3s ease, visibility 0.3s ease 0.15s;
     z-index: 3; }
   .game__point-inner-container {
     position: relative;
-    top: 0;
+    top: 50%;
     right: 0;
     width: 90%;
     height: 90%;
-    margin: 5%;
-    background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
-    background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 3px rgba(255, 255, 255, 0.2);
+    margin: 0 auto;
     border-radius: 0.56em;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
     z-index: 3; }
+    .game__point-inner-container:before {
+      content: '';
+      display: block;
+      background-color: inherit;
+      width: 100%;
+      height: 100%;
+      margin: 0 auto;
+      opacity: 1;
+      background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
+      background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 3px rgba(255, 255, 255, 0.2);
+      border-radius: 0.56em;
+      -webkit-transform: scale(1);
+              transform: scale(1); }
+  .game__point--removed .game__point-inner-container {
+    opacity: 0;
+    -webkit-transition: opacity 0.3s ease 0.3s;
+            transition: opacity 0.3s ease 0.3s; }
+    .game__point--removed .game__point-inner-container:before {
+      opacity: 0;
+      -webkit-transform: scale(1.5);
+              transform: scale(1.5);
+      -webkit-transition: -webkit-transform 0.3s ease 0.3s, opacity 0.3s ease 0.3s;
+              transition: transform 0.3s ease 0.3s, opacity 0.3s ease 0.3s; }
   .game__point-container {
     position: absolute;
     border: 3px solid white;
@@ -331,10 +354,7 @@ body {
   left: 50%;
   width: 55.56em;
   margin-left: -27.78em;
-  padding-bottom: 4.72em;
-  padding-top: 4.22em;
-  padding-left: 6.67em;
-  padding-right: 6.67em;
+  padding: 4.22em 6.67em 4.72em;
   border: 1px solid #6D7579;
   background-color: #272C2E;
   opacity: 0.9;
@@ -888,10 +908,7 @@ body {
   100% {
     opacity: 1; } }
   .game__confirm-text {
-    margin-bottom: 1.11em;
-    margin-top: 2.33em;
-    margin-left: 2.22em;
-    margin-right: 2.22em;
+    margin: 2.33em 2.22em 1.11em;
     font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
     font-size: 1em;
     color: #fff;
@@ -910,10 +927,7 @@ body {
         .game__confirm-text-game-over {
           font-size: 20px; } }
   .game__confirm-button {
-    padding-left: 1.11em;
-    padding-right: 1.11em;
-    padding-top: 0.33em;
-    padding-bottom: 0.33em;
+    padding: 0.33em 1.56em;
     opacity: 1;
     font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
     font-size: 1em;

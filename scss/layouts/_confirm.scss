@@ -42,10 +42,7 @@
       }
     }
     &-text {
-      margin-bottom: em(20px);
-      margin-top: em(42px);
-      margin-left: em(40px);
-      margin-right: em(40px);
+      margin: em(42px) em(40px) em(20px);
 
       font-family: $font-stack-avenir-roman;
       font-size: em(18px);
@@ -70,10 +67,7 @@
       }
     }
     &-button {
-      padding-left: em(20px);
-      padding-right: em(20px);
-      padding-top: em(6px);
-      padding-bottom: em(6px);
+      padding: em(6px) em(28px);
 
       opacity: 1;
 

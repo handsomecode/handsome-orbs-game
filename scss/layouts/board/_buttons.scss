@@ -6,7 +6,7 @@
     top: em(630px);
     left: em(108px);
 
-    padding: 0;
+    padding-bottom: 1px;
 
     @include breakpoint-mobile {
       position: relative;
@@ -56,7 +56,7 @@
         font-size: 12px;
         line-height: 1;
 
-        &:last-of-type {
+        &:last-child {
           margin-right: 0;
         }
       }
