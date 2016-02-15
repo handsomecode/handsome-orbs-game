@@ -883,8 +883,8 @@ body {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 21.11em;
-  margin-left: -10.56em;
+  width: 22em;
+  margin-left: -11em;
   padding-bottom: 2em;
   border: 1px solid #6D7579;
   background-color: #272C2E;
@@ -908,7 +908,7 @@ body {
   100% {
     opacity: 1; } }
   .game__confirm-text {
-    margin: 2.33em 2.22em 1.11em;
+    margin: 2.33em 1.67em 1.11em;
     font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
     font-size: 1em;
     color: #fff;

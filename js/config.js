@@ -91,7 +91,7 @@
     '</div>',
 
     confirmRestartText: 'Would you like to continue on and do the restart?',
-    confirmGameOverText: 'Oh no! There are no more moves.<br><span class="game__confirm-text-game-over">Play again?',
+    confirmGameOverText: 'Oh no! There are no more moves left.<br><span class="game__confirm-text-game-over">Play Again?',
     confirmChangeDifficultyText: 'Would you like to continue on and change difficulty level?',
     confirmWinningText: 'Awesome, You are cool!!! Would you like to improve your high score?',
     moveTimeout: 700,

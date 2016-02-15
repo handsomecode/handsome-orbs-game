@@ -6,9 +6,9 @@
     top: 50%;
     left: 50%;
 
-    width: em(380px);
+    width: em(396px);
 
-    margin-left: em(-190px);
+    margin-left: em(-198px);
     padding-bottom: em(36px);
 
     border: 1px solid #6D7579;
@@ -42,7 +42,7 @@
       }
     }
     &-text {
-      margin: em(42px) em(40px) em(20px);
+      margin: em(42px) em(30px) em(20px);
 
       font-family: $font-stack-avenir-roman;
       font-size: em(18px);
