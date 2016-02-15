@@ -55,7 +55,7 @@
     instructionsHtml: '' +
     '<div class="game__instructions" id="instructions">' +
     '  <h1 class="game__instructions-title game__instructions-title--general">' + 'Instructions' + '</h1>' +
-    '  <p class="game__instructions-text game__instructions-text--general">' + 'The overall objective of the game is to shift the tiles and align 3 or 4 of the same color.' + '</p>' +
+    '  <p class="game__instructions-text game__instructions-text--general">' + 'The overall objective of the game is to shift the tiles and align 3 or more of the same color.' + '</p>' +
     '  <div class="game__instructions-moving">' +
     '    <h3 class="game__instructions-title">' + 'Moving tiles' + '</h3>' +
     '    <p class="game__instructions-text">' + 'Shift all pieces to one side of the board with your arrow keys.' + '</p>' +
