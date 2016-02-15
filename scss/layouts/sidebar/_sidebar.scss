@@ -19,23 +19,6 @@
       padding-left: 0;
       padding-top: 0;
     }
-    &-mute-button {
-      position: absolute;
-      top: 0;
-      right: 0;
-
-      width: 28px;
-      height: 28px;
-
-      background: url('../images/sprites/volume.png') no-repeat 0 120%;
-
-      @include breakpoint-mobile {
-        top: 2%;
-      }
-      &--active {
-        background: url('../images/sprites/volume.png') no-repeat 0 0;
-      }
-    }
   }
   &__scoreboard {
     position: relative;

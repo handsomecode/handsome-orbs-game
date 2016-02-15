@@ -708,18 +708,6 @@ body {
       height: auto;
       padding-left: 0;
       padding-top: 0; } }
-  .game__sidebar-mute-button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 28px;
-    height: 28px;
-    background: url("../images/sprites/volume.png") no-repeat 0 120%; }
-    @media (max-width: 767px) {
-      .game__sidebar-mute-button {
-        top: 2%; } }
-    .game__sidebar-mute-button--active {
-      background: url("../images/sprites/volume.png") no-repeat 0 0; }
 .game__scoreboard {
   position: relative;
   height: 5.56em;

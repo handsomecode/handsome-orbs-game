@@ -22,8 +22,6 @@
         undo: 'game__buttons-item--undo',
         instructions: 'game__buttons-item--instructions'
       },
-      muteButton: 'game__sidebar-mute-button',
-      muteButtonActive: 'game__sidebar-mute-button--active',
       modeList: 'game__modes',
       modeItem: 'game__modes-item',
       point: 'game__point',
@@ -98,13 +96,6 @@
     removeTimeout: 600,
     increaseScoreTimeout: 400,
 
-    sounds: {
-      move: 'sounds/soundMove.mp3',
-      undo: 'sounds/soundUndo.mp3',
-      winning: 'sounds/soundWinning.mp3',
-      gameOver: 'sounds/soundGameOver.mp3'
-    },
-
     modes: {
       easy: {
         settings: {
@@ -150,7 +141,7 @@
             return 1;
           },
           pointsAmountAfterRemove: function (count) {
-            return count * 0.7;
+            return 0;
           },
           pointsAmountInLineForRemove: 3,
 
