@@ -22,7 +22,6 @@ var Orbs;
       keyDownLock: false,
       running: false,
       init: false,
-      sounds: {},
       scoresList: {
         modesButton: {
           easy: {
@@ -81,33 +80,6 @@ var Orbs;
     self.debug = function (message) {
       if (self.config.debug) {
         console.log(message);
-      }
-    };
-
-    self.preloadSound = function () {
-      for (var soundName in self.config.sounds) {
-        var soundSrc = self.config.sounds[soundName];
-
-        self.data.sounds[soundName] = new Audio();
-        self.data.sounds[soundName].preload = 'auto';
-        self.data.sounds[soundName].src = soundSrc;
-        self.data.sounds[soundName].muted = false;
-      }
-
-      self.generateMuteButton();
-    };
-
-    self.sound = function (soundName) {
-      if (typeof self.data.sounds[soundName]) {
-        var sound = self.data.sounds[soundName];
-
-        if (sound.duration > 0 && !sound.paused) {
-          sound.pause();
-          sound.currentTime = sound.currentTime / sound.duration > 0.2 || (sound.duration - sound.currentTime) / sound.duration > 0.2 ? sound.duration / 2 : 0;
-          sound.play();
-        } else {
-          sound.play();
-        }
       }
     };
 
@@ -346,7 +318,6 @@ var Orbs;
       }
 
       if (countChanges) {
-        self.sound('move');
 
         if (!self.checkLocalStorage(localStorage['hasUndo'])) {
           localStorage['hasUndo'] = true;
@@ -584,7 +555,6 @@ var Orbs;
 
     self.undo = function () {
       if (self.checkLocalStorage(localStorage['hasUndo'])) {
-        self.sound('undo');
 
         localStorage['hasUndo'] = false;
         self.data.buttonsList.undo.classList.add(self.config.classes.button.disabled);
@@ -649,8 +619,6 @@ var Orbs;
     self.gameOver = function () {
       self.data.running = false;
 
-      self.sound('gameOver');
-
       self.data._board.classList.add(self.config.classes.boardGameOver);
 
       self.openConfirm(self.config.confirmGameOverText, function () {
@@ -669,7 +637,6 @@ var Orbs;
     };
 
     self.winning = function () {
-      self.sound('winning');
 
       self.data.running = false;
 
@@ -827,29 +794,6 @@ var Orbs;
       }
 
       self.data._container.appendChild(_buttonsList);
-    };
-
-    self.generateMuteButton = function () {
-      var _muteButton = document.createElement('div');
-      _muteButton.classList.add(self.config.classes.muteButton);
-
-      _muteButton.addEventListener("click", function () {
-        if (!_muteButton.classList.contains(self.config.classes.muteButtonActive)) {
-          _muteButton.classList.add(self.config.classes.muteButtonActive);
-
-          for (var soundName in self.config.sounds) {
-            self.data.sounds[soundName].muted = true;
-          }
-        } else {
-          _muteButton.classList.remove(self.config.classes.muteButtonActive);
-
-          for (var soundName in self.config.sounds) {
-            self.data.sounds[soundName].muted = false;
-          }
-        }
-      });
-
-      self.data._sidebar.appendChild(_muteButton);
     };
 
     self.openConfirm = function (text, callback) {
@@ -1062,8 +1006,6 @@ var Orbs;
       _mobile.id = 'is_mobile';
 
       self.data._container.appendChild(_mobile);
-
-      self.preloadSound();
 
       self.generateSidebar(); // add self.generateScoreboard(); // add div and push to it the best high score if it was
 
