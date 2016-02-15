@@ -70,6 +70,8 @@
         color: #42748f;
 
         z-index: 1;
+
+        transition: background-color ease 0.3s, color ease 0.3s;
       }
       &--undo:hover {
         background-color: #42748f;
@@ -81,6 +83,8 @@
         background: rgba(211, 73, 73, 0.10);
 
         color: #d34949;
+
+        transition: background-color ease 0.3s, color ease 0.3s;
 
         &:hover {
           background-color: #d34949;
@@ -102,6 +106,8 @@
         background: rgba(33, 35, 37, 0.10);
 
         color: #959595;
+
+        transition: background-color ease 0.3s, color ease 0.3s;
 
         &:hover {
           background-color: #535455;

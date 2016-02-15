@@ -213,14 +213,18 @@ body {
       border: 1px solid rgba(84, 158, 201, 0.5);
       background-color: rgba(84, 158, 201, 0.1);
       color: #42748f;
-      z-index: 1; }
+      z-index: 1;
+      -webkit-transition: background-color ease 0.3s, color ease 0.3s;
+              transition: background-color ease 0.3s, color ease 0.3s; }
     .game__buttons-item--undo:hover {
       background-color: #42748f;
       color: #fff; }
     .game__buttons-item--restart {
       border: 1px solid rgba(211, 73, 73, 0.5);
       background: rgba(211, 73, 73, 0.1);
-      color: #d34949; }
+      color: #d34949;
+      -webkit-transition: background-color ease 0.3s, color ease 0.3s;
+              transition: background-color ease 0.3s, color ease 0.3s; }
       .game__buttons-item--restart:hover {
         background-color: #d34949;
         color: #fff; }
@@ -232,7 +236,9 @@ body {
       width: 7.89em;
       border: 1px solid rgba(83, 84, 85, 0.5);
       background: rgba(33, 35, 37, 0.1);
-      color: #959595; }
+      color: #959595;
+      -webkit-transition: background-color ease 0.3s, color ease 0.3s;
+              transition: background-color ease 0.3s, color ease 0.3s; }
       .game__buttons-item--instructions:hover {
         background-color: #535455;
         color: #fff; }
