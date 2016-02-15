@@ -149,8 +149,8 @@
           pointsAmountAfterMove: function () {
             return 1;
           },
-          pointsAmountAfterRemove: function () {
-            return 0;
+          pointsAmountAfterRemove: function (count) {
+            return count * 0.7;
           },
           pointsAmountInLineForRemove: 3,
 
