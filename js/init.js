@@ -888,6 +888,12 @@ var Orbs;
         }
       }
 
+      function blur(event) {
+        if ((event.target === document.body)) {
+          instructionsClose();
+        }
+      }
+
       function instructionsClose() {
         self.data.hasOpenedInstructions = false;
 
@@ -898,9 +904,13 @@ var Orbs;
         self.removeDOMElement(document.getElementById('instructions'));
 
         document.removeEventListener('keydown', instructionsKeyDown);
+
+        document.body.removeEventListener('click', blur);
       }
 
       document.addEventListener('keydown', instructionsKeyDown);
+
+      document.body.addEventListener('click', blur);
 
       document.getElementById('instructions-ok').addEventListener('click', function () {
         instructionsClose();

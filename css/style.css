@@ -360,7 +360,7 @@ body {
   left: 50%;
   width: 55.56em;
   margin-left: -27.78em;
-  padding: 4.22em 6.67em 4.72em;
+  padding: 4.22em 10em 4.72em;
   border: 1px solid #6D7579;
   background-color: #272C2E;
   opacity: 0.9;
@@ -443,7 +443,7 @@ body {
   .game__instructions-moving {
     float: left;
     position: relative;
-    width: 35%; }
+    width: 45%; }
     @media (max-width: 767px) {
       .game__instructions-moving {
         width: 100%; } }
@@ -501,7 +501,7 @@ body {
             top: -85%;
             left: 21%; } }
   .game__instructions-earning {
-    margin-left: 45%; }
+    margin-left: 55%; }
     @media (max-width: 767px) {
       .game__instructions-earning {
         width: 100%;
@@ -563,9 +563,9 @@ body {
     width: 4.44em;
     height: 1.94em;
     margin-left: -2.23em;
-    border: 1px solid rgba(83, 84, 85, 0.5);
-    background-color: #272C2E;
-    color: #535455;
+    border: 1px solid rgba(84, 158, 201, 0.5);
+    background-color: rgba(84, 158, 201, 0.1);
+    color: #42748f;
     font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
     font-size: 1em;
     text-transform: lowercase;
@@ -584,10 +584,11 @@ body {
         padding: 2% 5%;
         font-size: 12px; }
         .game__instructions-button:hover {
-          background-color: #272C2E;
-          color: #535455; } }
+          border: 1px solid rgba(84, 158, 201, 0.5);
+          background-color: rgba(84, 158, 201, 0.1);
+          color: #42748f; } }
     .game__instructions-button:hover {
-      background-color: #535455;
+      background-color: #42748f;
       color: #fff; }
 
 .game__modes {

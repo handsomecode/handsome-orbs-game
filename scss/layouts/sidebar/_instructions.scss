@@ -9,7 +9,7 @@
     width: em(1000px);
 
     margin-left: em(-500px);
-    padding: em(76px) em(120px) em(85px);
+    padding: em(76px) em(180px) em(85px);
 
     border: 1px solid #6D7579;
     background-color: #272C2E;
@@ -119,7 +119,7 @@
       float: left;
       position: relative;
 
-      width: 35%;
+      width: 45%;
 
       @include breakpoint-mobile {
         width: 100%;
@@ -198,7 +198,7 @@
       }
     }
     &-earning {
-      margin-left: 45%;
+      margin-left: 55%;
 
       @include breakpoint-mobile {
         width: 100%;
@@ -288,10 +288,10 @@
 
       margin-left: em(-40px);
 
-      border: 1px solid rgba(83, 84, 85, 0.50);
-      background-color: #272C2E;
+      border: 1px solid rgba(84, 158, 201, 0.50);
+      background-color: rgba(84, 158, 201, 0.10);
 
-      color: #535455;
+      color: #42748f;
       font-family: $font-stack-avenir-roman;
       font-size: em(18px);
       text-transform: lowercase;
@@ -316,13 +316,14 @@
         font-size: 12px;
 
         &:hover {
-          background-color: #272C2E;
+          border: 1px solid rgba(84, 158, 201, 0.50);
+          background-color: rgba(84, 158, 201, 0.10);
 
-          color: #535455;
+          color: #42748f;
         }
       }
       &:hover {
-        background-color: #535455;
+        background-color: #42748f;
 
         color: #fff;
       }
