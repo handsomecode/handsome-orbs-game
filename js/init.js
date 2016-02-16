@@ -342,10 +342,6 @@ var Orbs;
       } else {
         self.data.points = oldPoints.slice(0);
       }
-      setTimeout(function () {
-        self.data.running = true;
-        self.data.keyDownLock = false;
-      }, self.config.moveTimeout);
 
     };
 
@@ -1068,8 +1064,8 @@ var Orbs;
 
         self.movePoints(direction);
 
-        self.data.keyDownLock = false;
-        self.data.running = false;
+        self.data.keyDownLock = true;
+        self.data.running = true;
       });
     };
 
@@ -1083,18 +1079,38 @@ var Orbs;
           case 37: // Arrow Left
             self.data.keyDownLock = true;
             self.movePoints('left');
+
+            setTimeout(function () {
+              self.data.running = true;
+              self.data.keyDownLock = false;
+            }, self.config.moveTimeout);
             break;
           case 38: // Arrow Up
             self.data.keyDownLock = true;
             self.movePoints('top');
+
+            setTimeout(function () {
+              self.data.running = true;
+              self.data.keyDownLock = false;
+            }, self.config.moveTimeout);
             break;
           case 39: // Arrow Right
             self.data.keyDownLock = true;
             self.movePoints('right');
+
+            setTimeout(function () {
+              self.data.running = true;
+              self.data.keyDownLock = false;
+            }, self.config.moveTimeout);
             break;
           case 40: // Arrow Down
             self.data.keyDownLock = true;
             self.movePoints('bottom');
+
+            setTimeout(function () {
+              self.data.running = true;
+              self.data.keyDownLock = false;
+            }, self.config.moveTimeout);
             break;
           case 82: // R
             if (!self.data.hasOpenedConfirm) {
