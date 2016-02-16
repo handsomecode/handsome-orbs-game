@@ -267,7 +267,7 @@ var Orbs;
     };
 
     self.movePoints = function (direction) {
-      if (!self.data.running || self.data.keyDownLock || self.data.hasOpenedConfirm) {
+      if (!self.data.running || !self.data.keyDownLock || self.data.hasOpenedConfirm) {
         return false;
       }
 
@@ -342,10 +342,11 @@ var Orbs;
       } else {
         self.data.points = oldPoints.slice(0);
       }
-
       setTimeout(function () {
         self.data.running = true;
+        self.data.keyDownLock = false;
       }, self.config.moveTimeout);
+
     };
 
     self.changeCoordinates = function (point) {
@@ -1080,15 +1081,19 @@ var Orbs;
 
         switch (e.keyCode) {
           case 37: // Arrow Left
+            self.data.keyDownLock = true;
             self.movePoints('left');
             break;
           case 38: // Arrow Up
+            self.data.keyDownLock = true;
             self.movePoints('top');
             break;
           case 39: // Arrow Right
+            self.data.keyDownLock = true;
             self.movePoints('right');
             break;
           case 40: // Arrow Down
+            self.data.keyDownLock = true;
             self.movePoints('bottom');
             break;
           case 82: // R
@@ -1125,7 +1130,6 @@ var Orbs;
           case 73: // I
           case 27: // Esc
           case 13: // Enter
-            self.data.keyDownLock = false;
             break;
         }
       });

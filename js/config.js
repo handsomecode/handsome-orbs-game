@@ -92,7 +92,7 @@
     confirmGameOverText: 'Oh no! There are no more moves left.<br><span class="game__confirm-text-game-over">Play Again?',
     confirmChangeDifficultyText: 'Would you like to continue on and change difficulty level?',
     confirmWinningText: 'Awesome, You are cool!!! Would you like to improve your high score?',
-    moveTimeout: 700,
+    moveTimeout: 400,
     removeTimeout: 600,
     increaseScoreTimeout: 400,
 
