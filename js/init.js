@@ -1154,7 +1154,6 @@ var Orbs;
     self.init = function () {
       self.generateGame();
     };
-
     self.init();
   }
 
