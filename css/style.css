@@ -69,6 +69,24 @@ body {
   -webkit-transform: translateY(-50%);
           transform: translateY(-50%); }
 
+.landscape body {
+  opacity: 0; }
+.landscape:before {
+  content: 'Sorry, but we don\'t support landscape orientation. Please turn left/right you device 90 degrees (in portrait orientation). Thanks!';
+  display: block;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  margin-left: -45%;
+  font-size: 22px;
+  font-family: "Avenir Roman", Helvetica, Arial, sans-serif;
+  color: #fff;
+  line-height: 1.35;
+  text-align: center;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%); }
+
 .game {
   box-sizing: border-box;
   position: relative;

@@ -18,11 +18,20 @@ var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playboo
 (function () {
   'use strict';
 
+  var _html = document.documentElement;
+
   if (iphone4) {
-    var _html = document.documentElement;
     _html.classList.add('iphone4');
 
     return false;
+  }
+
+  function checkOrientation () {
+    if ((window.orientation === -90 || window.orientation === 90) && isMobile() && !iphone4) {
+      _html.classList.add('landscape');
+    } else {
+      _html.classList.remove('landscape');
+    }
   }
 
   function triggerResize() {
@@ -78,6 +87,8 @@ var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playboo
       _activeElement.blur();
     }
 
+    checkOrientation();
+
     setTimeout(function () {
       if (isSafari()) {
         DOMReRender();
@@ -86,6 +97,8 @@ var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playboo
       triggerResize();
     }, 100);
   });
+
+  checkOrientation();
 
   oldWindowWidth = window.innerWidth;
   windowResize();
