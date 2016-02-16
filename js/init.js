@@ -20,6 +20,7 @@ var Orbs;
       hasOpenedConfirm: false,
       hasOpenedInstructions: false,
       keyDownLock: false,
+      touch: false,
       running: false,
       init: false,
       scoresList: {
@@ -267,7 +268,7 @@ var Orbs;
     };
 
     self.movePoints = function (direction) {
-      if (!self.data.running || !self.data.keyDownLock || self.data.hasOpenedConfirm) {
+      if (!self.data.running || self.data.keyDownLock || self.data.hasOpenedConfirm) {
         return false;
       }
 
@@ -343,6 +344,10 @@ var Orbs;
         self.data.points = oldPoints.slice(0);
       }
 
+      setTimeout(function () {
+        self.data.keyDownLock = false;
+        self.data.running = true;
+      }, self.config.moveTimeout);
     };
 
     self.changeCoordinates = function (point) {
@@ -1024,7 +1029,6 @@ var Orbs;
     };
 
     self.touchBinding = function () {
-
       var startX = 0,
           startY = 0,
           endX = 0,
@@ -1063,9 +1067,6 @@ var Orbs;
         }
 
         self.movePoints(direction);
-
-        self.data.keyDownLock = true;
-        self.data.running = true;
       });
     };
 
@@ -1077,40 +1078,24 @@ var Orbs;
 
         switch (e.keyCode) {
           case 37: // Arrow Left
-            self.data.keyDownLock = true;
+            self.data.keyDownLock = false;
             self.movePoints('left');
 
-            setTimeout(function () {
-              self.data.running = true;
-              self.data.keyDownLock = false;
-            }, self.config.moveTimeout);
             break;
           case 38: // Arrow Up
-            self.data.keyDownLock = true;
+            self.data.keyDownLock = false;
             self.movePoints('top');
 
-            setTimeout(function () {
-              self.data.running = true;
-              self.data.keyDownLock = false;
-            }, self.config.moveTimeout);
             break;
           case 39: // Arrow Right
-            self.data.keyDownLock = true;
+            self.data.keyDownLock = false;
             self.movePoints('right');
 
-            setTimeout(function () {
-              self.data.running = true;
-              self.data.keyDownLock = false;
-            }, self.config.moveTimeout);
             break;
           case 40: // Arrow Down
-            self.data.keyDownLock = true;
+            self.data.keyDownLock = false;
             self.movePoints('bottom');
 
-            setTimeout(function () {
-              self.data.running = true;
-              self.data.keyDownLock = false;
-            }, self.config.moveTimeout);
             break;
           case 82: // R
             if (!self.data.hasOpenedConfirm) {
