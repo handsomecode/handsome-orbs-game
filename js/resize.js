@@ -2,6 +2,10 @@ function isMobile () {
   return window.getComputedStyle(document.getElementById('is_mobile'))['display'] === 'block';
 }
 
+function isTablet() {
+  return window.getComputedStyle(document.getElementById('is_tablet'))['display'] === 'block';
+}
+
 function isSafari() {
   return (navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1)
 }
@@ -47,7 +51,7 @@ var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|playboo
       oldWindowWidth;
 
   function windowResize() {
-    if (!isMobile()) {
+    if (!isMobile() && !isTablet()) {
       clearTimeout(resizeTimer);
 
       resizeTimer = setTimeout(function () {

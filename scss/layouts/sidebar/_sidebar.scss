@@ -9,6 +9,17 @@
     padding-left: em(50px);
     padding-top: em(100px);
 
+    @include breakpoint-tablet {
+      @include portraitOrientation() {
+        float: none;
+
+        width: 100%;
+        height: auto;
+
+        padding-left: 0;
+        padding-top: 0;
+      }
+    }
     @include breakpoint-mobile {
       float: none;
 
@@ -26,6 +37,17 @@
 
     font-family: $font-stack-avenir-roman;
 
+    @include breakpoint-tablet {
+      @include portraitOrientation() {
+        height: auto;
+
+        &:after {
+          content: '';
+          display: table;
+          clear: both;
+        }
+      }
+    }
     @include breakpoint-mobile {
       height: auto;
 
@@ -43,6 +65,11 @@
       letter-spacing: em(4.59px, 12px);
       text-transform: uppercase;
 
+      @include breakpoint-tablet {
+        @include portraitOrientation() {
+          font-size: 12px;
+        }
+      }
       @include breakpoint-mobile {
         font-size: 8px;
       }
@@ -55,10 +82,17 @@
       font-size: em(90px);
       color: #37c97c;
 
-      @include breakpoint-mobile {
-        font-size: 30px;
+      @include breakpoint-tablet {
+        @include portraitOrientation() {
+          padding-top: 1%;
 
+          font-size: 62px;
+        }
+      }
+      @include breakpoint-mobile {
         padding-top: 0;
+
+        font-size: 30px;
       }
 
       p {

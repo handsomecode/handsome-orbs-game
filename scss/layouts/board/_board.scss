@@ -13,6 +13,17 @@
 
   background-color: #212325;
 
+  @include breakpoint-tablet {
+    @include portraitOrientation() {
+      top: auto;
+      left: auto;
+
+      width: 74%;
+      height: 100%;
+
+      margin: 5% 13%;
+    }
+  }
   @include breakpoint-mobile {
     top: auto;
     left: auto;
@@ -39,6 +50,25 @@
 
     z-index: 1;
 
+    @include breakpoint-tablet {
+      @include portraitOrientation() {
+        float: none;
+
+        top: 0;
+        left: 0;
+
+        width: 74vw;
+        height: 74vw;
+
+        border-radius: 2%;
+
+        &:after {
+          content: '';
+          display: table;
+          clear: both;
+        }
+      }
+    }
     @include breakpoint-mobile {
       float: none;
 
@@ -115,6 +145,14 @@
 
       z-index: 2;
 
+      @include breakpoint-tablet {
+        @include portraitOrientation() {
+          padding: 45% 0;
+
+          font-size: 55px;
+          letter-spacing: 0.1em;
+        }
+      }
       @include breakpoint-mobile {
         padding: 45% 0;
 

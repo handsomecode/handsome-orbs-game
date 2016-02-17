@@ -25,6 +25,14 @@
 
     z-index: 100;
 
+    @include breakpoint-tablet {
+      @include portraitOrientation() {
+        width: 80%;
+
+        margin-left: -40%;
+        padding: 10% 12% 3%;
+      }
+    }
     @include breakpoint-mobile {
       width: 90%;
 
@@ -49,6 +57,13 @@
       text-transform: uppercase;
       letter-spacing: 0.2em;
 
+      @include breakpoint-tablet {
+        @include portraitOrientation() {
+          margin-bottom: 2%;
+
+          font-size: 18px;
+        }
+      }
       @include breakpoint-mobile {
         margin-bottom: 2%;
 
@@ -58,9 +73,16 @@
         font-size: em(36px);
         text-align: center;
 
+        @include breakpoint-tablet {
+          @include portraitOrientation() {
+
+            font-size: 28px;
+          }
+        }
         @include breakpoint-mobile {
           font-size: 18px;
         }
+
         &:after {
           content: "";
 
@@ -75,6 +97,15 @@
 
           background-color: #3d4042;
 
+          @include breakpoint-tablet {
+            @include portraitOrientation() {
+              width: 40%;
+              height: 3px;
+
+              margin-top: 5%;
+              margin-bottom: 5%;
+            }
+          }
           @include breakpoint-mobile {
             width: 40%;
             height: 2px;
@@ -91,6 +122,11 @@
       color: #939596;
       line-height: 1.35;
 
+      @include breakpoint-tablet {
+        @include portraitOrientation() {
+          font-size: 16px;
+        }
+      }
       @include breakpoint-mobile {
         font-size: 10px;
       }
@@ -106,6 +142,15 @@
 
         text-align: center;
 
+        @include breakpoint-tablet {
+          @include portraitOrientation() {
+            width: 100%;
+
+            margin-bottom: 15%;
+
+            font-size: 16px;
+          }
+        }
         @include breakpoint-mobile {
           width: 100%;
 
@@ -121,6 +166,11 @@
 
       width: 45%;
 
+      @include breakpoint-tablet {
+        @include portraitOrientation() {
+          width: 100%;
+        }
+      }
       @include breakpoint-mobile {
         width: 100%;
       }
@@ -130,6 +180,20 @@
         left: 0;
         margin-top: em(75px);
 
+        @include breakpoint-tablet {
+          @include portraitOrientation() {
+            display: inline-block;
+
+            width: 50%;
+            height: auto;
+
+            margin-top: 12%;
+            margin-bottom: 10%;
+            padding: 1%;
+
+            border-radius: 5px;
+          }
+        }
         @include breakpoint-mobile {
           display: inline-block;
 
@@ -158,6 +222,17 @@
 
         &:last-child {
           margin-right: 0;
+        }
+        @include breakpoint-tablet {
+          @include portraitOrientation() {
+            width: 10%;
+            height: auto;
+
+            margin-right: 2%;
+            padding: 8%;
+
+            border-radius: 5px;
+          }
         }
         @include breakpoint-mobile {
           width: 10%;
@@ -190,6 +265,12 @@
           
           background: url('../images/arrow-up.png') no-repeat 50% 50%;
 
+          @include breakpoint-tablet {
+            @include portraitOrientation() {
+              top: -79%;
+              left: 20%;
+            }
+          }
           @include breakpoint-mobile {
             top: -85%;
             left: 21%;
@@ -200,6 +281,13 @@
     &-earning {
       margin-left: 55%;
 
+      @include breakpoint-tablet {
+        @include portraitOrientation() {
+          width: 100%;
+
+          margin-left: 0;
+        }
+      }
       @include breakpoint-mobile {
         width: 100%;
 
@@ -220,6 +308,20 @@
 
         border-radius: em(7px);
 
+        @include breakpoint-tablet {
+          @include portraitOrientation() {
+            display: inline-block;
+
+            width: 28%;
+            height: auto;
+
+            margin-top: 5%;
+            margin-bottom: 2%;
+            padding: 1%;
+
+            border-radius: 5px;
+          }
+        }
         @include breakpoint-mobile {
           display: inline-block;
 
@@ -249,6 +351,17 @@
         &:last-child {
           margin-right: 0;
         }
+        @include breakpoint-tablet {
+          @include portraitOrientation() {
+            width: 32%;
+            height: auto;
+
+            margin-right: 2%;
+            padding: 14%;
+
+            border-radius: 5px;
+          }
+        }
         @include breakpoint-mobile {
           width: 32%;
           height: auto;
@@ -270,6 +383,15 @@
       line-height: 1.35;
       letter-spacing: 0.2em;
 
+      @include breakpoint-tablet {
+        @include portraitOrientation() {
+          display: block;
+
+          margin-bottom: 10%;
+
+          font-size: 14px;
+        }
+      }
       @include breakpoint-mobile {
         display: block;
 
@@ -302,6 +424,28 @@
 
       cursor: pointer;
 
+      @include breakpoint-tablet {
+        @include portraitOrientation() {
+          width: 20%;
+          height: auto;
+
+          bottom: 0;
+          left: 50%;
+
+          margin-bottom: 0;
+          margin-left: -10%;
+          padding: 2% 5%;
+
+          font-size: 18px;
+
+          &:hover {
+            border: 1px solid rgba(84, 158, 201, 0.50);
+            background-color: rgba(84, 158, 201, 0.10);
+
+            color: #42748f;
+          }
+        }
+      }
       @include breakpoint-mobile {
         width: 20%;
         height: auto;

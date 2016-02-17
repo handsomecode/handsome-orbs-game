@@ -26,6 +26,16 @@ body {
     display: block;
   }
 }
+#is_tablet {
+  display: none;
+  visibility: hidden;
+
+  @include breakpoint-tablet {
+   @include portraitOrientation() {
+      display: block;
+    }
+  }
+}
 
 .iphone4 {
   body {

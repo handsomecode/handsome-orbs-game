@@ -68,7 +68,12 @@
     -moz-osx-font-smoothing: auto;
   }
 }
-@mixin orientation($orientation: landscape) {
+@mixin landscapeOrientation($orientation: landscape) {
+  @media (orientation: $orientation) {
+    @content
+  }
+}
+@mixin portraitOrientation($orientation: portrait) {
   @media (orientation: $orientation) {
     @content
   }
@@ -98,8 +103,13 @@
     @content
   }
 }
+@mixin breakpoint-tablet-not-mobile($tabletWidth, $mobileWidth) {
+  @media (max-width: $tabletWidth)  and (min-width: $mobileWidth + 1px) {
+    @content
+  }
+}
 @mixin breakpoint-tablet {
-  @include breakpoint($tabletMaxWidth) {
+  @include breakpoint-tablet-not-mobile($tabletMaxWidth, $mobileMaxWidth) {
     @content
   }
 }
@@ -108,36 +118,8 @@
     @content
   }
 }
-@mixin breakpoint-not-phone {
+@mixin breakpoint-not-mobile {
   @include breakpoint-min-width($mobileMaxWidth + 1px) {
     @content
   }
-}
-@mixin roboto-light {
-  font-family: 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: 300;
-}
-@mixin roboto {
-  font-family: 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: 400;
-}
-@mixin roboto-medium {
-  font-family: 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: 500;
-}
-@mixin roboto-bold {
-  font-family: 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: 700;
-}
-@mixin roboto-black {
-  font-family: 'Roboto Black', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: 400;
-}
-@mixin source-sans-pro {
-  font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: 400;
-}
-@mixin quicksand {
-  font-family: 'Quicksand', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-  font-weight: 400;
 }

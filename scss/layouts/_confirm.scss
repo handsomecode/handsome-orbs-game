@@ -27,6 +27,14 @@
 
     z-index: 100;
 
+    @include breakpoint-tablet {
+      @include portraitOrientation() {
+        width: 50%;
+
+        margin-left: -25%;
+        padding-bottom: 5%;
+      }
+    }
     @include breakpoint-mobile {
       width: 70%;
 
@@ -49,6 +57,13 @@
       color: #fff;
       line-height: em(24px);
 
+      @include breakpoint-tablet {
+        @include portraitOrientation() {
+          margin: 10%;
+
+          font-size: 18px;
+        }
+      }
       @include breakpoint-mobile {
         margin: 10% 10% 5%;
 
@@ -61,6 +76,11 @@
         font-weight: bold;
         line-height: em(46px, 28px);
 
+        @include breakpoint-tablet {
+          @include portraitOrientation() {
+            font-size: 30px;
+          }
+        }
         @include breakpoint-mobile {
           font-size: 20px;
         }
@@ -81,6 +101,13 @@
 
       cursor: pointer;
 
+      @include breakpoint-tablet {
+        @include portraitOrientation() {
+          padding: 2% 10%;
+
+          font-size: 18px;
+        }
+      }
       @include breakpoint-mobile {
         padding: 2% 5%;
 
@@ -98,6 +125,15 @@
           background-color: #d34949;
 
           color: #fff;
+        }
+        @include breakpoint-tablet {
+          @include portraitOrientation() {
+            &:hover {
+              background: rgba(211, 73, 73, 0.10);
+
+              color: #d34949;
+            }
+          }
         }
         @include breakpoint-mobile {
           &:hover {
@@ -119,6 +155,15 @@
           background-color: #42748f;
 
           color: #fff;
+        }
+        @include breakpoint-tablet {
+          @include portraitOrientation() {
+            &:hover {
+              background-color: rgba(84, 158, 201, 0.10);
+
+              color: #42748f;
+            }
+          }
         }
         @include breakpoint-mobile {
           &:hover {

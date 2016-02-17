@@ -39,6 +39,12 @@
 
       z-index: 3;
 
+      @include breakpoint-tablet {
+        @include portraitOrientation() {
+          border-radius: 15%;
+        }
+      }
+
       &:before {
         content: '';
         display: block;
@@ -59,6 +65,12 @@
         border-radius: em(10px);
 
         transform: scale(1);
+
+        @include breakpoint-tablet {
+          @include portraitOrientation() {
+            border-radius: 15%;
+          }
+        }
       }
     }
     &--removed &-inner-container {

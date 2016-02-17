@@ -1018,6 +1018,11 @@ var Orbs;
 
       self.data._container.appendChild(_mobile);
 
+      var _tablet = document.createElement('div');
+      _tablet.id = 'is_tablet';
+
+      self.data._container.appendChild(_tablet);
+
       self.generateSidebar(); // add self.generateScoreboard(); // add div and push to it the best high score if it was
 
       self.generateButtons();
