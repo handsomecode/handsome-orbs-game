@@ -34,6 +34,7 @@ h4, h5, h6 {
 
 html,
 html body {
+  overflow: hidden;
   width: 100%;
   height: 100%;
   background-color: #212325;
@@ -109,8 +110,7 @@ body {
     top: auto;
     left: auto;
     width: 74%;
-    height: 100%;
-    margin: 5% 13%; } }
+    margin: 5% 13% 0; } }
 
   @media (max-width: 767px) {
     .game {
