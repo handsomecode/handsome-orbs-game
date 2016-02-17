@@ -100,7 +100,7 @@
       easy: {
         settings: {
           name: 'Easy',
-          size: 6,
+          size: 7,
 
           colors: [
             'rgb(224, 122, 70)',
@@ -110,7 +110,7 @@
             'rgb(55, 201, 124)'
           ],
 
-          pointsAmountAfterStart: 12,
+          pointsAmountAfterStart: 14,
           pointsAmountAfterMove: function () {
             return 1;
           },
@@ -126,7 +126,7 @@
       medium: {
         settings: {
           name: 'Medium',
-          size: 8,
+          size: 6,
 
           colors: [
             'rgba(224, 122, 70, 1)',
@@ -136,7 +136,7 @@
             'rgba(55, 201, 124,1 )'
           ],
 
-          pointsAmountAfterStart: 18,
+          pointsAmountAfterStart: 14,
           pointsAmountAfterMove: function () {
             return 1;
           },
