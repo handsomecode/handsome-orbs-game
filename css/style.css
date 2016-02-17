@@ -99,11 +99,10 @@ body {
   background-color: #212325; }
   @media (max-width: 767px) {
     .game {
-      display: table;
       top: auto;
       left: auto;
       width: 90%;
-      height: 90%;
+      height: 100%;
       margin: 0 5%; } }
   .game__content {
     box-sizing: border-box;
@@ -117,12 +116,11 @@ body {
     z-index: 1; }
     @media (max-width: 767px) {
       .game__content {
-        display: table-cell;
         float: none;
         top: 0;
         left: 0;
-        width: 98vw;
-        height: 88vw; }
+        width: 90vw;
+        height: 90vw; }
         .game__content:after {
           content: '';
           display: table;
@@ -719,7 +717,7 @@ body {
       color: #fff; }
 
 .game__sidebar {
-  float: left;
+  float: right;
   position: relative;
   width: 32em;
   height: 32em;
@@ -727,7 +725,6 @@ body {
   padding-top: 5.56em; }
   @media (max-width: 767px) {
     .game__sidebar {
-      display: table-header-group;
       float: none;
       width: 100%;
       height: auto;

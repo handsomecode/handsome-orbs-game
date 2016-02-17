@@ -14,13 +14,11 @@
   background-color: #212325;
 
   @include breakpoint-mobile {
-    display: table;
-
     top: auto;
     left: auto;
 
     width: 90%;
-    height: 90%;
+    height: 100%;
 
     margin: 0 5%;
   }
@@ -42,14 +40,13 @@
     z-index: 1;
 
     @include breakpoint-mobile {
-      display: table-cell;
       float: none;
 
       top: 0;
       left: 0;
 
-      width: 98vw;
-      height: 88vw;
+      width: 90vw;
+      height: 90vw;
 
       &:after {
         content: '';

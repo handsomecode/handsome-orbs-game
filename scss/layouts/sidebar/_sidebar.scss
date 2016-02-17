@@ -1,6 +1,6 @@
 .game {
   &__sidebar {
-    float: left;
+    float: right;
     position: relative;
 
     width: em(576px);
@@ -10,7 +10,6 @@
     padding-top: em(100px);
 
     @include breakpoint-mobile {
-      display: table-header-group;
       float: none;
 
       width: 100%;

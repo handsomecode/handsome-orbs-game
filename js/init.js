@@ -1002,17 +1002,16 @@ var Orbs;
     self.generateGame = function () {
       self.data._container.classList.add(self.config.classes.container);
 
-      var _board = document.createElement('ul');
-      _board.classList.add(self.config.classes.board);
-      self.data._board = _board;
-
-      self.data._container.appendChild(_board);
-
       var _sidebar = document.createElement('div');
       _sidebar.classList.add(self.config.classes.sidebar);
       self.data._sidebar = _sidebar;
 
       self.data._container.appendChild(_sidebar);
+      var _board = document.createElement('ul');
+      _board.classList.add(self.config.classes.board);
+      self.data._board = _board;
+
+      self.data._container.appendChild(_board);
 
       var _mobile = document.createElement('div');
       _mobile.id = 'is_mobile';
