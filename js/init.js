@@ -821,7 +821,7 @@ var Orbs;
 
       function confirmKeyDown(e) {
         if (!self.data.keyDownLock) {
-          self.data.keyDownLock = true;
+          self.data.keyDownLock = false;
           switch (e.keyCode) {
             case 89: // Y
             case 13: // Enter
@@ -887,7 +887,7 @@ var Orbs;
 
       function instructionsKeyDown(e) {
         if (!self.data.keyDownLock) {
-          self.data.keyDownLock = true;
+          self.data.keyDownLock = false;
           switch (e.keyCode) {
             case 27: // Esc
               instructionsClose();
@@ -1049,16 +1049,16 @@ var Orbs;
           criticalDistance = 50;
 
       self.data._board.addEventListener('touchstart', function(e){
-        var touchobj = e.changedTouches[0]; // reference first touch point (ie: first finger)
+        var touchobj = e.changedTouches[0];
 
-        startX = parseInt(touchobj.clientX); // get x position of touch point relative to left edge of browser
+        startX = parseInt(touchobj.clientX);
         startY = parseInt(touchobj.clientY);
 
         e.preventDefault();
       }, false);
 
       self.data._board.addEventListener('touchend', function(e){
-        var touchobj = e.changedTouches[0]; // reference first touch point for this event
+        var touchobj = e.changedTouches[0];
 
         endX = parseInt(touchobj.clientX);
         endY = parseInt(touchobj.clientY);
@@ -1109,19 +1109,19 @@ var Orbs;
             break;
           case 82: // R
             if (!self.data.hasOpenedConfirm) {
-              self.data.keyDownLock = true;
+              self.data.keyDownLock = false;
               self.restart();
             }
             break;
           case 85: // U
             if (!self.data.hasOpenedConfirm) {
-              self.data.keyDownLock = true;
+              self.data.keyDownLock = false;
               self.undo();
             }
             break;
           case 73: // I
             if (!self.data.hasOpenedInstructions) {
-              self.data.keyDownLock = true;
+              self.data.keyDownLock = false;
               self.instructions();
             }
             break;
@@ -1142,6 +1142,7 @@ var Orbs;
           case 27: // Esc
           case 13: // Enter
             break;
+            self.data.keyDownLock = false;
         }
       });
     };
