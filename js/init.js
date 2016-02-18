@@ -544,7 +544,7 @@ var Orbs;
 
         for (var i = 0; i < Math.max(futureScore.length, currentScore.length); i++) {
           var _p = document.createElement('p');
-          _p.setAttribute('data-value', (currentScore.length > i ? currentScore[i] : '\b'));
+          _p.setAttribute('data-value', (currentScore.length > i ? currentScore[i] : '\b' + '\n' + '\b' + '\n' + '\b'));
 
           if (changingDigitalIndexes.indexOf(i) > -1) {
             _p.setAttribute('data-to-next-value', (futureScore.length > i ? futureScore[i] : ' '));
