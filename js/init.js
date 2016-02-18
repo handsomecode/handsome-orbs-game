@@ -354,7 +354,13 @@ var Orbs;
       var translateX =  point.x * 100,
           translateY = point.y * 100;
 
-      point._element.style.transform = 'translateX(' + translateX + '%) translateY(' + translateY + '%) translateZ(0)';
+      var transform = 'translateX(' + translateX + '%) translateY(' + translateY + '%) translateZ(0)';
+
+      point._element.style.transform = transform;
+      point._element.style.webkitTransform = transform;
+      point._element.style.mozTransform = transform;
+      point._element.style.msTransform = transform;
+      point._element.style.oTransform = transform;
     };
 
     self.createPoint = function (x, y, color, oldX, oldY, forDeleting) {
