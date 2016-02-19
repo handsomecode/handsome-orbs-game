@@ -424,6 +424,8 @@
 
       cursor: pointer;
 
+      transition: background-color ease 0.3s, color ease 0.3s;
+
       @include breakpoint-tablet {
         @include portraitOrientation() {
           width: 20%;
@@ -437,6 +439,8 @@
           padding: 2% 5%;
 
           font-size: 18px;
+
+          transition: none;
 
           &:hover {
             border: 1px solid rgba(84, 158, 201, 0.50);
@@ -458,6 +462,8 @@
         padding: 2% 5%;
 
         font-size: 12px;
+
+        transition: none;
 
         &:hover {
           border: 1px solid rgba(84, 158, 201, 0.50);

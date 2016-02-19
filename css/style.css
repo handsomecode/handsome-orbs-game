@@ -751,7 +751,9 @@ body {
     text-align: center;
     line-height: 1;
     border-radius: 0.33em;
-    cursor: pointer; }
+    cursor: pointer;
+    -webkit-transition: background-color ease 0.3s, color ease 0.3s;
+            transition: background-color ease 0.3s, color ease 0.3s; }
 @media (max-width: 991px) and (min-width: 768px) and (orientation: portrait) {
   .game__instructions-button {
     width: 20%;
@@ -761,7 +763,9 @@ body {
     margin-bottom: 0;
     margin-left: -10%;
     padding: 2% 5%;
-    font-size: 18px; }
+    font-size: 18px;
+    -webkit-transition: none;
+            transition: none; }
     .game__instructions-button:hover {
       border: 1px solid rgba(84, 158, 201, 0.5);
       background-color: rgba(84, 158, 201, 0.1);
@@ -776,7 +780,9 @@ body {
         margin-bottom: 0;
         margin-left: -10%;
         padding: 2% 5%;
-        font-size: 12px; }
+        font-size: 12px;
+        -webkit-transition: none;
+                transition: none; }
         .game__instructions-button:hover {
           border: 1px solid rgba(84, 158, 201, 0.5);
           background-color: rgba(84, 158, 201, 0.1);
@@ -1215,33 +1221,49 @@ body {
       margin-right: 0.22em;
       border: 1px solid rgba(211, 73, 73, 0.5);
       background: rgba(211, 73, 73, 0.1);
-      color: #d34949; }
+      color: #d34949;
+      -webkit-transition: background-color ease 0.3s, color ease 0.3s;
+              transition: background-color ease 0.3s, color ease 0.3s; }
       .game__confirm-button--no:hover {
         background-color: #d34949;
         color: #fff; }
 @media (max-width: 991px) and (min-width: 768px) and (orientation: portrait) {
-  .game__confirm-button--no:hover {
-    background: rgba(211, 73, 73, 0.1);
-    color: #d34949; } }
+  .game__confirm-button--no {
+    -webkit-transition: none;
+            transition: none; }
+    .game__confirm-button--no:hover {
+      background: rgba(211, 73, 73, 0.1);
+      color: #d34949; } }
 
       @media (max-width: 767px) {
-        .game__confirm-button--no:hover {
-          background: rgba(211, 73, 73, 0.1);
-          color: #d34949; } }
+        .game__confirm-button--no {
+          -webkit-transition: none;
+                  transition: none; }
+          .game__confirm-button--no:hover {
+            background: rgba(211, 73, 73, 0.1);
+            color: #d34949; } }
     .game__confirm-button--yes {
       margin-left: 0.22em;
       border: 1px solid rgba(84, 158, 201, 0.5);
       background-color: rgba(84, 158, 201, 0.1);
-      color: #42748f; }
+      color: #42748f;
+      -webkit-transition: background-color ease 0.3s, color ease 0.3s;
+              transition: background-color ease 0.3s, color ease 0.3s; }
       .game__confirm-button--yes:hover {
         background-color: #42748f;
         color: #fff; }
 @media (max-width: 991px) and (min-width: 768px) and (orientation: portrait) {
-  .game__confirm-button--yes:hover {
-    background-color: rgba(84, 158, 201, 0.1);
-    color: #42748f; } }
+  .game__confirm-button--yes {
+    -webkit-transition: none;
+            transition: none; }
+    .game__confirm-button--yes:hover {
+      background-color: rgba(84, 158, 201, 0.1);
+      color: #42748f; } }
 
       @media (max-width: 767px) {
-        .game__confirm-button--yes:hover {
-          background-color: rgba(84, 158, 201, 0.1);
-          color: #42748f; } }
+        .game__confirm-button--yes {
+          -webkit-transition: none;
+                  transition: none; }
+          .game__confirm-button--yes:hover {
+            background-color: rgba(84, 158, 201, 0.1);
+            color: #42748f; } }

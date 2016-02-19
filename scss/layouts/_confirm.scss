@@ -121,6 +121,8 @@
 
         color: #d34949;
 
+        transition: background-color ease 0.3s, color ease 0.3s;
+
         &:hover {
           background-color: #d34949;
 
@@ -128,6 +130,8 @@
         }
         @include breakpoint-tablet {
           @include portraitOrientation() {
+            transition: none;
+
             &:hover {
               background: rgba(211, 73, 73, 0.10);
 
@@ -136,6 +140,8 @@
           }
         }
         @include breakpoint-mobile {
+          transition: none;
+
           &:hover {
             background: rgba(211, 73, 73, 0.10);
 
@@ -151,6 +157,8 @@
 
         color: #42748f;
 
+        transition: background-color ease 0.3s, color ease 0.3s;
+
         &:hover {
           background-color: #42748f;
 
@@ -158,6 +166,8 @@
         }
         @include breakpoint-tablet {
           @include portraitOrientation() {
+            transition: none;
+
             &:hover {
               background-color: rgba(84, 158, 201, 0.10);
 
@@ -166,6 +176,8 @@
           }
         }
         @include breakpoint-mobile {
+          transition: none;
+
           &:hover {
             background-color: rgba(84, 158, 201, 0.10);
 
