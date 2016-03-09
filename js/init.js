@@ -3,7 +3,7 @@ var Orbs;
 (function () {
   'use strict';
 
-  Orbs = function (_container, config) {
+  Orbs = function (_game, config) {
     var self = this;
 
     self.config = config;
@@ -11,7 +11,8 @@ var Orbs;
 
     self.data = {
       _html: document.documentElement,
-      _container: _container,
+      _game: _game,
+      _container: undefined,
       _board: undefined,
       _sidebar: undefined,
       itemSize: 0,
@@ -815,7 +816,7 @@ var Orbs;
         self.data._html.classList.add(self.config.classes.boardDisabled);
       }
       self.data._html.classList.add(self.config.classes.boardDisabled);
-      self.appendChildren(self.data._container, self.config.confirmHtml.replace(/%text%/g, text));
+      self.appendChildren(self.data._game, self.config.confirmHtml.replace(/%text%/g, text));
 
       self.data.running = false;
 
@@ -881,7 +882,7 @@ var Orbs;
 
       self.data._html.classList.add(self.config.classes.boardDisabled);
 
-      self.appendChildren(self.data._container, self.config.instructionsHtml);
+      self.appendChildren(self.data._game, self.config.instructionsHtml);
 
       self.data.running = false;
 
@@ -1006,7 +1007,18 @@ var Orbs;
     };
 
     self.generateGame = function () {
-      self.data._container.classList.add(self.config.classes.container);
+      self.data._game.classList.add(self.config.classes.game);
+
+      var _container = document.createElement('div');
+      _container.classList.add(self.config.classes.container);
+      self.data._container = _container;
+
+      self.data._game.appendChild(_container);
+
+      var _overlay = document.createElement('div');
+      _overlay.classList.add(self.config.classes.overlay);
+      self.data._game.appendChild(_overlay);
+
 
       var _sidebar = document.createElement('div');
       _sidebar.classList.add(self.config.classes.sidebar);

@@ -1,36 +1,47 @@
 .game {
-  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 
-  position: relative;
-  top: 50%;
-  left: 50%;
+  &__container {
+    box-sizing: border-box;
 
-  width: em(1230px);
-  height: em(690px);
+    position: relative;
+    top: 50%;
+    left: 50%;
 
-  margin-left: em(-615px);
-  margin-top: em(-345px);
+    width: em(1230px);
+    height: em(690px);
 
-  background-color: #212325;
+    margin-left: em(-615px);
+    transform: translateY(-50%);
 
-  @include breakpoint-tablet {
-    @include portraitOrientation() {
-      top: auto;
+    background-color: #212325;
+
+    will-change: contents;
+
+    @include breakpoint-tablet {
+      @include portraitOrientation() {
+        top: 50%;
+        left: auto;
+
+        height: auto;
+        width: 74%;
+
+        margin: 0 13% 0;
+
+        transform: translateY(-50%);
+      }
+    }
+    @include breakpoint-mobile {
+      top: 50%;
       left: auto;
 
-      width: 74%;
+      width: 90%;
+      height: auto;
 
-      margin: 5% 13% 0;
+      margin: 0 5%;
+      transform: translateY(-50%);
     }
-  }
-  @include breakpoint-mobile {
-    top: auto;
-    left: auto;
-
-    width: 90%;
-    height: 100%;
-
-    margin: 0 5%;
   }
   &__content {
     box-sizing: border-box;
@@ -47,7 +58,7 @@
                 0 0 20px 3px rgba(255, 255, 255, 0.02);
     border-radius: em(10px);
 
-    z-index: 1;
+    transform: translateZ(100px);
 
     @include breakpoint-tablet {
       @include portraitOrientation() {
@@ -91,31 +102,6 @@
       overflow: auto;
 
       max-height: 100%;
-    }
-    body:before {
-      content: '';
-
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-
-      box-shadow: inset 0 0 15px 5px #243a31;
-      background-color: rgba(32, 32, 32, 0.9);
-
-      animation: overlayShowing 0.2s ease;
-
-      z-index: 2;
-
-      @keyframes overlayShowing {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
     }
   }
   &--winning,

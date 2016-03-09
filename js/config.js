@@ -6,8 +6,10 @@
     sound: true,
 
     classes: {
+      overlay: 'game__overlay',
       sidebar: 'game__sidebar',
-      container: 'game',
+      game: 'game',
+      container: 'game__container',
       board: 'game__content',
       boardGrid: 'game__grid',
       boardRunning: 'game--running',

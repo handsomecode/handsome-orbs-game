@@ -96,29 +96,39 @@ body {
           transform: translateY(-50%); }
 
 .game {
-  box-sizing: border-box;
-  position: relative;
-  top: 50%;
-  left: 50%;
-  width: 68.33em;
-  height: 38.33em;
-  margin-left: -34.17em;
-  margin-top: -19.17em;
-  background-color: #212325; }
+  width: 100%;
+  height: 100%; }
+  .game__container {
+    box-sizing: border-box;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 68.33em;
+    height: 38.33em;
+    margin-left: -34.17em;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    background-color: #212325;
+    will-change: contents; }
 @media (max-width: 991px) and (min-width: 768px) and (orientation: portrait) {
-  .game {
-    top: auto;
+  .game__container {
+    top: 50%;
     left: auto;
+    height: auto;
     width: 74%;
-    margin: 5% 13% 0; } }
+    margin: 0 13% 0;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%); } }
 
-  @media (max-width: 767px) {
-    .game {
-      top: auto;
-      left: auto;
-      width: 90%;
-      height: 100%;
-      margin: 0 5%; } }
+    @media (max-width: 767px) {
+      .game__container {
+        top: 50%;
+        left: auto;
+        width: 90%;
+        height: auto;
+        margin: 0 5%;
+        -webkit-transform: translateY(-50%);
+                transform: translateY(-50%); } }
   .game__content {
     box-sizing: border-box;
     float: left;
@@ -128,7 +138,8 @@ body {
     background: url("../images/grid.png") repeat 0 0;
     box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.5), 0 0 20px 3px rgba(255, 255, 255, 0.02);
     border-radius: 0.56em;
-    z-index: 1; }
+    -webkit-transform: translateZ(100px);
+            transform: translateZ(100px); }
 @media (max-width: 991px) and (min-width: 768px) and (orientation: portrait) {
   .game__content {
     float: none;
@@ -158,28 +169,6 @@ body {
     .game--disabled body {
       overflow: auto;
       max-height: 100%; }
-    .game--disabled body:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      box-shadow: inset 0 0 15px 5px #243a31;
-      background-color: rgba(32, 32, 32, 0.9);
-      -webkit-animation: overlayShowing 0.2s ease;
-              animation: overlayShowing 0.2s ease;
-      z-index: 2; }
-@-webkit-keyframes overlayShowing {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-@keyframes overlayShowing {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
   .game--winning:before, .game--game-over:before {
     display: block;
     position: relative;
@@ -207,6 +196,11 @@ body {
       .game--winning:before, .game--game-over:before {
         padding: 45% 0;
         font-size: 34px; } }
+@-webkit-keyframes overlayShowing {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 @keyframes overlayShowing {
   0% {
     opacity: 0; }
@@ -218,7 +212,6 @@ body {
     content: 'Game Over'; }
 
 .game__buttons {
-  overflow: hidden;
   position: absolute;
   top: 35em;
   left: 6em;
@@ -343,13 +336,15 @@ body {
   left: 0;
   padding: 2px;
   opacity: 1;
+  will-change: transform;
   -webkit-transition: -webkit-transform 0.3s ease, opacity 0.3s ease;
           transition: transform 0.3s ease, opacity 0.3s ease; }
   .game__point--removed {
     visibility: hidden;
     -webkit-transition: -webkit-transform 0.3s ease, visibility 0.3s ease 0.15s;
             transition: transform 0.3s ease, visibility 0.3s ease 0.15s;
-    z-index: 3; }
+    -webkit-transform: translateZ(300px);
+            transform: translateZ(300px); }
   .game__point-inner-container {
     position: relative;
     top: 50%;
@@ -358,9 +353,8 @@ body {
     height: 90%;
     margin: 0 auto;
     border-radius: 0.56em;
-    -webkit-transform: translateY(-50%);
-            transform: translateY(-50%);
-    z-index: 3; }
+    -webkit-transform: translateY(-50%) translateZ(300px);
+            transform: translateY(-50%) translateZ(300px); }
 @media (max-width: 991px) and (min-width: 768px) and (orientation: portrait) {
   .game__point-inner-container {
     border-radius: 15%; } }
@@ -368,11 +362,11 @@ body {
     .game__point-inner-container:before {
       content: '';
       display: block;
-      background-color: inherit;
       width: 100%;
       height: 100%;
       margin: 0 auto;
       opacity: 1;
+      background-color: inherit;
       background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
       background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
       box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 3px rgba(255, 255, 255, 0.2);
@@ -396,7 +390,8 @@ body {
   .game__point-container {
     position: absolute;
     border: 3px solid white;
-    z-index: 2;
+    -webkit-transform: translateZ(200px);
+            transform: translateZ(200px);
     border-radius: 0.56em; }
     .game__point-container--removed {
       -webkit-animation: removingPointsContainer 0.3s ease 0.3s both;
@@ -667,7 +662,7 @@ body {
       width: 8.06em;
       margin-top: 2.5em;
       margin-bottom: 0.83em;
-      padding: 0.28em;
+      padding: 0.25em;
       padding-right: 0;
       border: 1px solid #939596;
       border-radius: 0.39em; }
@@ -1267,3 +1262,22 @@ body {
           .game__confirm-button--yes:hover {
             background-color: rgba(84, 158, 201, 0.1);
             color: #42748f; } }
+
+.game__overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  box-shadow: inset 0 0 15px 5px #243a31;
+  background-color: rgba(32, 32, 32, 0.9);
+  -webkit-animation: overlayShowing 0.2s ease;
+          animation: overlayShowing 0.2s ease;
+  visibility: hidden; }
+@keyframes overlayShowing {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+.game--disabled .game__overlay {
+  visibility: visible; }
