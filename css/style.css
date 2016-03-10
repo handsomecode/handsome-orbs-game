@@ -361,20 +361,38 @@ body {
 
     .game__point-inner-container:before {
       content: '';
+      position: absolute;
       display: block;
       width: 100%;
       height: 100%;
       margin: 0 auto;
       opacity: 1;
       background-color: inherit;
-      background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
-      background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
-      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2), inset 0 0 0 3px rgba(255, 255, 255, 0.2);
+      background-image: -webkit-linear-gradient(315deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.25) 100%);
+      background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.25) 100%);
       border-radius: 0.56em;
       -webkit-transform: scale(1);
               transform: scale(1); }
 @media (max-width: 991px) and (min-width: 768px) and (orientation: portrait) {
   .game__point-inner-container:before {
+    border-radius: 15%; } }
+
+    .game__point-inner-container:after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 90%;
+      height: 90%;
+      margin: 5%;
+      opacity: 1;
+      background-color: inherit;
+      background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
+      background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.22) 100%);
+      border-radius: 0.56em;
+      -webkit-transform: scale(1);
+              transform: scale(1); }
+@media (max-width: 991px) and (min-width: 768px) and (orientation: portrait) {
+  .game__point-inner-container:after {
     border-radius: 15%; } }
 
   .game__point--removed .game__point-inner-container {
