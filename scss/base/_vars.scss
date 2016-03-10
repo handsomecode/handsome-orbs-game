@@ -1,7 +1,9 @@
 $font-stack-avenir-roman: "Avenir Roman", Helvetica, Arial, sans-serif;
 $fontSize: 18px;
 $generalAnimationDuration: 0.3s;
-$removeAnimationDuration: 0.3s;
-$increaseScoreAnimationDuration: $generalAnimationDuration/3;
+$removeAnimationTimeoutDuration: 0.7s;
+$removePointsAnimationDuration: 0.6s;
+$removeContainersAnimationDuration: 0.3s;
+$increaseScoreAnimationDuration: 0.15s;
 $mobileMaxWidth: 767px;
 $tabletMaxWidth: 991px;

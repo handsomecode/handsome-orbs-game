@@ -29,6 +29,7 @@
       point: 'game__point',
       pointInnerContainer: 'game__point-inner-container',
       pointsContainer: 'game__point-container',
+      pointsContainerOverlay: 'game__point-container-overlay',
       removePointsContainer: 'game__point-container--removed',
       removePoint: 'game__point--removed',
       scoreboard: {
@@ -94,9 +95,9 @@
     confirmGameOverText: 'Oh no! There are no more moves left.<br><span class="game__confirm-text-game-over">Play Again?',
     confirmChangeDifficultyText: 'Would you like to continue on and change difficulty level?',
     confirmWinningText: 'Awesome, You are cool!!! Would you like to improve your high score?',
-    moveTimeout: 400,
-    removeTimeout: 600,
-    increaseScoreTimeout: 400,
+    moveTimeout: 700,
+    removeTimeout: 900,
+    increaseScoreTimeout: 750,
 
     modes: {
       easy: {

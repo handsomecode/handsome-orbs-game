@@ -169,8 +169,12 @@ var Orbs;
 
     self.generateRemovingAnimation = function (points) {
       var _pointsContainer = document.createElement('div'),
+          _pointsContainerOverlay = document.createElement('div'),
           verticalLine = false;
 
+      _pointsContainer.appendChild(_pointsContainerOverlay);
+
+      _pointsContainerOverlay.classList.add(self.config.classes.pointsContainerOverlay);
       _pointsContainer.classList.add(self.config.classes.pointsContainer);
 
       for (var i = 1; i < points.length; i++) {
@@ -190,13 +194,14 @@ var Orbs;
       _pointsContainer.style.top = (points[0].y * self.data.itemSize) + '%';
       _pointsContainer.style.left = (points[0].x * self.data.itemSize) + '%';
 
-      _pointsContainer.style['background-color'] = points[0].color;
+      _pointsContainerOverlay.style['background-color'] = points[0].color;
 
       _pointsContainer.classList.add(self.config.classes.removePointsContainer);
 
       self.data._board.appendChild(_pointsContainer);
 
       setTimeout(function () {
+        self.removeDOMElement(_pointsContainerOverlay);
         self.removeDOMElement(_pointsContainer);
       }, self.config.removeTimeout);
     };
